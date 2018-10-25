@@ -6,9 +6,11 @@ import com.songoda.epicbuckets.filehandler.files.ShopFile;
 import com.songoda.epicbuckets.listeners.GenbucketPlaceListener;
 import com.songoda.epicbuckets.listeners.InventoryClickListener;
 import com.songoda.epicbuckets.util.ChatUtil;
+import com.songoda.epicbuckets.util.ServerVersion;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -25,6 +27,8 @@ public class EpicBuckets extends JavaPlugin {
     public ShopFile shopFile;
 
     private Locale locale;
+
+    private ServerVersion serverVersion = ServerVersion.fromPackageName(Bukkit.getServer().getClass().getPackage().getName());
 
     public static EpicBuckets getInstance() {
         return INSTANCE;
@@ -139,6 +143,21 @@ public class EpicBuckets extends JavaPlugin {
         }
 
         return (economy != null);
+    }
+
+    public ServerVersion getServerVersion() {
+        return serverVersion;
+    }
+
+    public boolean isServerVersion(ServerVersion version) {
+        return serverVersion == version;
+    }
+    public boolean isServerVersion(ServerVersion... versions) {
+        return ArrayUtils.contains(versions, serverVersion);
+    }
+
+    public boolean isServerVersionAtLeast(ServerVersion version) {
+        return serverVersion.ordinal() >= version.ordinal();
     }
 
     public Locale getLocale() {

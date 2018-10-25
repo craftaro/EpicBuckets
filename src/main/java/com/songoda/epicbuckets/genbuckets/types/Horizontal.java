@@ -8,6 +8,7 @@ import com.songoda.epicbuckets.genbuckets.GenbucketManager;
 import com.songoda.epicbuckets.genbuckets.GenbucketType;
 import com.songoda.epicbuckets.regionhandlers.RegionWBorder;
 import com.songoda.epicbuckets.util.ChatUtil;
+import com.songoda.epicbuckets.util.ServerVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -126,7 +127,8 @@ public class Horizontal extends Genbucket {
                     //ChatUtil.debugMSG(player, genbucketItem.getType(), genbucketItem.getTypeDamage(), movedBlocks);
 
                     block.setType(genbucketItem.getType());
-                    block.setData(genbucketItem.getTypeDamage());
+                    if (!plugin.isServerVersionAtLeast(ServerVersion.V1_13))
+                        block.setData(genbucketItem.getTypeDamage());
                     movedBlocks++;
 
                 } else {

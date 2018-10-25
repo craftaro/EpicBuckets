@@ -10,6 +10,7 @@ import com.songoda.epicbuckets.genbuckets.types.PsuedoVertical;
 import com.songoda.epicbuckets.genbuckets.types.Vertical;
 import com.songoda.epicbuckets.util.ChatUtil;
 import com.songoda.epicbuckets.util.ItemStackUtil;
+import com.songoda.epicbuckets.util.ServerVersion;
 import com.songoda.epicbuckets.util.Util;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -187,7 +188,7 @@ public class GenbucketPlaceListener implements Listener {
     @EventHandler
     public void onGenbucketPlace(GenbucketPlaceEvent event) {
 
-        ItemStack item = ItemStackUtil.createItemStack("§7" + event.getGenbucketUUID().toString(), Arrays.asList("", "§7Information:", " §eLeft click: §6Teleport to location", " §eRight click: §6Stop genbucket", " §ePlaced by §6SoFocused", " §eCordinates: §6" + ChatUtil.getCoordinatesFromLocation(event.getLocation()), " §eMaterial: §6" + event.getGenbucketItem().getType(), " §eDamage: §6" + event.getGenbucketItem().getTypeDamage()), Material.STAINED_GLASS_PANE, 1, 13, true);
+        ItemStack item = ItemStackUtil.createItemStack("§7" + event.getGenbucketUUID().toString(), Arrays.asList("", "§7Information:", " §eLeft click: §6Teleport to location", " §eRight click: §6Stop genbucket", " §ePlaced by §6SoFocused", " §eCordinates: §6" + ChatUtil.getCoordinatesFromLocation(event.getLocation()), " §eMaterial: §6" + event.getGenbucketItem().getType(), " §eDamage: §6" + event.getGenbucketItem().getTypeDamage()), Material.valueOf(plugin.isServerVersionAtLeast(ServerVersion.V1_13) ? "GRAY_STAINED_GLASS_PANE" : "STAINED_GLASS_PANE"), 1, 13, true);
 
         GenbucketManager.activeGenbucketItems.put(event.getGenbucketUUID(), item);
         GenbucketManager.activeGenbucketLocation.put(event.getGenbucketUUID(), event.getLocation());

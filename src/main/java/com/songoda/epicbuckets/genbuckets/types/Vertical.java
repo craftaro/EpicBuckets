@@ -5,6 +5,7 @@ import com.songoda.epicbuckets.genbuckets.Genbucket;
 import com.songoda.epicbuckets.genbuckets.GenbucketItem;
 import com.songoda.epicbuckets.genbuckets.GenbucketManager;
 import com.songoda.epicbuckets.genbuckets.GenbucketType;
+import com.songoda.epicbuckets.util.ServerVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -170,12 +171,14 @@ public class Vertical extends Genbucket {
                             return;
                         } else {
                             block.setType(genbucketItem.getType());
-                            block.setData(genbucketItem.getTypeDamage());
+                            if (!plugin.isServerVersionAtLeast(ServerVersion.V1_13))
+                                block.setData(genbucketItem.getTypeDamage());
                         }
 
                     } else {
                         block.setType(genbucketItem.getType());
-                        block.setData(genbucketItem.getTypeDamage());
+                        if (!plugin.isServerVersionAtLeast(ServerVersion.V1_13))
+                            block.setData(genbucketItem.getTypeDamage());
                     }
 
                     movedBlocks++;
@@ -258,12 +261,14 @@ public class Vertical extends Genbucket {
                             return;
                         } else {
                             block.setType(genbucketItem.getType());
-                            block.setData(genbucketItem.getTypeDamage());
+                            if (!plugin.isServerVersionAtLeast(ServerVersion.V1_13))
+                                block.setData(genbucketItem.getTypeDamage());
                         }
 
                     } else {
                         block.setType(genbucketItem.getType());
-                        block.setData(genbucketItem.getTypeDamage());
+                        if (!plugin.isServerVersionAtLeast(ServerVersion.V1_13))
+                            block.setData(genbucketItem.getTypeDamage());
                     }
 
                     movedBlocks++;
@@ -350,12 +355,14 @@ public class Vertical extends Genbucket {
                             return;
                         } else {
                             block.setType(genbucketItem.getType());
-                            block.setData(genbucketItem.getTypeDamage());
+                            if (!plugin.isServerVersionAtLeast(ServerVersion.V1_13))
+                                block.setData(genbucketItem.getTypeDamage());
                         }
 
                     } else {
                         block.setType(genbucketItem.getType());
-                        block.setData(genbucketItem.getTypeDamage());
+                        if (!plugin.isServerVersionAtLeast(ServerVersion.V1_13))
+                            block.setData(genbucketItem.getTypeDamage());
                     }
 
                     movedBlocks++;

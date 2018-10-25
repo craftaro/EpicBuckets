@@ -6,6 +6,7 @@ import com.songoda.epicbuckets.genbuckets.GenbucketItem;
 import com.songoda.epicbuckets.genbuckets.GenbucketManager;
 import com.songoda.epicbuckets.genbuckets.GenbucketType;
 import com.songoda.epicbuckets.util.ChatUtil;
+import com.songoda.epicbuckets.util.ServerVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -120,7 +121,8 @@ public class Infused extends Genbucket {
                 if (runPillarOne && runFirst && canPlace(player, blockOne.getLocation(), false)) {
 
                     blockOne.setType(genbucketItem.getType());
-                    blockOne.setData(genbucketItem.getTypeDamage());
+                    if (!plugin.isServerVersionAtLeast(ServerVersion.V1_13))
+                        blockOne.setData(genbucketItem.getTypeDamage());
 
                 } else
                     runPillarOne = false;
@@ -130,7 +132,8 @@ public class Infused extends Genbucket {
                 if (runPillarTwo && runSecond && canPlace(player, blockTwo.getLocation(), false)) {
 
                     blockTwo.setType(genbucketItem.getType());
-                    blockTwo.setData(genbucketItem.getTypeDamage());
+                    if (!plugin.isServerVersionAtLeast(ServerVersion.V1_13))
+                        blockTwo.setData(genbucketItem.getTypeDamage());
 
                 } else
                     runPillarTwo = false;
