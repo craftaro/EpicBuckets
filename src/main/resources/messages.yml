@@ -1,0 +1,31 @@
+PREFIX: "&e&lEZBUCKET>" # set to "none" if you don't want a prefix
+
+NO-PERMISSION: "&7You do not have &epermission &7for this command"
+
+PLAYER-COMMAND: "&c&lOnly players can use this"
+
+ERROR-OCCURED: "&cAn error occurred, please contact an administrator"
+
+RELOAD-CONFIG: "&7You've reloaded the config"
+
+WITHDRAW-MESSAGE: "&e${amount}&7 was taken from your &eaccount&7!"
+NOT-ENOUGH-MONEY: "&7You need &e${money} &7more to purchase this genbucket!"
+
+INVENTORY-FULL: "&7Your inventory is &efull&7!"
+
+YOU-CANNOT-PLACE-HERE: "&7You're not &eallowed&7 to place a genbucket here!"
+YOU-MUST-WAIT: "&7You must &ewait&7 before your other gen(s) finishes!"
+
+ADMIN-TOGGLE-ON: "&7You have toggled admin-mode &aon"
+ADMIN-TOGGLE-OFF: "&7You have toggled admin-mode &coff"
+ADMIN-MESSAGE: "&e{player} &7placed a &e{type} genbucket&7!"
+
+WRONG-MATERIAL-PSUEDO: "&7You cannot use this genbucket on this &eblock!"
+
+GENBUCKET-DISABLED: "&eGenbuckets &7are currently disabled!"
+GENBUCKET-PLACED-WRONG: "&e{genbucket} &7can be placed {direction}" # {side} equals to TRANSLATE-DIRECTION-X
+
+TRANSLATE-DIRECTION-UP: "on top of blocks"
+TRANSLATE-DIRECTION-SIDE: "on the side of blocks"
+
+SETTING-MODIFY: "&7You've set &e{setting}&7 to &e{value}"

@@ -1,0 +1,16 @@
+name: EpicBuckets
+version: 1
+description: Generate walls fast and efficient with beautiful guis!
+author: Songoda
+main: club.sofocused.ezbucket.plugin.Plugin
+softdepend: [WorldGuard, WorldEdit, Factions, MassiveCore, FactionsUUID, GriefPrevention]
+depend: [Vault]
+commands:
+  genbucket:
+    description: Open genbucket shop
+    aliases: [gb, gen, genbuckets, ezbucket, genshop]
+    usage: "/gb"
+  genbucketadmin:
+    description: Admin commands
+    aliases: [gbadmin, genadmin, genbucketadmin, ezbucketadmin]
+    usage: "/genbucketadmin"

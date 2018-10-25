@@ -1,0 +1,418 @@
+use-back-buttons: true
+
+shops:
+
+  vertical:
+
+    goBackButton: 31 # back button will display if enabled in config.yml
+
+    trait: "VERTICAL" # Which genbucket type does this shop have?
+
+    size: 36 # Must be one of these: 9, 18, 27, 36, 45, 54
+
+    fill: true # Fill inventory ?
+
+    inventory-name: "Vertical genbuckets"
+
+    '0': # Must be unique
+
+      name: "&eVertical Cobble" # Genbucket item name
+
+      icon: "WATER_BUCKET" # This is the item placed in the GUI and the item you will get when purchased
+
+      type: "COBBLESTONE" # This is the material the bucket places
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 12 # This is the slot for the bucket in the GUI
+
+      price: 400 # This is the price for the bucket
+
+      damage: 0 # Material id if needed, for example if you want to spawn red wool in the guit
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+    '1':
+
+      name: "&eVertical Sand"
+
+      icon: "WATER_BUCKET"
+
+      type: "SAND"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 13
+
+      price: 400
+
+      damage: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+    '2':
+
+      name: "&eVertical Obby"
+
+      icon: "WATER_BUCKET"
+
+      type: "OBSIDIAN"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 14
+
+      price: 700
+
+      damage: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+  infused:
+
+    goBackButton: 31
+
+    trait: "INFUSED"
+
+    size: 36
+
+    fill: true
+
+    inventory-name: "Infused genbuckets"
+
+    '0':
+
+      name: "&eInfused Cobble"
+
+      icon: "WATER_BUCKET"
+
+      type: "COBBLESTONE"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 12
+
+      price: 200
+
+      trait: "INFUSED"
+
+      material-id: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+    '1':
+
+      name: "&eInfused Obsidian"
+
+      icon: "WATER_BUCKET"
+
+      type: "OBSIDIAN"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 13
+
+      price: 700
+
+      trait: "INFUSED"
+
+      material-id: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+
+    '2':
+
+      name: "&eInfused Netherrack"
+
+      icon: "WATER_BUCKET"
+
+      type: "NETHERRACK"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 14
+
+      price: 31
+
+      trait: "INFUSED"
+
+      material-id: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+  psuedo:
+
+    goBackButton: 31
+
+    trait: "PSUEDO"
+
+    size: 36
+
+    fill: true
+
+    inventory-name: "Psuedo genbuckets"
+
+    '0': # Must be unique
+
+      name: "&ePsuedo Cobble"
+
+      icon: "WATER_BUCKET"
+
+      type: "COBBLESTONE"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 12
+
+      price: 400
+
+      damage: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+    '1':
+
+      name: "&ePsuedo Sand"
+
+      icon: "WATER_BUCKET"
+
+      type: "SAND"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 13
+
+      price: 400
+
+      damage: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+    '2':
+
+      name: "&ePsuedo Obby"
+
+      icon: "WATER_BUCKET"
+
+      type: "OBSIDIAN"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 14
+
+      price: 700
+
+      damage: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+  horizontal:
+
+    goBackButton: 31
+
+    trait: "HORIZONTAL"
+
+    size: 36
+
+    fill: true
+
+    inventory-name: "Horizontal genbuckets"
+
+    '0': # Must be unique
+
+      name: "&eHorizontal Cobble"
+
+      icon: "WATER_BUCKET"
+
+      type: "COBBLESTONE"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 12
+
+      price: 400
+
+      damage: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+    '1':
+
+      name: "&eHorizontal Sand"
+
+      icon: "WATER_BUCKET"
+
+      type: "SAND"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 13
+
+      price: 400
+
+      damage: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
+
+    '2':
+
+      name: "&eHorizontal Obby"
+
+      icon: "WATER_BUCKET"
+
+      type: "OBSIDIAN"
+
+      type-damage: 0 # Set a damage for the block the genbucket places
+
+      slot: 14
+
+      price: 700
+
+      damage: 0
+
+      description: # This is the lore of the bucket in the gui
+      - ""
+      - "&7&o((Left click to buy or right click to open bulk shop))"
+      - ""
+      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - ""
+      - "&7Spawns &e{material} &7blocks"
+      - ""
+
+      item-lore: # New lore after the gen has been purchased
+      - ""
+      - "&7&oRight click a block to place"
+      - ""
