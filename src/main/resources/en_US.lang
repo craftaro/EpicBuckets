@@ -5,23 +5,26 @@ general.nametag.prefix = "&8[&6EpicBuckets&8]"
 #Command Messages
 
 command.reload.success = "&7You've reloaded the config"
+command.admin.on = "&7You have toggled admin-mode &aon"
+command.admin.off = "&7You have toggled admin-mode &coff"
+command.settings.modify = "&7You've set &e%setting%&7 to &e%value%"
+
+#Interface Messages
+
+interface.withdrawl.success = "&e$%amount%&7 was taken from your &eaccount&7!"
 
 #Event Messages
 
 event.general.nopermission = "&cYou do not have permission to do that."
 event.general.playercommand = "&c&lOnly players can use this"
 event.general.error = "&cAn error occurred, please contact an administrator"
-event.withdrawl.success = "&e$%amount%&7 was taken from your &eaccount&7!"
 event.purchase.notenoughmoney = "&7You need &e$%money% &7more to purchase this genbucket!"
 event.purchase.inventoryfull = "&7Your inventory is &efull&7!"
 event.place.nothere = "&7You're not &eallowed&7 to place a genbucket here!"
 event.place.wait = "&7You must &ewait&7 before your other gen(s) finishes!"
-event.admin.on = "&7You have toggled admin-mode &aon"
-event.admin.off = "&7You have toggled admin-mode &coff"
-event.admin.playerplaced = "&e%player% &7placed a &e%type% genbucket&7!"
-event.settings.modify = "&7You've set &e%setting%&7 to &e%value%"
 event.translate.directionup = "on top of blocks"
 event.translate.directionside = "on the side of blocks"
 event.genbucket.disabled = "&eGenbuckets &7are currently disabled!"
-event.genbucket.placedwrong = "&e%genbucket% &7can be placed %direction%" # %side% equals to TRANSLATE-DIRECTION-X
+event.genbucket.placedwrong = "&e%genbucket% &7can be placed %direction%"
 event.genbucket.wrongmaterialpsuedo = "&7You cannot use this genbucket on this &eblock!"
+event.admin.playerplaced = "&e%player% &7placed a &e%type% genbucket&7!"

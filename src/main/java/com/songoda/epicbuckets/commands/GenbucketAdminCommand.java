@@ -76,7 +76,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
 
                     GenbucketManager.adminList.remove(player.getUniqueId());
 
-                    player.sendMessage(plugin.getLocale().getMessage("event.admin.off"));
+                    player.sendMessage(plugin.getLocale().getMessage("command.admin.off"));
 
                 } else {
 
@@ -84,7 +84,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
 
                     GenbucketManager.adminList.add(player.getUniqueId());
 
-                    player.sendMessage(plugin.getLocale().getMessage("event.admin.on"));
+                    player.sendMessage(plugin.getLocale().getMessage("command.admin.on"));
 
                 }
 
@@ -350,10 +350,10 @@ public class GenbucketAdminCommand implements CommandExecutor {
 
 
     private void toggleSetting(CommandSender sender, String setting, boolean oldValue) {
-        sender.sendMessage(plugin.getLocale().getMessage("event.settings.modify", setting.toUpperCase(), String.valueOf(!oldValue)));
+        sender.sendMessage(plugin.getLocale().getMessage("command.settings.modify", setting.toUpperCase(), String.valueOf(!oldValue)));
     }
 
     private void toggleSetting(CommandSender sender, String setting, String oldValue) {
-        sender.sendMessage(plugin.getLocale().getMessage("event.settings.modify", setting.toUpperCase(), String.valueOf(oldValue)));
+        sender.sendMessage(plugin.getLocale().getMessage("command.settings.modify", setting.toUpperCase(), String.valueOf(oldValue)));
     }
 }

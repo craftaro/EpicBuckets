@@ -86,7 +86,7 @@ public class EpicBuckets extends JavaPlugin {
     public void withdrawBalance(Player player, int amount, boolean sendMessage) {
 
         if (sendMessage)
-            player.sendMessage(locale.getMessage("event.withdrawl.success").replace("{amount}", String.valueOf(amount)));
+            player.sendMessage(locale.getMessage("interface.withdrawl.success").replace("{amount}", String.valueOf(amount)));
 
         economy.withdrawPlayer(player, amount);
     }

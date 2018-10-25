@@ -153,7 +153,7 @@ public abstract class Genbucket {
 
         } else {
 
-            player.sendMessage(plugin.getLocale().getMessage("event.withdrawl.success", String.valueOf((playerBalance - item.getPrice()) * -1)));
+            player.sendMessage(plugin.getLocale().getMessage("interface.withdrawl.success", String.valueOf((playerBalance - item.getPrice()) * -1)));
 
             return false;
         }

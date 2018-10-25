@@ -397,7 +397,7 @@ public class InventoryClickListener implements Listener {
 
             // they have less money
 
-            player.sendMessage(plugin.getLocale().getMessage("event.withdrawl.success", String.valueOf((playerBalance - price) * -1)));
+            player.sendMessage(plugin.getLocale().getMessage("interface.withdrawl.success", String.valueOf((playerBalance - price) * -1)));
 
         }
 
