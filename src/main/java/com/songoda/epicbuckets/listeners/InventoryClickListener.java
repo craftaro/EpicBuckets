@@ -28,7 +28,7 @@ import java.util.WeakHashMap;
  */
 public class InventoryClickListener implements Listener {
 
-    private EpicBuckets main = EpicBuckets.main;
+    private EpicBuckets plugin = EpicBuckets.getInstance();
 
     private Map<UUID, String> shopMap = new WeakHashMap<>();
 
@@ -37,7 +37,7 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
 
-        String inventoryTitle = ChatUtil.stripColor(main.getConfig().getString("MENU-ITEMS.inventory-name"));
+        String inventoryTitle = ChatUtil.stripColor(plugin.getConfig().getString("MENU-ITEMS.inventory-name"));
         String clickedInventoryTitle = ChatColor.stripColor(event.getInventory().getTitle());
 
         if (!clickedInventoryTitle.equalsIgnoreCase(inventoryTitle))
@@ -92,7 +92,7 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onClickSubInventory(InventoryClickEvent event) {
 
-        FileConfiguration config = main.shopFile.config;
+        FileConfiguration config = plugin.shopFile.config;
 
         String clickedInventory = ChatUtil.stripColor(event.getInventory().getTitle());
 
@@ -171,7 +171,7 @@ public class InventoryClickListener implements Listener {
 
                 // Open the multiple gui shop
 
-                final boolean infinite_gens = main.getConfig().getBoolean("INFINITE-USE");
+                final boolean infinite_gens = plugin.getConfig().getBoolean("INFINITE-USE");
 
                 if (infinite_gens) {
                     return;
@@ -329,9 +329,9 @@ public class InventoryClickListener implements Listener {
 
         }
 
-        FileConfiguration config = main.getConfig();
+        FileConfiguration config = plugin.getConfig();
 
-        int mainItemSlot = config.getInt("BULK-SHOP-INVENTORY.main-item-slot");
+        int mainItemSlot = config.getInt("BULK-SHOP-INVENTORY.plugin-item-slot");
 
         inventory.getItem(mainItemSlot).setAmount(GenbucketManager.getPlayerInteger(player));
 
@@ -341,7 +341,7 @@ public class InventoryClickListener implements Listener {
 
     private int[] modifySlotList() {
 
-        FileConfiguration config = main.getConfig();
+        FileConfiguration config = plugin.getConfig();
 
         int[] modifyValueSlots = new int[6];
 
@@ -367,16 +367,16 @@ public class InventoryClickListener implements Listener {
 
         if (player.getInventory().firstEmpty() == -1) {
 
-            player.sendMessage(ChatUtil.colorPrefix(main.messageFile.config.getString("INVENTORY-FULL")));
+            player.sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.purchase.inventoryfull"));
 
             return;
         }
 
         int price = genbucketItem.getPrice() * amount;
 
-        double playerBalance = main.getBalance(player);
+        double playerBalance = plugin.getBalance(player);
 
-        final boolean infinite_gens = main.getConfig().getBoolean("INFINITE-USE");
+        final boolean infinite_gens = plugin.getConfig().getBoolean("INFINITE-USE");
 
         if (infinite_gens) {
             player.getInventory().addItem(genbucketItem.getGenbucketItem());
@@ -387,7 +387,7 @@ public class InventoryClickListener implements Listener {
 
             // they have enough money
 
-            main.withdrawBalance(player, price, true);
+            plugin.withdrawBalance(player, price, true);
 
             genbucketItem.setAmount(amount);
 
@@ -397,11 +397,11 @@ public class InventoryClickListener implements Listener {
 
             // they have less money
 
-            player.sendMessage(ChatUtil.colorPrefix(main.messageFile.config.getString("NOT-ENOUGH-MONEY").replace("{money}", String.valueOf((playerBalance - price) * -1))));
+            player.sendMessage(plugin.getLocale().getMessage("event.withdrawl.success", String.valueOf((playerBalance - price) * -1)));
 
         }
 
-        boolean closeGUI = main.getConfig().getBoolean("CLOSE-GUI-AFTER-PURCHASE");
+        boolean closeGUI = plugin.getConfig().getBoolean("CLOSE-GUI-AFTER-PURCHASE");
 
         if (closeGUI)
             player.getOpenInventory().close();

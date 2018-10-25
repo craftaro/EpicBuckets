@@ -149,12 +149,12 @@ public class GenbucketPlaceListener implements Listener {
             return;
 
         if (!player.hasPermission("genbucket.place")) {
-            player.sendMessage(ChatUtil.colorPrefix(EpicBuckets.getInstance().messageFile.config.getString("NO-PERMISSION")));
+            player.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
             return;
         }
 
         if (Util.disableGenbuckets()) {
-            player.sendMessage(ChatUtil.colorPrefix(EpicBuckets.getInstance().messageFile.config.getString("GENBUCKET-DISABLED")));
+            player.sendMessage(plugin.getLocale().getMessage("event.genbucket.disabled"));
             player.updateInventory();
             return;
         }

@@ -61,7 +61,7 @@ public class PsuedoVertical extends Genbucket {
         boolean validMaterial = false;
 
         // This is a list of allowed material from the config
-        List<String> materialList = main.getConfig().getStringList("PSUEDO-MATERIALS");
+        List<String> materialList = plugin.getConfig().getStringList("PSUEDO-MATERIALS");
 
         // In the for loop we simply check if the material is
         // valid if it is then validMaterial is set to true
@@ -73,7 +73,7 @@ public class PsuedoVertical extends Genbucket {
 
         // If the material isn't valid we tell the player and stop the code
         if (!validMaterial || !clickedMaterial.equals(genbucketItem.getType())) {
-            player.sendMessage(ChatUtil.colorPrefix(main.messageFile.config.getString("WRONG-MATERIAL-PSUEDO")));
+            player.sendMessage(plugin.getLocale().getMessage("event.genbucket.wrongmaterialpsuedo"));
             return;
         }
 
@@ -92,7 +92,7 @@ public class PsuedoVertical extends Genbucket {
             return;
 
         // Delay from config
-        long delay = main.getConfig().getInt("DELAY");
+        long delay = plugin.getConfig().getInt("DELAY");
 
         // Now we can start spawning the blocks
 
@@ -164,7 +164,7 @@ public class PsuedoVertical extends Genbucket {
 
                 } else {
 
-                    List<String> materialList = main.getConfig().getStringList("PSUEDO-MATERIALS");
+                    List<String> materialList = plugin.getConfig().getStringList("PSUEDO-MATERIALS");
 
                     boolean validMaterial = false;
 
@@ -188,7 +188,7 @@ public class PsuedoVertical extends Genbucket {
 
             }
 
-        }.runTaskTimer(main, 0L, delay);
+        }.runTaskTimer(plugin, 0L, delay);
 
 
     }

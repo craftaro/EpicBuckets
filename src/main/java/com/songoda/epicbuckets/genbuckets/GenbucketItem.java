@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class GenbucketItem {
 
-    private EpicBuckets main = EpicBuckets.main;
+    private EpicBuckets main = EpicBuckets.getInstance();
 
     private String itemName;
     private List<String> itemLore;

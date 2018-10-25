@@ -7,6 +7,7 @@ import com.songoda.epicbuckets.inventories.InventoryManager;
 import com.songoda.epicbuckets.util.ChatUtil;
 import com.songoda.epicbuckets.util.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,22 +29,24 @@ public class GenbucketAdminCommand implements CommandExecutor {
         if (args.length == 0) {
 
             if (!sender.hasPermission("genbucketadmin.command.help")) {
-                sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("NO-PERMISSION")));
+                sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                 return true;
             }
 
-            sender.sendMessage("§a/genbucketadmin info §8- §fPlugin information");
-            sender.sendMessage("§a/genbucketadmin admin §8- §fToggle admin mode");
-            sender.sendMessage("§a/genbucketadmin reload §8- §fReload the configs");
-            sender.sendMessage("§a/genbucketadmin toggleStatus §8- §fEnable/Disable genbuckets");
-            sender.sendMessage("§a/genbucketadmin toggleSponge §8- §fEnable/Disable sponges");
-            sender.sendMessage("§a/genbucketadmin toggleEnchant §8- §fToggle glowing genbuckets");
-            sender.sendMessage("§a/genbucketadmin toggleInfinity §8- §fToggle infinite genbuckets");
-            sender.sendMessage("§a/genbucketadmin activepanel §8- §fOpens a GUI");
-            sender.sendMessage("§a/genbucketadmin setHeight <int> §8- §fModify vertical height");
-            sender.sendMessage("§a/genbucketadmin setLength <int> §8- §fModify horizontal length");
-            sender.sendMessage("§a/genbucketadmin give <player> <shop> <key> <amount>");
-
+            sender.sendMessage("");
+            sender.sendMessage(ChatUtil.colorString(ChatUtil.getPrefix() + "&7Version " + plugin.getDescription().getVersion() + " Created with <3 by &5&l&oBrianna"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin info&7 - Plugin information"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin admin&7 - Toggle admin mode"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin reload&7 - Reload the configs"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin toggleStatus&7 - Enable/Disable genbuckets"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin toggleSponge&7 - Enable/Disable sponges"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin toggleEnchant&7 - Toggle glowing genbuckets"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin toggleInfinity&7 - Toggle infinite genbuckets"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin activepanel&7 - Opens a GUI"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin setHeight <int>&7 - Modify vertical height"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin setLength <int>&7 - Modify horizontal length"));
+            sender.sendMessage(ChatUtil.colorString("&8 - &agenbucketadmin give <player> <shop> <key> <amount>"));
+            sender.sendMessage("");
             return true;
         }
 
@@ -54,12 +57,12 @@ public class GenbucketAdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("admin")) {
 
                 if (!sender.hasPermission(permission)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(EpicBuckets.getInstance().messageFile.config.getString("NO-PERMISSION")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                     return true;
                 }
 
                 if (!(sender instanceof Player)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("PLAYER-COMMAND")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.playercommand"));
                     return true;
                 }
 
@@ -73,7 +76,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
 
                     GenbucketManager.adminList.remove(player.getUniqueId());
 
-                    player.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("ADMIN-TOGGLE-OFF")));
+                    player.sendMessage(plugin.getLocale().getMessage("event.admin.off"));
 
                 } else {
 
@@ -81,7 +84,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
 
                     GenbucketManager.adminList.add(player.getUniqueId());
 
-                    player.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("ADMIN-TOGGLE-ON")));
+                    player.sendMessage(plugin.getLocale().getMessage("event.admin.on"));
 
                 }
 
@@ -91,7 +94,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("reload")) {
 
                 if (!sender.hasPermission(permission)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(EpicBuckets.getInstance().messageFile.config.getString("NO-PERMISSION")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                     return true;
                 }
 
@@ -100,11 +103,11 @@ public class GenbucketAdminCommand implements CommandExecutor {
                     EpicBuckets.getInstance().reloadFiles();
 
                 } catch (Exception e) {
-                    sender.sendMessage(ChatUtil.colorPrefix(EpicBuckets.getInstance().messageFile.config.getString("ERROR-OCCURED")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.error"));
                     e.printStackTrace();
                 }
 
-                sender.sendMessage(ChatUtil.colorPrefix(EpicBuckets.getInstance().messageFile.config.getString("RELOAD-CONFIG")));
+                sender.sendMessage(plugin.getLocale().getMessage("command.reload.success"));
 
                 return true;
             }
@@ -113,12 +116,12 @@ public class GenbucketAdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("activepanel")) {
 
                 if (!sender.hasPermission(permission)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("NO-PERMISSION")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                     return true;
                 }
 
                 if (!(sender instanceof Player)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("PLAYER-COMMAND")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.playercommand"));
                     return true;
                 }
 
@@ -134,7 +137,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("toggleStatus")) {
 
                 if (!sender.hasPermission(permission)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("NO-PERMISSION")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                     return true;
                 }
 
@@ -151,7 +154,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("toggleInfinity")) {
 
                 if (!sender.hasPermission(permission)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("NO-PERMISSION")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                     return true;
                 }
 
@@ -170,7 +173,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("toggleSponge")) {
 
                 if (!sender.hasPermission(permission)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("NO-PERMISSION")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                     return true;
                 }
 
@@ -205,7 +208,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("toggleEnchant")) {
 
                 if (!sender.hasPermission(permission)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("NO-PERMISSION")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                     return true;
                 }
 
@@ -231,7 +234,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("setheight")) {
 
                 if (!sender.hasPermission(permission)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("NO-PERMISSION")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                     return true;
                 }
 
@@ -258,7 +261,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("setlength")) {
 
                 if (!sender.hasPermission(permission)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("NO-PERMISSION")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                     return true;
                 }
 
@@ -292,7 +295,7 @@ public class GenbucketAdminCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("give")) {
 
                 if (!sender.hasPermission(permission)) {
-                    sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("NO-PERMISSION")));
+                    sender.sendMessage(plugin.getLocale().getMessage("event.general.nopermission"));
                     return true;
                 }
 
@@ -347,10 +350,10 @@ public class GenbucketAdminCommand implements CommandExecutor {
 
 
     private void toggleSetting(CommandSender sender, String setting, boolean oldValue) {
-        sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("SETTING-MODIFY").replace("{setting}", setting.toUpperCase()).replace("{value}", String.valueOf(!oldValue))));
+        sender.sendMessage(plugin.getLocale().getMessage("event.settings.modify", setting.toUpperCase(), String.valueOf(!oldValue)));
     }
 
     private void toggleSetting(CommandSender sender, String setting, String oldValue) {
-        sender.sendMessage(ChatUtil.colorPrefix(plugin.messageFile.config.getString("SETTING-MODIFY").replace("{setting}", setting.toUpperCase()).replace("{value}", String.valueOf(oldValue))));
+        sender.sendMessage(plugin.getLocale().getMessage("event.settings.modify", setting.toUpperCase(), String.valueOf(oldValue)));
     }
 }

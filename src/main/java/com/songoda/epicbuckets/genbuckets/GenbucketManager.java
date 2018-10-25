@@ -54,7 +54,7 @@ public class GenbucketManager {
 
         Inventory inventory = Bukkit.createInventory(player, size, inventoryName);
 
-        int mainItemSlot = config.getInt("BULK-SHOP-INVENTORY.main-item-slot");
+        int mainItemSlot = config.getInt("BULK-SHOP-INVENTORY.plugin-item-slot");
 
         int itemAmount = getPlayerInteger(player);
 

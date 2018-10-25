@@ -48,7 +48,7 @@ public class Horizontal extends Genbucket {
     public void run() {
 
         if ("DOWN".equalsIgnoreCase(blockFace.name()) || "UP".equalsIgnoreCase(blockFace.name())) {
-            player.sendMessage(ChatUtil.colorPrefix(main.messageFile.config.getString("GENBUCKET-PLACED-WRONG").replace("{direction}", main.messageFile.config.getString("TRANSLATE-DIRECTION-SIDE")).replace("{genbucket}", ChatUtil.stripColor(genbucketItem.getItemName()))));
+            player.sendMessage(ChatUtil.colorPrefix(plugin.getLocale().getMessage("event.genbucket.placedwrong", plugin.getLocale().getMessage("event.translate.directionside", ChatUtil.stripColor(genbucketItem.getItemName())))));
             return;
         }
 
@@ -61,7 +61,7 @@ public class Horizontal extends Genbucket {
         if (!withdrawMoney(player, genbucketItem))
             return;
 
-        long delay = main.getConfig().getInt("DELAY");
+        long delay = plugin.getConfig().getInt("DELAY");
 
         // Now we can start spawning the blocks
 
@@ -119,7 +119,7 @@ public class Horizontal extends Genbucket {
                     return;
                 }
 
-                boolean run = main.getConfig().getStringList("IGNORE-MATERIALS").contains(block.getType().name());
+                boolean run = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(block.getType().name());
 
                 if (run) {
 
@@ -136,7 +136,7 @@ public class Horizontal extends Genbucket {
 
             }
 
-        }.runTaskTimer(main, 0L, delay);
+        }.runTaskTimer(plugin, 0L, delay);
 
     }
 

@@ -28,7 +28,7 @@ public class Vertical extends Genbucket {
     private BlockFace blockFace;
     private GenbucketItem genbucketItem;
     private UUID genbucketUUID;
-    private long delay = main.getConfig().getInt("DELAY");
+    private long delay = plugin.getConfig().getInt("DELAY");
 
     /**
      * Creating the class constructor for a Vertical genbucket
@@ -147,7 +147,7 @@ public class Vertical extends Genbucket {
                     return;
                 }
 
-                boolean run = main.getConfig().getStringList("IGNORE-MATERIALS").contains(block.getType().name());
+                boolean run = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(block.getType().name());
 
                 if (!run && genbucketItem.getType().equals(Material.SAND) || !run && genbucketItem.getType().equals(Material.GRAVEL) || run) {
 
@@ -161,7 +161,7 @@ public class Vertical extends Genbucket {
                         block_.setType(Material.COBBLESTONE);
 
                         Block blockUnderCobbleStone = block.getLocation().clone().subtract(0, 2, 0).getBlock();
-                        boolean ignoreBlock = main.getConfig().getStringList("IGNORE-MATERIALS").contains(blockUnderCobbleStone.getType().name());
+                        boolean ignoreBlock = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(blockUnderCobbleStone.getType().name());
 
                         if (!ignoreBlock) {
                             block_.setType(genbucketItem.getType());
@@ -189,7 +189,7 @@ public class Vertical extends Genbucket {
 
             }
 
-        }.runTaskTimer(main, 0L, delay);
+        }.runTaskTimer(plugin, 0L, delay);
 
     }
 
@@ -235,7 +235,7 @@ public class Vertical extends Genbucket {
                     return;
                 }
 
-                boolean run = main.getConfig().getStringList("IGNORE-MATERIALS").contains(block.getType().name());
+                boolean run = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(block.getType().name());
 
                 if (!run && genbucketItem.getType().equals(Material.SAND) || !run && genbucketItem.getType().equals(Material.GRAVEL) || run) {
 
@@ -249,7 +249,7 @@ public class Vertical extends Genbucket {
                         block_.setType(Material.COBBLESTONE);
 
                         Block blockUnderCobbleStone = block.getLocation().clone().add(0, 2, 0).getBlock();
-                        boolean ignoreBlock = main.getConfig().getStringList("IGNORE-MATERIALS").contains(blockUnderCobbleStone.getType().name());
+                        boolean ignoreBlock = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(blockUnderCobbleStone.getType().name());
 
                         if (!ignoreBlock) {
                             block_.setType(genbucketItem.getType());
@@ -277,7 +277,7 @@ public class Vertical extends Genbucket {
 
             }
 
-        }.runTaskTimer(main, 0L, delay);
+        }.runTaskTimer(plugin, 0L, delay);
     }
 
     private void directionDown() {
@@ -327,7 +327,7 @@ public class Vertical extends Genbucket {
                     return;
                 }
 
-                boolean run = main.getConfig().getStringList("IGNORE-MATERIALS").contains(block.getType().name());
+                boolean run = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(block.getType().name());
 
                 if (!run && genbucketItem.getType().equals(Material.SAND) || !run && genbucketItem.getType().equals(Material.GRAVEL) || run) {
 
@@ -341,7 +341,7 @@ public class Vertical extends Genbucket {
                         block_.setType(Material.COBBLESTONE);
 
                         Block blockUnderCobbleStone = block.getLocation().clone().subtract(0, 2, 0).getBlock();
-                        boolean ignoreBlock = main.getConfig().getStringList("IGNORE-MATERIALS").contains(blockUnderCobbleStone.getType().name());
+                        boolean ignoreBlock = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(blockUnderCobbleStone.getType().name());
 
                         if (!ignoreBlock) {
                             block_.setType(genbucketItem.getType());
@@ -369,7 +369,7 @@ public class Vertical extends Genbucket {
 
             }
 
-        }.runTaskTimer(main, 0L, delay);
+        }.runTaskTimer(plugin, 0L, delay);
 
 
     }

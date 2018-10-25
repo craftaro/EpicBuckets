@@ -2,7 +2,6 @@ package com.songoda.epicbuckets;
 
 import com.songoda.epicbuckets.commands.GenbucketAdminCommand;
 import com.songoda.epicbuckets.commands.GenbucketCommand;
-import com.songoda.epicbuckets.filehandler.files.MessageFile;
 import com.songoda.epicbuckets.filehandler.files.ShopFile;
 import com.songoda.epicbuckets.listeners.GenbucketPlaceListener;
 import com.songoda.epicbuckets.listeners.InventoryClickListener;
@@ -10,64 +9,71 @@ import com.songoda.epicbuckets.util.ChatUtil;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EpicBuckets extends JavaPlugin {
+    private static CommandSender console = Bukkit.getConsoleSender();
 
-    public static EpicBuckets main;
+    private static EpicBuckets INSTANCE;
     private static Permission permission = null;
     private static Economy economy = null;
     private static Chat chat = null;
-    public MessageFile messageFile;
     public ShopFile shopFile;
 
+    private Locale locale;
+
     public static EpicBuckets getInstance() {
-        return main;
+        return INSTANCE;
     }
 
     @Override
     public void onEnable() {
-
-        main = this;
-
-        //new AntiPiracy().enable();
+        console.sendMessage(ChatUtil.colorString("&a============================="));
+        console.sendMessage(ChatUtil.colorString("&7EpicBuckets " + this.getDescription().getVersion() + " by &5Songoda <3!"));
+        console.sendMessage(ChatUtil.colorString("&7Action: &aEnabling&7..."));
+        INSTANCE = this;
 
         if (!isEnabled())
             return;
 
-        setUpFiles();
-
-        setupPermissions();
-        setupEconomy();
-        setupChat();
-        setUpCommands();
-        registerListeners();
+        // Locales
+        Locale.init(this);
+        Locale.saveDefaultLocale("en_US");
+        this.locale = Locale.getLocale(getConfig().getString("Locale", "en_US"));
 
 
+        this.setUpFiles();
+
+        this.setupPermissions();
+        this.setupEconomy();
+        this.setupChat();
+        this.setUpCommands();
+        this.registerListeners();
+
+        console.sendMessage(ChatUtil.colorString("&a============================="));
     }
 
     @Override
     public void onDisable() {
-
-        main = null;
-
+        console.sendMessage(ChatUtil.colorString("&a============================="));
+        console.sendMessage(ChatUtil.colorString("&7EpicBuckets " + this.getDescription().getVersion() + " by &5Songoda <3!"));
+        console.sendMessage(ChatUtil.colorString("&7Action: &cDisabling&7..."));
+        console.sendMessage(ChatUtil.colorString("&a============================="));
     }
 
     private void setUpFiles() {
 
         if (!getDataFolder().exists()) {
-
             getDataFolder().mkdirs();
             getLogger().warning("Folder not found, generating files!");
-            saveResource("messages.yml", false);
             saveResource("shops.yml", false);
             saveDefaultConfig();
 
         }
-
-        messageFile = new MessageFile();
         shopFile = new ShopFile();
 
 
@@ -80,7 +86,7 @@ public class EpicBuckets extends JavaPlugin {
     public void withdrawBalance(Player player, int amount, boolean sendMessage) {
 
         if (sendMessage)
-            player.sendMessage(ChatUtil.colorPrefix(messageFile.config.getString("WITHDRAW-MESSAGE")).replace("{amount}", String.valueOf(amount)));
+            player.sendMessage(locale.getMessage("event.withdrawl.success").replace("{amount}", String.valueOf(amount)));
 
         economy.withdrawPlayer(player, amount);
     }
@@ -102,8 +108,7 @@ public class EpicBuckets extends JavaPlugin {
 
 
     public void reloadFiles() {
-
-        messageFile.load();
+        this.locale.reloadMessages();
         shopFile.load();
         reloadConfig();
 
@@ -136,5 +141,8 @@ public class EpicBuckets extends JavaPlugin {
         return (economy != null);
     }
 
+    public Locale getLocale() {
+        return locale;
+    }
 
 }

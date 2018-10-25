@@ -51,7 +51,7 @@ public class ChatUtil {
     }
 
     public static String getPrefix() {
-        return EpicBuckets.getInstance().messageFile.config.getString("PREFIX").equals("none") ? "" : EpicBuckets.getInstance().messageFile.config.getString("PREFIX") + " ";
+        return EpicBuckets.getInstance().getLocale().getMessage("general.nametag.prefix").equals("none") ? "" : EpicBuckets.getInstance().getLocale().getMessage("general.nametag.prefix") + " ";
     }
 
     public static void debugMSG(Player player, Object... args) {

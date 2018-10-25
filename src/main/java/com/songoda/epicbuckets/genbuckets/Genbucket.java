@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public abstract class Genbucket {
 
-    protected EpicBuckets main = EpicBuckets.getInstance();
+    protected EpicBuckets plugin = EpicBuckets.getInstance();
 
     private GenbucketType genbucketType;
 
@@ -34,7 +34,7 @@ public abstract class Genbucket {
     public abstract void run();
 
     public EpicBuckets getInstance() {
-        return main;
+        return plugin;
     }
 
     protected void genbucketFinished(Player player, UUID uuid) {
@@ -65,7 +65,7 @@ public abstract class Genbucket {
         //ChatUtil.debugMSG(player, factionsCheck, factionsUUIDCheck, griefPreventionCheck, worldGuardCheck, worldBorderCheck);
 
         if (!factionsCheck || !factionsUUIDCheck || !griefPreventionCheck || !worldGuardCheck || worldBorderCheck) {
-            player.sendMessage(ChatUtil.colorPrefix(main.messageFile.config.getString("YOU-CANNOT-PLACE-HERE")));
+            player.sendMessage(plugin.getLocale().getMessage("event.place.nothere"));
             return false;
         }
 
@@ -84,7 +84,7 @@ public abstract class Genbucket {
         if (!factionsCheck || !factionsUUIDCheck || !griefPreventionCheck || !worldGuardCheck || worldBorderCheck) {
 
             if (sendMessage)
-                player.sendMessage(ChatUtil.colorPrefix(main.messageFile.config.getString("YOU-CANNOT-PLACE-HERE")));
+                player.sendMessage(plugin.getLocale().getMessage("event.place.nothere"));
 
             return false;
 
@@ -110,7 +110,7 @@ public abstract class Genbucket {
 
         if (GenbucketManager.getActiveGenBuckets(player) >= maxActiveGenForPlayer(player) + 1) {
 
-            player.sendMessage(ChatUtil.colorPrefix(main.messageFile.config.getString("YOU-MUST-WAIT")));
+            player.sendMessage(plugin.getLocale().getMessage("event.place.wait"));
             return false;
 
         }
@@ -128,7 +128,7 @@ public abstract class Genbucket {
             if (!offlinePlayer.isOnline())
                 continue;
 
-            offlinePlayer.getPlayer().sendMessage(ChatUtil.colorPrefix(main.messageFile.config.getString("ADMIN-MESSAGE").replace("{player}", target.getName()).replace("{type}", genbucketType.toString().toLowerCase())));
+            offlinePlayer.getPlayer().sendMessage(plugin.getLocale().getMessage("event.admin.playerplaced", target.getName(),  genbucketType.toString().toLowerCase()));
 
         }
 
@@ -136,24 +136,24 @@ public abstract class Genbucket {
 
     protected boolean withdrawMoney(Player player, GenbucketItem item) {
 
-        boolean useInfinityGens = main.getConfig().getBoolean("INFINITE-USE");
+        boolean useInfinityGens = plugin.getConfig().getBoolean("INFINITE-USE");
 
         if (!useInfinityGens) {
             removeBucket(player, player.getInventory().getItem(player.getInventory().getHeldItemSlot()));
             return true;
         }
 
-        double playerBalance = main.getBalance(player);
+        double playerBalance = plugin.getBalance(player);
 
         if (playerBalance >= item.getPrice()) {
 
-            main.withdrawBalance(player, item.getPrice(), true);
+            plugin.withdrawBalance(player, item.getPrice(), true);
 
             return true;
 
         } else {
 
-            player.sendMessage(ChatUtil.colorPrefix(main.messageFile.config.getString("NOT-ENOUGH-MONEY").replace("{money}", String.valueOf((playerBalance - item.getPrice()) * -1))));
+            player.sendMessage(plugin.getLocale().getMessage("event.withdrawl.success", String.valueOf((playerBalance - item.getPrice()) * -1)));
 
             return false;
         }
@@ -166,9 +166,9 @@ public abstract class Genbucket {
 
         boolean foundValue = false;
 
-        for (String maxAmountString : main.getConfig().getConfigurationSection("CUSTOM-ACTIVE-GEN-PER-PLAY").getKeys(false)) {
+        for (String maxAmountString : plugin.getConfig().getConfigurationSection("CUSTOM-ACTIVE-GEN-PER-PLAY").getKeys(false)) {
 
-            String value[] = main.getConfig().getString("CUSTOM-ACTIVE-GEN-PER-PLAY." + maxAmountString).split(":");
+            String value[] = plugin.getConfig().getString("CUSTOM-ACTIVE-GEN-PER-PLAY." + maxAmountString).split(":");
 
             if (!player.hasPermission(value[1]))
                 continue;
@@ -180,7 +180,7 @@ public abstract class Genbucket {
         }
 
         if (!foundValue)
-            maxActiveGenForPlayer = main.getConfig().getInt("MAX-ACTIVE-GEN-PER-PLAYER");
+            maxActiveGenForPlayer = plugin.getConfig().getInt("MAX-ACTIVE-GEN-PER-PLAYER");
 
         //ChatUtil.debugMSG(player, maxActiveGenForPlayer, foundValue);
 
@@ -190,12 +190,12 @@ public abstract class Genbucket {
 
     protected boolean foundSponge(Location loc) {
 
-        boolean useSponge = main.getConfig().getBoolean("USE-SPONGE-SUPPORT");
+        boolean useSponge = plugin.getConfig().getBoolean("USE-SPONGE-SUPPORT");
 
         if (!useSponge)
             return false;
 
-        int radius = main.getConfig().getInt("SPONGE-RADIUS");
+        int radius = plugin.getConfig().getInt("SPONGE-RADIUS");
 
         if (radius < 0)
             return false;

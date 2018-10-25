@@ -56,7 +56,7 @@ public class Infused extends Genbucket {
     public void run() {
 
         if (!"UP".equalsIgnoreCase(blockFace.name())) {
-            player.sendMessage(ChatUtil.colorPrefix(main.messageFile.config.getString("GENBUCKET-PLACED-WRONG").replace("{direction}", main.messageFile.config.getString("TRANSLATE-DIRECTION-UP")).replace("{genbucket}", ChatUtil.stripColor(genbucketItem.getItemName()))));
+            player.sendMessage(ChatUtil.colorPrefix(plugin.getLocale().getMessage("event.genbucket.placedwrong", plugin.getLocale().getMessage("event.translate.directionup", "{genbucket}", ChatUtil.stripColor(genbucketItem.getItemName())))));
             return;
         }
 
@@ -74,7 +74,7 @@ public class Infused extends Genbucket {
         if (!withdrawMoney(player, genbucketItem))
             return;
 
-        long delay = main.getConfig().getInt("DELAY");
+        long delay = plugin.getConfig().getInt("DELAY");
 
         // Now we can start spawning the blocks
 
@@ -115,7 +115,7 @@ public class Infused extends Genbucket {
 
                 }
 
-                boolean runFirst = main.getConfig().getStringList("IGNORE-MATERIALS").contains(blockOne.getType().name());
+                boolean runFirst = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(blockOne.getType().name());
 
                 if (runPillarOne && runFirst && canPlace(player, blockOne.getLocation(), false)) {
 
@@ -125,7 +125,7 @@ public class Infused extends Genbucket {
                 } else
                     runPillarOne = false;
 
-                boolean runSecond = main.getConfig().getStringList("IGNORE-MATERIALS").contains(blockTwo.getType().name());
+                boolean runSecond = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(blockTwo.getType().name());
 
                 if (runPillarTwo && runSecond && canPlace(player, blockTwo.getLocation(), false)) {
 
@@ -148,8 +148,8 @@ public class Infused extends Genbucket {
                 Block nextBlockOne = blockOne.getLocation().clone().subtract(0, 1, 0).getBlock();
                 Block nextBlockTwo = blockTwo.getLocation().clone().subtract(0, 1, 0).getBlock();
 
-                boolean checkNextBlock = main.getConfig().getStringList("IGNORE-MATERIALS").contains(nextBlockOne.getType().name());
-                boolean checkNextBlock_ = main.getConfig().getStringList("IGNORE-MATERIALS").contains(nextBlockTwo.getType().name());
+                boolean checkNextBlock = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(nextBlockOne.getType().name());
+                boolean checkNextBlock_ = plugin.getConfig().getStringList("IGNORE-MATERIALS").contains(nextBlockTwo.getType().name());
 
                 if (!checkNextBlock && !checkNextBlock_ || !runPillarOne && !runPillarTwo) {
 
@@ -162,7 +162,7 @@ public class Infused extends Genbucket {
 
             }
 
-        }.runTaskTimer(main, 0L, delay);
+        }.runTaskTimer(plugin, 0L, delay);
 
     }
 

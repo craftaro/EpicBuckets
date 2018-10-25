@@ -19,12 +19,12 @@ public class GenbucketCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatUtil.colorPrefix(EpicBuckets.getInstance().messageFile.config.getString("PLAYER-COMMAND")));
+            sender.sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.general.playercommand"));
             return true;
         }
 
         if (!sender.hasPermission("genbucket.command")) {
-            sender.sendMessage(ChatUtil.colorPrefix(EpicBuckets.getInstance().messageFile.config.getString("NO-PERMISSION")));
+            sender.sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.general.nopermission"));
             return true;
         }
 
