@@ -8,6 +8,7 @@ import com.songoda.epicbuckets.util.ChatUtil;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -100,18 +101,22 @@ public class InventoryClickListener implements Listener {
 
         String shopName = "";
 
-        for (String key : config.getConfigurationSection("shops").getKeys(false)) {
+        ConfigurationSection cs = config.getConfigurationSection("shops");
 
-            String inventoryName = ChatUtil.stripColor(config.getString("shops." + key + ".inventory-name"));
+        if (cs != null) {
+            for (String key : config.getConfigurationSection("shops").getKeys(false)) {
 
-            if (!clickedInventory.equalsIgnoreCase(inventoryName))
-                continue;
+                String inventoryName = ChatUtil.stripColor(config.getString("shops." + key + ".inventory-name"));
 
-            foundInventory = true;
+                if (!clickedInventory.equalsIgnoreCase(inventoryName))
+                    continue;
 
-            shopName = key;
+                foundInventory = true;
 
-            break;
+                shopName = key;
+
+                break;
+            }
         }
 
         if (!foundInventory || shopName.equalsIgnoreCase(""))
