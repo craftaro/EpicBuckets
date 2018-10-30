@@ -87,7 +87,7 @@
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
-            <artifactId>VaultAPI</artifactId>
+            <artifactId>Vault</artifactId>
             <version>LATEST</version>
         </dependency>
         <dependency>
