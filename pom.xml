@@ -86,7 +86,7 @@
             <version>LATEST</version>
         </dependency>
         <dependency>
-            <groupId>net.milkbowl.vault</groupId>
+            <groupId>net.milkbowl</groupId>
             <artifactId>Vault</artifactId>
             <version>LATEST</version>
         </dependency>
