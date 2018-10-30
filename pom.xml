@@ -66,7 +66,7 @@
         </repository>
         <repository>
             <id>vault</id>
-            <url>http://repo.songoda.com/repository/vault</url>
+            <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
     </repositories>
     <dependencies>
@@ -86,8 +86,8 @@
             <version>LATEST</version>
         </dependency>
         <dependency>
-            <groupId>net.milkbowl</groupId>
-            <artifactId>Vault</artifactId>
+            <groupId>net.milkbowl.vault</groupId>
+            <artifactId>VaultAPI</artifactId>
             <version>LATEST</version>
         </dependency>
         <dependency>
