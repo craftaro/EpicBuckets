@@ -106,3 +106,25 @@ target/maven-archiver/pom\.properties
 target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles\.lst
 
 target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles\.lst
+
+\.idea/artifacts/epicbuckets_jar\.xml
+
+\.idea/libraries/Maven__com_google_code_gson_gson_2_2_4\.xml
+
+\.idea/libraries/Maven__com_google_guava_guava_17_0\.xml
+
+\.idea/libraries/Maven__javax_persistence_persistence_api_1_0\.xml
+
+\.idea/libraries/Maven__net_milkbowl_vault_VaultAPI_1_6\.xml
+
+\.idea/libraries/Maven__org_avaje_ebean_2_8_1\.xml
+
+\.idea/libraries/Maven__org_bukkit_bukkit_1_9_R0_1_SNAPSHOT\.xml
+
+\.idea/libraries/Maven__org_yaml_snakeyaml_1_15\.xml
+
+src/main/java/META-INF/MANIFEST\.MF
+
+target/classes/com/songoda/epicbuckets/genbuckets/GenbucketItem\.class
+
+target/classes/com/songoda/epicbuckets/inventories/InventoryManager\.class

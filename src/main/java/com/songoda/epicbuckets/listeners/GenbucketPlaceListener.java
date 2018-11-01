@@ -41,7 +41,7 @@ public class GenbucketPlaceListener implements Listener {
     @EventHandler
     public void onPlayerBucketEmptyEvent(PlayerBucketEmptyEvent event) {
 
-        FileConfiguration config = plugin.shopFile.config;
+        FileConfiguration config = plugin.shopFile;
 
         final Player player = event.getPlayer();
 
@@ -99,7 +99,7 @@ public class GenbucketPlaceListener implements Listener {
 
         Block clickedBlock = event.getClickedBlock();
 
-        FileConfiguration config = plugin.shopFile.config;
+        FileConfiguration config = plugin.shopFile;
 
         boolean foundGenbucket = false;
 

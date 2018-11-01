@@ -57,7 +57,7 @@ public class InventoryManager {
 
     public void loadSubInventory(Player player, String shopName) {
 
-        FileConfiguration config = EpicBuckets.getInstance().shopFile.config;
+        FileConfiguration config = EpicBuckets.getInstance().shopFile;
 
         String inventoryName = ChatUtil.colorString(config.getString("shops." + shopName + ".inventory-name"));
 
@@ -97,7 +97,7 @@ public class InventoryManager {
 
     private void setBucketInSubGUI(Inventory inventory, String shopName, String key) {
 
-        FileConfiguration config = EpicBuckets.getInstance().shopFile.config;
+        FileConfiguration config = EpicBuckets.getInstance().shopFile;
 
         String name = ChatUtil.colorString(config.getString("shops." + shopName + "." + key + ".name"));
 

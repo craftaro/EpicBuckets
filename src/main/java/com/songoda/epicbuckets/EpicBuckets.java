@@ -13,9 +13,12 @@ import net.milkbowl.vault.permission.Permission;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 public class EpicBuckets extends JavaPlugin {
     private static CommandSender console = Bukkit.getConsoleSender();
@@ -24,7 +27,7 @@ public class EpicBuckets extends JavaPlugin {
     private static Permission permission = null;
     private static Economy economy = null;
     private static Chat chat = null;
-    public ShopFile shopFile;
+    public YamlConfiguration shopFile;
 
     private Locale locale;
 
@@ -61,6 +64,21 @@ public class EpicBuckets extends JavaPlugin {
         console.sendMessage(ChatUtil.colorString("&a============================="));
     }
 
+    private void save(String folder, String file) {
+        File f = null;
+        if(folder != null && !folder.equals(""))
+            f = new File(getDataFolder() + File.separator + folder + File.separator, file);
+        else
+            f = new File(getDataFolder() + File.separator, file);
+        if(!f.exists()) {
+            f.getParentFile().mkdirs();
+            saveResource(folder != null && !folder.equals("") ? folder + File.separator + file : file, false);
+        }
+        if(file.equals("shops.yml")) {
+            shopFile = YamlConfiguration.loadConfiguration(f);
+        }
+    }
+
     @Override
     public void onDisable() {
         console.sendMessage(ChatUtil.colorString("&a============================="));
@@ -76,11 +94,9 @@ public class EpicBuckets extends JavaPlugin {
             getLogger().warning("Folder not found, generating files!");
             saveResource("shops.yml", false);
             saveDefaultConfig();
-
         }
-        shopFile = new ShopFile();
-
-
+        saveDefaultConfig();
+        save(null, "shops.yml");
     }
 
     public double getBalance(Player player) {
@@ -113,7 +129,6 @@ public class EpicBuckets extends JavaPlugin {
 
     public void reloadFiles() {
         this.locale.reloadMessages();
-        shopFile.load();
         reloadConfig();
 
     }
