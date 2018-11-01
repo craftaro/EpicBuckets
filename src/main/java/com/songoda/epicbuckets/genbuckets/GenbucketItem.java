@@ -35,7 +35,7 @@ public class GenbucketItem {
 
     public GenbucketItem(String shopName, String key) {
 
-        FileConfiguration config = EpicBuckets.getInstance().shopFile.config;
+        FileConfiguration config = EpicBuckets.getInstance().shopFile;
 
         this.itemName = ChatUtil.colorString(config.getString("shops." + shopName + "." + key + ".name"));
 

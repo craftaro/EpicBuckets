@@ -93,7 +93,7 @@ public class InventoryClickListener implements Listener {
     @EventHandler
     public void onClickSubInventory(InventoryClickEvent event) {
 
-        FileConfiguration config = plugin.shopFile.config;
+        FileConfiguration config = plugin.shopFile;
 
         String clickedInventory = ChatUtil.stripColor(event.getInventory().getTitle());
 
