@@ -95,6 +95,7 @@ public class EpicBuckets extends JavaPlugin {
             saveResource("shops.yml", false);
             saveDefaultConfig();
         }
+        saveDefaultConfig();
         save(null, "shops.yml");
     }
 
