@@ -124,3 +124,7 @@ target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles\.ls
 \.idea/libraries/Maven__org_yaml_snakeyaml_1_15\.xml
 
 src/main/java/META-INF/MANIFEST\.MF
+
+target/classes/com/songoda/epicbuckets/genbuckets/GenbucketItem\.class
+
+target/classes/com/songoda/epicbuckets/inventories/InventoryManager\.class
