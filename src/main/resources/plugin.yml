@@ -8,7 +8,7 @@ depend: [Vault]
 commands:
   genbucket:
     description: Open EpicBuckets shop
-    aliases: [gb, gen, genbuckets, ezbucket, epicbuckkets, genshop]
+    aliases: [gb, gen, genbuckets, ezbucket, epicbuckets, genshop]
     usage: "/gb"
   genbucketadmin:
     description: Admin commands
