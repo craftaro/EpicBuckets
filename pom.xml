@@ -55,9 +55,15 @@
     </repositories>
     <dependencies>
         <dependency>
+            <groupId>me.lucko</groupId>
+            <artifactId>helper</artifactId>
+            <version>LATEST</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.12.2</version>
+            <version>1.13.2</version>
         </dependency>
         <dependency>
             <groupId>com.songoda</groupId>
