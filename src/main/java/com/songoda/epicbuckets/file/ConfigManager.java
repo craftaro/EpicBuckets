@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.files;
+package com.songoda.epicbuckets.file;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,16 +18,17 @@ public class ConfigManager {
 
     private void setup() {
         epicBuckets.saveDefaultConfig();
-        createConfig("shops");
+        createConfig("shops", true);
     }
 
-    public void createConfig(String name) {
+    public void createConfig(String name, boolean resource) {
         File f = new File(epicBuckets.getDataFolder(), name + ".yml");
-        configDatabase.put(name, new Config(f));
+        configDatabase.put(name, new Config(f, resource));
     }
 
-    public FileConfiguration getConfig() {
-        return epicBuckets.getConfig();
+    public void reloadConfig(String name) {
+        if (!configDatabase.containsKey(name)) return;
+        configDatabase.get(name).reloadConfig();
     }
 
     public FileConfiguration getConfig(String name) {

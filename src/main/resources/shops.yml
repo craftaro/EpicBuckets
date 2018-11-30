@@ -4,7 +4,7 @@ shops:
 
   vertical:
 
-    goBackButton: 31 # back button will display if enabled in files.yml
+    goBackButton: 31 # back button will display if enabled in file.yml
 
     trait: "VERTICAL" # Which genbucket type does this shop have?
 
