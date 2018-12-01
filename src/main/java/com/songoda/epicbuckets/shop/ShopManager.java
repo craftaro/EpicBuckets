@@ -27,7 +27,7 @@ public class ShopManager {
                 continue;
             }
 
-            shopDatabase.put(epicBuckets.getConfig().getString(path + "." + key), new Shop(epicBuckets.getConfig().getString(path + "." + key), path + "." + key));
+            shopDatabase.put(epicBuckets.getConfig().getString(path + "." + key), new Shop(epicBuckets.getConfig().getString(path + "." + key), epicBuckets.getConfig().getString(path + "." + key + ".shop"), path + "." + key));
         }
     }
 
