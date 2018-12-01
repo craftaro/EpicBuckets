@@ -23,8 +23,11 @@ public class Config {
     private void initializeHandler() {
         if (!file.exists()) {
             try {
-                if (isResource) EpicBuckets.getInstance().saveResource(file.getName(), false);
-                file.createNewFile();
+                if (isResource) {
+                    EpicBuckets.getInstance().saveResource(file.getName(), false);
+                } else {
+                    file.createNewFile();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
