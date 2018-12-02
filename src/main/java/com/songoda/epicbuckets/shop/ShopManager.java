@@ -12,6 +12,7 @@ public class ShopManager {
     private EpicBuckets epicBuckets;
 
     private String path = "MENU-ITEMS";
+    private String shopPath = "shops";
 
     public ShopManager() {
         epicBuckets = EpicBuckets.getInstance();
@@ -29,6 +30,14 @@ public class ShopManager {
 
             shopDatabase.put(epicBuckets.getConfig().getString(path + "." + key), new Shop(epicBuckets.getConfig().getString(path + "." + key), epicBuckets.getConfig().getString(path + "." + key + ".shop"), path + "." + key));
         }
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String getShopPath() {
+        return shopPath;
     }
 
 }

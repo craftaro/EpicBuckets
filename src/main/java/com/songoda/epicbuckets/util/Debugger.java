@@ -15,4 +15,12 @@ public class Debugger {
         epicBuckets.getLogger().info(ChatColor.translateAlternateColorCodes('&', message));
     }
 
+    public void invalidSlot(String item) {
+        sendConsole(item + " has an invalid slot set, disabling shop..");
+    }
+
+    public void invalidPrice(String item) {
+        sendConsole(item + " has an invalid price set, disabling shop..");
+    }
+
 }

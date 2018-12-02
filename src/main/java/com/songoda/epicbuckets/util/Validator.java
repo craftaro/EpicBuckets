@@ -15,6 +15,15 @@ public class Validator {
     private Validator() {
     }
 
+    public boolean isDouble(String s) {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean isInt(String s) {
         try {
             Integer.parseInt(s);
@@ -31,6 +40,11 @@ public class Validator {
         } catch (IllegalArgumentException e) {
             return false;
         }
+    }
+
+    public int slot(String s) {
+        if (isInt(s)) return Integer.parseInt(s);
+        return -1;
     }
 
 }
