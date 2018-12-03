@@ -7,7 +7,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ConfigManager {
 
@@ -20,10 +22,14 @@ public class ConfigManager {
     private String bulkShopDecreasePath = "BULK-SHOP-INVENTORY.decrease-item";
     private String bulkShopPurchasePath = "BULK-SHOP-INVENTORY.purchase-item";
 
+    private List<String> ignoredMaterials;
+
     private ItemStack backButton;
 
     public ConfigManager() {
         this.epicBuckets = EpicBuckets.getInstance();
+        ignoredMaterials = new ArrayList<>();
+
         setup();
     }
 
@@ -31,8 +37,14 @@ public class ConfigManager {
         epicBuckets.saveDefaultConfig();
         createConfig("shops", true);
 
+        loadData();
         setupBackButton();
         setupFillItem();
+    }
+
+    private void loadData() {
+        ignoredMaterials = epicBuckets.getConfig().getStringList("IGNORE-MATERIALS");
+        //TODO: load in all config data
     }
 
     private void setupFillItem() {

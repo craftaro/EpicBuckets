@@ -87,4 +87,32 @@ public class ShopManager {
         return shopPath;
     }
 
+    public ItemStack getIncreaseItem() {
+        return increaseItem;
+    }
+
+    public ItemStack getDecreaseItem() {
+        return decreaseItem;
+    }
+
+    public ItemStack getPurchaseItem() {
+        return purchaseItem;
+    }
+
+    public List<Integer> getIncreaseSlots() {
+        return increaseSlots;
+    }
+
+    public List<Integer> getDecreaseSlots() {
+        return decreaseSlots;
+    }
+
+    public int getPurchaseSlot() {
+        return purchaseSlot;
+    }
+
+    public boolean isUseBackButtons() {
+        return useBackButtons;
+    }
+
 }
