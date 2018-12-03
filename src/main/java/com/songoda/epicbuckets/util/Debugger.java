@@ -15,8 +15,16 @@ public class Debugger {
         epicBuckets.getLogger().info(ChatColor.translateAlternateColorCodes('&', message));
     }
 
+    public void invalidInventorySize(String item) {
+        sendConsole(item + " has an invalid inventory size, disabling shop..");
+    }
+
+    public void invalidGenbucketType(String item) {
+        sendConsole(item + " has an invalid Genbucket type, disabling shop..");
+    }
+
     public void invalidSlot(String item) {
-        sendConsole(item + " has an invalid slot set, disabling shop..");
+        sendConsole(item + " has an invalid slot, disabling shop..");
     }
 
     public void invalidPrice(String item) {

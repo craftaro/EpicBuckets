@@ -1,6 +1,7 @@
 package com.songoda.epicbuckets.util;
 
 import com.songoda.epicbuckets.EpicBuckets;
+import com.songoda.epicbuckets.genbucket.GenbucketType;
 
 public class Validator {
 
@@ -13,6 +14,23 @@ public class Validator {
     private EpicBuckets epicBuckets = EpicBuckets.getInstance();
 
     private Validator() {
+    }
+
+    public int inventorySize(String s) {
+        int i;
+        if (isInt(s)) {
+            i = Integer.parseInt(s);
+            if (i%9 == 0 && i<=54) return i;
+        }
+        return -1;
+    }
+
+    public GenbucketType genbucketType(String s) {
+        try {
+            return GenbucketType.valueOf(s);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public boolean isDouble(String s) {
