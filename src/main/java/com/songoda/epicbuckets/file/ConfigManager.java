@@ -95,4 +95,8 @@ public class ConfigManager {
     public String getBulkShopPurchasePath() {
         return bulkShopPurchasePath;
     }
+
+    public List<String> getIgnoredMaterials() {
+        return ignoredMaterials;
+    }
 }
