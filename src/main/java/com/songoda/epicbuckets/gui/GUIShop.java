@@ -52,7 +52,7 @@ public class GUIShop extends Gui {
     }
 
     private void handleSubShop(SubShop s) {
-        if (shopManager.hasEnoughFunds(getPlayer(), s)) shopManager.buyFromShop(getPlayer(), s);
+        if (shopManager.hasEnoughFunds(getPlayer(), s, 1)) shopManager.buyFromShop(getPlayer(), s, 1);
     }
 
 }

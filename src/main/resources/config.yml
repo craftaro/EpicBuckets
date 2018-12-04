@@ -78,7 +78,7 @@ BULK-SHOP-INVENTORY:
 
   inventory-name: "Bulk shop for {player}"
 
-  size: 5 # Number of lines in inventory
+  size: 6 # Number of lines in inventory
 
   fill: false # recommended off
 

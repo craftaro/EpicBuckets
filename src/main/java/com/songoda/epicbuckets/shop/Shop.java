@@ -101,6 +101,10 @@ public class Shop {
         return subShops.values();
     }
 
+    public SubShop getSubShop(String shop) {
+        return subShops.get(shop);
+    }
+
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }

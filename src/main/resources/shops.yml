@@ -199,7 +199,7 @@ shops:
 
     fill: true
 
-    inventory-name: "Psuedo genbuckets"
+    inventory-name: "PsuedoVertical genbuckets"
 
     '0': # Must be unique
 

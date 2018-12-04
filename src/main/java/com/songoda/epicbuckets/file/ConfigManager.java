@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class ConfigManager {
@@ -27,6 +28,8 @@ public class ConfigManager {
     private List<String> ignoredMaterials;
     private List<String> psuedoMaterials;
 
+    private LinkedHashMap<String, Integer> genbucketGroups;
+
     private boolean supportFactions;
     private boolean supportWorldGuard;
     private boolean supportGriefPrevention;
@@ -40,7 +43,7 @@ public class ConfigManager {
     private int maxVerticalHeight;
     private int maxHorizontalLength;
     private int delay;
-    private boolean enabled;
+    private boolean genbucketsDisabled;
     private int inventorySize;
     private String inventoryName;
     private boolean fillInventory;
@@ -53,6 +56,7 @@ public class ConfigManager {
         ignoredMaterials = new ArrayList<>();
         psuedoMaterials = new ArrayList<>();
         configDatabase = new HashMap<>();
+        genbucketGroups = new LinkedHashMap<>();
 
         setup();
     }
@@ -80,10 +84,11 @@ public class ConfigManager {
         maxVerticalHeight = epicBuckets.getConfig().getInt("MAX-VERTICAL-HEIGHT");
         maxHorizontalLength = epicBuckets.getConfig().getInt("MAX-HORIZONTAL-LENGTH");
         delay = epicBuckets.getConfig().getInt("DELAY");
-        setEnabled(epicBuckets.getConfig().getBoolean("DISABLE-GENBUCKETS"));
+        setGenbucketsDisabled(epicBuckets.getConfig().getBoolean("DISABLE-GENBUCKETS"));
         inventorySize = epicBuckets.getConfig().getInt(menuItemsPath + ".size");
         inventoryName = epicBuckets.getConfig().getString(menuItemsPath + ".inventory-name");
         fillInventory = epicBuckets.getConfig().getBoolean(menuItemsPath + ".fill");
+        epicBuckets.getConfig().getConfigurationSection("CUSTOM-ACTIVE-GEN-PER-PLAY").getKeys(false).forEach(s -> genbucketGroups.put(epicBuckets.getConfig().getString("CUSTOM-ACTIVE-GEN-PER-PLAY." + s).split(":")[1], Integer.parseInt(epicBuckets.getConfig().getString("CUSTOM-ACTIVE-GEN-PER-PLAY." + s).split(":")[0])));
     }
 
     private void setupFillItem() {
@@ -191,12 +196,12 @@ public class ConfigManager {
         return delay;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setGenbucketsDisabled(boolean enabled) {
+        this.genbucketsDisabled = enabled;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public boolean isGenbucketsDisabled() {
+        return genbucketsDisabled;
     }
 
     public ItemStack getBackButton() {
@@ -221,5 +226,9 @@ public class ConfigManager {
 
     public ItemStack getFillItem() {
         return fillItem;
+    }
+
+    public LinkedHashMap<String, Integer> getGenbucketGroups() {
+        return genbucketGroups;
     }
 }

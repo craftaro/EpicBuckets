@@ -2,6 +2,7 @@ package com.songoda.epicbuckets.shop;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.util.InventoryHelper;
+import com.songoda.epicbuckets.util.NBTHelper;
 import com.songoda.epicbuckets.util.Validator;
 import com.songoda.epicbuckets.util.XMaterial;
 import org.bukkit.Bukkit;
@@ -27,6 +28,7 @@ public class ShopManager {
 
     private List<Integer> increaseSlots;
     private List<Integer> decreaseSlots;
+    private List<Integer> bulkAmounts = new ArrayList<>(Arrays.asList(1, 5, 10));
     private int purchaseSlot;
 
     private String bulkInventoryName;
@@ -97,18 +99,25 @@ public class ShopManager {
         }
     }
 
-    public boolean hasEnoughFunds(Player buyer, SubShop s) {
-        if (epicBuckets.getEcon().getBalance(Bukkit.getOfflinePlayer(buyer.getUniqueId())) >= s.getPrice()) return true;
+    public boolean hasEnoughFunds(Player buyer, SubShop s, int amount) {
+        if (epicBuckets.getEcon().getBalance(Bukkit.getOfflinePlayer(buyer.getUniqueId())) >= (s.getPrice() * amount)) return true;
         return false;
     }
 
-    public void buyFromShop(Player buyer, SubShop s) {
+    public void buyFromShop(Player buyer, SubShop s, int amount) {
         epicBuckets.getEcon().withdrawPlayer(Bukkit.getOfflinePlayer(buyer.getUniqueId()), s.getPrice());
-        buyer.getInventory().addItem(s.getGenShopItem());
+
+        ItemStack genBucket = s.getGenShopItem();
+        genBucket.setAmount(amount);
+        buyer.getInventory().addItem(NBTHelper.addGenbucketData(genBucket, s.getParent().getTrait(), s));
     }
 
     public Collection<Shop> getShops() {
         return shopDatabase.values();
+    }
+
+    public Shop getShop(String shop) {
+        return shopDatabase.get(shop);
     }
 
     public String getShopPath() {
@@ -165,5 +174,9 @@ public class ShopManager {
 
     public int getBulkMainItemSlot() {
         return bulkMainItemSlot;
+    }
+
+    public List<Integer> getBulkAmounts() {
+        return bulkAmounts;
     }
 }

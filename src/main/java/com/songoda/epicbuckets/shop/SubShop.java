@@ -126,4 +126,8 @@ public class SubShop {
     public ItemStack getGenShopItem() {
         return genShopItem;
     }
+
+    public String getItem() {
+        return item;
+    }
 }

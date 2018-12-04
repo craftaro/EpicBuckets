@@ -3,6 +3,8 @@ package com.songoda.epicbuckets;
 import co.aikar.commands.PaperCommandManager;
 import com.songoda.epicbuckets.command.CommandGenbucket;
 import com.songoda.epicbuckets.file.ConfigManager;
+import com.songoda.epicbuckets.genbucket.GenbucketManager;
+import com.songoda.epicbuckets.listener.GenbucketPlaceListener;
 import com.songoda.epicbuckets.shop.ShopManager;
 import com.songoda.epicbuckets.util.Debugger;
 import net.milkbowl.vault.economy.Economy;
@@ -16,8 +18,9 @@ public class EpicBuckets extends JavaPlugin {
     private ConfigManager configManager;
     private ShopManager shopManager;
     private Debugger debugger;
+    private GenbucketManager genbucketManager;
     private Economy econ;
-    PaperCommandManager commandManager;
+    private PaperCommandManager commandManager;
 
     public static EpicBuckets getInstance() { return instance; }
 
@@ -29,9 +32,12 @@ public class EpicBuckets extends JavaPlugin {
         configManager = new ConfigManager();
         shopManager = new ShopManager();
         shopManager.init();
+        genbucketManager = new GenbucketManager();
         commandManager = new PaperCommandManager(this);
 
         commandManager.registerCommand(new CommandGenbucket());
+
+        getServer().getPluginManager().registerEvents(new GenbucketPlaceListener(), this);
 
         setupEconomy();
     }
@@ -63,6 +69,10 @@ public class EpicBuckets extends JavaPlugin {
 
     public Debugger getDebugger() {
         return debugger;
+    }
+
+    public GenbucketManager getGenbucketManager() {
+        return genbucketManager;
     }
 
     public Economy getEcon() {

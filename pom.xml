@@ -54,6 +54,10 @@
                             <pattern>co.aikar.commands</pattern>
                             <shadedPattern>${project.groupId}.${project.artifactId}.acf</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>de.tr7zw.itemnbtapi</pattern>
+                            <shadedPattern>${project.groupId}.${project.artifactId}.itemnbtapi</shadedPattern>
+                        </relocation>
                     </relocations>
                 </configuration>
             </plugin>
@@ -79,6 +83,10 @@
             <id>33_aikar</id>
             <url>https://repo.aikar.co/content/groups/aikar/</url>
         </repository>
+        <repository>
+            <id>44_jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
     <dependencies>
         <dependency>
@@ -92,6 +100,12 @@
             <artifactId>helper</artifactId>
             <version>LATEST</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tr7zw</groupId>
+            <artifactId>Item-NBT-API</artifactId>
+            <version>master-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
