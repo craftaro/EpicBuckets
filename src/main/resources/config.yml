@@ -28,7 +28,7 @@ MAX-ACTIVE-GEN-PER-PLAYER: 10 # Amount of gens a player can have active at time
 
 PLACE-UNLIMTED-GENS: true # This will override MAX-ACTIVE-GEN-PER-PLAYER and let them place unlimted gens
 
-MAX-VERTICAL-HEIGHT: 257 # Vertical gen height, the gen will stop if y > 256
+MAX-VERTICAL-HEIGHT: 256 # Vertical gen height, the gen will stop if y > 256
 
 MAX-HORIZONTAL-LENGTH: 50 # Horizontal height
 
@@ -65,24 +65,20 @@ FILL-ITEM:
 
   name: " "
 
-  material: stained_glass_pane
-
-  damage: 15
+  material: WHITE_STAINED_GLASS_PANE
 
 BACK-BUTTON:
 
   name: " &c&lReturn back to categories"
 
-  material: barrier
-
-  damage: 0
+  material: BARRIER
 
 
 BULK-SHOP-INVENTORY:
 
   inventory-name: "Bulk shop for {player}"
 
-  size: 54 # Must be one of these: 9, 18, 27, 36, 45, 54
+  size: 5 # Number of lines in inventory
 
   fill: false # recommended off
 
@@ -92,17 +88,13 @@ BULK-SHOP-INVENTORY:
 
   increase-item:
 
-    material: stained_glass_pane
-
-    damage: 5
+    material: GREEN_STAINED_GLASS_PANE
 
     slots: "24,25,26" # Put only three integers and separate with commas
 
   decrease-item:
 
-    material: stained_glass_pane
-
-    damage: 14
+    material: RED_STAINED_GLASS_PANE
 
     slots: "18,19,20" # Put only three integers and separate with commas
 
@@ -110,9 +102,7 @@ BULK-SHOP-INVENTORY:
 
     name: "&a&lConfirm"
 
-    material: stained_glass
-
-    damage: 13
+    material: YELLOW_STAINED_GLASS
 
     slot: 40
 
@@ -121,7 +111,7 @@ BULK-SHOP-INVENTORY:
 
 MENU-ITEMS:
 
-  size: 27 # Must be one of these: 9, 18, 27, 36, 45, 54
+  size: 3
 
   fill: true # Fill inventory ?
 
@@ -132,8 +122,6 @@ MENU-ITEMS:
     item: # Item configuration
 
       material: WATER_BUCKET # material name
-
-      damage: 0 # also known as short
 
       name: "&eVertical genbuckets" # Name of the item
 
@@ -155,8 +143,6 @@ MENU-ITEMS:
 
       material: WATER_BUCKET
 
-      damage: 0
-
       name: "&eHorizontal genbuckets"
 
       lore:
@@ -176,8 +162,6 @@ MENU-ITEMS:
     item:
 
       material: WATER_BUCKET
-
-      damage: 0
 
       name: "&eInfused genbuckets"
 
@@ -199,8 +183,6 @@ MENU-ITEMS:
     item:
 
       material: WATER_BUCKET
-
-      damage: 0
 
       name: "&ePsuedo genbuckets"
 

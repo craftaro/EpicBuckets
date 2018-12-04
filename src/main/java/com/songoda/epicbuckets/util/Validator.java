@@ -1,31 +1,19 @@
 package com.songoda.epicbuckets.util;
 
-import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.GenbucketType;
 
 public class Validator {
 
-    static Validator instance = new Validator();
-
-    public static Validator getInstance() {
-        return instance;
-    }
-
-    private EpicBuckets epicBuckets = EpicBuckets.getInstance();
-
-    private Validator() {
-    }
-
-    public int inventorySize(String s) {
+    public static int inventorySize(String s) {
         int i;
         if (isInt(s)) {
             i = Integer.parseInt(s);
-            if (i%9 == 0 && i<=54) return i;
+            if (i<=6) return i;
         }
         return -1;
     }
 
-    public GenbucketType genbucketType(String s) {
+    public static GenbucketType genbucketType(String s) {
         try {
             return GenbucketType.valueOf(s);
         } catch (Exception e) {
@@ -33,7 +21,12 @@ public class Validator {
         }
     }
 
-    public boolean isDouble(String s) {
+    public static double price(String s) {
+        if (isDouble(s)) return Double.parseDouble(s);
+        return -1;
+    }
+
+    public static boolean isDouble(String s) {
         try {
             Double.parseDouble(s);
             return true;
@@ -42,7 +35,7 @@ public class Validator {
         }
     }
 
-    public boolean isInt(String s) {
+    public static boolean isInt(String s) {
         try {
             Integer.parseInt(s);
             return true;
@@ -51,7 +44,7 @@ public class Validator {
         }
     }
 
-    public boolean isMaterial(String mat) {
+    public static boolean isMaterial(String mat) {
         try {
             XMaterial.valueOf(mat);
             return true;
@@ -60,7 +53,7 @@ public class Validator {
         }
     }
 
-    public int slot(String s) {
+    public static int slot(String s) {
         if (isInt(s)) return Integer.parseInt(s);
         return -1;
     }

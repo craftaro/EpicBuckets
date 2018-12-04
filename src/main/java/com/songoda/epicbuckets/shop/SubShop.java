@@ -1,6 +1,7 @@
 package com.songoda.epicbuckets.shop;
 
 import com.songoda.epicbuckets.EpicBuckets;
+import com.songoda.epicbuckets.util.InventoryHelper;
 import com.songoda.epicbuckets.util.Validator;
 import com.songoda.epicbuckets.util.XMaterial;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,6 +19,7 @@ public class SubShop {
 
     private ItemStack shopItem;
     private ItemStack genItem;
+    private ItemStack genShopItem;
 
     private Shop parent;
     private String item;
@@ -41,18 +43,20 @@ public class SubShop {
 
     private void init() {
         FileConfiguration shops = EpicBuckets.getInstance().getConfigManager().getConfig("shops");
-        subShopPath = epicBuckets.getShopManager().getShopPath() + "." + parent.getMenuItem() + "." + item;
+        subShopPath = epicBuckets.getShopManager().getShopPath() + "." + parent.getShopName() + "." + item;
+
+        setEnabled(true);
 
         loadData(shops);
         setupShopItem(shops);
     }
 
     private void loadData(FileConfiguration shops) {
-        boolean d = Validator.getInstance().isDouble(shops.getString(subShopPath + ".price"));
+        price = Validator.price(shops.getString(subShopPath + ".price"));
 
-        if (!d) {
+        if (price == -1.0) {
             epicBuckets.getDebugger().invalidPrice(subShopPath);
-            enabled = false;
+            setEnabled(false);
         }
 
         this.shopName = shops.getString(subShopPath + ".name");
@@ -61,17 +65,22 @@ public class SubShop {
     }
 
     private void setupShopItem(FileConfiguration shops) {
-        slot = Validator.getInstance().slot(shops.getString(subShopPath + ".slot"));
-        boolean m = Validator.getInstance().isMaterial(shops.getString(subShopPath + ".icon"));
-        boolean t = Validator.getInstance().isMaterial(shops.getString(subShopPath + ".type"));
+        slot = Validator.slot(shops.getString(subShopPath + ".slot"));
+        boolean m = Validator.isMaterial(shops.getString(subShopPath + ".icon"));
+        boolean t = Validator.isMaterial(shops.getString(subShopPath + ".type"));
 
         if (slot == -1) {
             epicBuckets.getDebugger().invalidSlot(subShopPath);
-            enabled = false;
+            setEnabled(false);
         }
 
         shopItem = ((!m) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".icon")).parseItem());
+        shopItem = InventoryHelper.setDisplayName(InventoryHelper.setLore(shopItem, getDescription()), getShopName());
+
         genItem = ((!t) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".type")).parseItem());
+
+        genShopItem = ((!m) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".icon")).parseItem());
+        genShopItem = InventoryHelper.setDisplayName(InventoryHelper.setLore(genShopItem, getGenItemLore()), getShopName());
     }
 
     public void setEnabled(boolean enabled) {
@@ -82,4 +91,39 @@ public class SubShop {
         return enabled;
     }
 
+    public ItemStack getShopItem() {
+        return shopItem;
+    }
+
+    public ItemStack getGenItem() {
+        return genItem;
+    }
+
+    public Shop getParent() {
+        return parent;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public int getSlot() {
+        return slot;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public List<String> getDescription() {
+        return description;
+    }
+
+    public List<String> getGenItemLore() {
+        return genItemLore;
+    }
+
+    public ItemStack getGenShopItem() {
+        return genShopItem;
+    }
 }

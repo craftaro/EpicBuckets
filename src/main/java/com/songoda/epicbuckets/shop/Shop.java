@@ -2,11 +2,13 @@ package com.songoda.epicbuckets.shop;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.GenbucketType;
+import com.songoda.epicbuckets.util.InventoryHelper;
 import com.songoda.epicbuckets.util.Validator;
 import com.songoda.epicbuckets.util.XMaterial;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Shop {
@@ -24,7 +26,7 @@ public class Shop {
     private String path;
     private String shopPath;
 
-    private int backButton;
+    private int backButtonSlot;
     private GenbucketType trait;
     private int inventorySize;
     private boolean fillInventory;
@@ -50,22 +52,22 @@ public class Shop {
     }
 
     private void loadData() {
-        trait = Validator.getInstance().genbucketType(shops.getString(shopPath + "trait"));
-        backButton = Validator.getInstance().slot(shops.getString(shopPath + "goBackButton"));
-        inventorySize = Validator.getInstance().inventorySize(shops.getString(shopPath + "size"));
-        fillInventory = shops.getBoolean(shopPath + "fill");
-        inventoryName = shops.getString(shopPath + "inventory-name");
+        trait = Validator.genbucketType(shops.getString(shopPath + ".trait"));
+        backButtonSlot = Validator.slot(shops.getString(shopPath + ".goBackButton"));
+        inventorySize = Validator.inventorySize(shops.getString(shopPath + ".size"));
+        fillInventory = shops.getBoolean(shopPath + ".fill");
+        inventoryName = shops.getString(shopPath + ".inventory-name");
 
         if (trait == null) {
-            epicBuckets.getDebugger().invalidGenbucketType(shopPath + "trait");
+            epicBuckets.getDebugger().invalidGenbucketType(shopPath + ".trait");
             setEnabled(false);
         }
-        if (backButton == -1) {
-            epicBuckets.getDebugger().invalidSlot(shopPath + "goBackButton");
+        if (backButtonSlot == -1) {
+            epicBuckets.getDebugger().invalidSlot(shopPath + ".goBackButton");
             setEnabled(false);
         }
         if (inventorySize == -1) {
-            epicBuckets.getDebugger().invalidInventorySize(shopPath + "size");
+            epicBuckets.getDebugger().invalidInventorySize(shopPath + ".size");
             setEnabled(false);
         }
     }
@@ -83,18 +85,20 @@ public class Shop {
     private void setupShopItem() {
         String itemPath = path + ".item";
 
-        slot = Validator.getInstance().slot(epicBuckets.getConfig().getString(itemPath + ".slot"));
-        boolean m = Validator.getInstance().isMaterial(epicBuckets.getConfig().getString(itemPath + ".material"));
+        slot = Validator.slot(epicBuckets.getConfig().getString(path + ".slot"));
+        boolean m = Validator.isMaterial(epicBuckets.getConfig().getString(itemPath + ".material"));
 
         if (slot == -1) {
-            epicBuckets.getDebugger().invalidSlot(itemPath);
+            epicBuckets.getDebugger().invalidSlot(itemPath + ".slot");
             setEnabled(false);
         }
 
         shopItem = ((!m) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(itemPath + ".material")).parseItem());
+        shopItem = InventoryHelper.setLore(InventoryHelper.setDisplayName(shopItem, epicBuckets.getConfig().getString(itemPath + ".name")), epicBuckets.getConfig().getStringList(itemPath + ".lore"));
+    }
 
-        shopItem.getItemMeta().setDisplayName(epicBuckets.getConfig().getString(itemPath + ".name"));
-        shopItem.getItemMeta().setLore(epicBuckets.getConfig().getStringList(itemPath + ".lore"));
+    public Collection<SubShop> getSubShops() {
+        return subShops.values();
     }
 
     public void setEnabled(boolean enabled) {
@@ -117,4 +121,27 @@ public class Shop {
         return menuItem;
     }
 
+    public ItemStack getShopItem() {
+        return shopItem;
+    }
+
+    public int getBackButtonSlot() {
+        return backButtonSlot;
+    }
+
+    public GenbucketType getTrait() {
+        return trait;
+    }
+
+    public int getInventorySize() {
+        return inventorySize;
+    }
+
+    public boolean isFillInventory() {
+        return fillInventory;
+    }
+
+    public String getInventoryName() {
+        return inventoryName;
+    }
 }

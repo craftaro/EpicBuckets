@@ -8,7 +8,7 @@ shops:
 
     trait: "VERTICAL" # Which genbucket type does this shop have?
 
-    size: 36 # Must be one of these: 9, 18, 27, 36, 45, 54
+    size: 4 # Number of lines in inventory
 
     fill: true # Fill inventory ?
 
@@ -22,13 +22,9 @@ shops:
 
       type: "COBBLESTONE" # This is the material the bucket places
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 12 # This is the slot for the bucket in the GUI
 
       price: 400 # This is the price for the bucket
-
-      damage: 0 # Material id if needed, for example if you want to spawn red wool in the guit
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -52,13 +48,9 @@ shops:
 
       type: "SAND"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 13
 
       price: 400
-
-      damage: 0
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -82,13 +74,9 @@ shops:
 
       type: "OBSIDIAN"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 14
 
       price: 700
-
-      damage: 0
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -110,7 +98,7 @@ shops:
 
     trait: "INFUSED"
 
-    size: 36
+    size: 4
 
     fill: true
 
@@ -124,15 +112,11 @@ shops:
 
       type: "COBBLESTONE"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 12
 
       price: 200
 
       trait: "INFUSED"
-
-      material-id: 0
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -156,15 +140,11 @@ shops:
 
       type: "OBSIDIAN"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 13
 
       price: 700
 
       trait: "INFUSED"
-
-      material-id: 0
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -189,15 +169,11 @@ shops:
 
       type: "NETHERRACK"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 14
 
       price: 31
 
       trait: "INFUSED"
-
-      material-id: 0
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -219,7 +195,7 @@ shops:
 
     trait: "PSUEDO"
 
-    size: 36
+    size: 4
 
     fill: true
 
@@ -233,13 +209,9 @@ shops:
 
       type: "COBBLESTONE"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 12
 
       price: 400
-
-      damage: 0
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -263,13 +235,9 @@ shops:
 
       type: "SAND"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 13
 
       price: 400
-
-      damage: 0
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -293,13 +261,9 @@ shops:
 
       type: "OBSIDIAN"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 14
 
       price: 700
-
-      damage: 0
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -321,7 +285,7 @@ shops:
 
     trait: "HORIZONTAL"
 
-    size: 36
+    size: 4
 
     fill: true
 
@@ -335,13 +299,9 @@ shops:
 
       type: "COBBLESTONE"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 12
 
       price: 400
-
-      damage: 0
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -365,13 +325,9 @@ shops:
 
       type: "SAND"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 13
 
       price: 400
-
-      damage: 0
 
       description: # This is the lore of the bucket in the gui
       - ""
@@ -395,13 +351,9 @@ shops:
 
       type: "OBSIDIAN"
 
-      type-damage: 0 # Set a damage for the block the genbucket places
-
       slot: 14
 
       price: 700
-
-      damage: 0
 
       description: # This is the lore of the bucket in the gui
       - ""

@@ -1,16 +1,16 @@
 package com.songoda.epicbuckets.shop;
 
 import com.songoda.epicbuckets.EpicBuckets;
+import com.songoda.epicbuckets.util.InventoryHelper;
 import com.songoda.epicbuckets.util.Validator;
 import com.songoda.epicbuckets.util.XMaterial;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ShopManager {
 
@@ -18,8 +18,8 @@ public class ShopManager {
     private FileConfiguration shops;
     private EpicBuckets epicBuckets;
 
-    private String configPath = "MENU-ITEMS";
     private String shopPath = "shops";
+    private String bulkShopPath = "BULK-SHOP-INVENTORY";
 
     private ItemStack increaseItem;
     private ItemStack decreaseItem;
@@ -29,7 +29,14 @@ public class ShopManager {
     private List<Integer> decreaseSlots;
     private int purchaseSlot;
 
+    private String bulkInventoryName;
+    private int bulkInventorySize;
+    private boolean bulkFillInventory;
+    private int bulkBackButtonSlot;
+    private int bulkMainItemSlot;
+
     private boolean useBackButtons;
+    private boolean closeAfterPurchase;
 
     public ShopManager() {
         epicBuckets = EpicBuckets.getInstance();
@@ -37,50 +44,71 @@ public class ShopManager {
         increaseSlots = new ArrayList<>();
         decreaseSlots = new ArrayList<>();
         shops = EpicBuckets.getInstance().getConfigManager().getConfig("shops");
+    }
 
+    public void init() {
         loadData();
         loadShops();
         setupBulkShop();
     }
 
     private void setupBulkShop() {
-        boolean i = Validator.getInstance().isMaterial(epicBuckets.getConfigManager().getBulkShopIncreasePath() + ".material");
-        boolean d = Validator.getInstance().isMaterial(epicBuckets.getConfigManager().getBulkShopDecreasePath() + ".material");
-        boolean p = Validator.getInstance().isMaterial(epicBuckets.getConfigManager().getBulkShopPurchasePath() + ".material");
-        purchaseSlot = Validator.getInstance().slot(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopPurchasePath() + ".slot"));
+        boolean i = Validator.isMaterial(epicBuckets.getConfigManager().getBulkShopIncreasePath() + ".material");
+        boolean d = Validator.isMaterial(epicBuckets.getConfigManager().getBulkShopDecreasePath() + ".material");
+        boolean p = Validator.isMaterial(epicBuckets.getConfigManager().getBulkShopPurchasePath() + ".material");
+        purchaseSlot = Validator.slot(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopPurchasePath() + ".slot"));
 
         if (purchaseSlot == -1) {
             purchaseSlot = 40;
         }
 
         increaseItem = ((!i) ? XMaterial.GREEN_STAINED_GLASS_PANE.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopIncreasePath() + ".material")).parseItem());
-        decreaseItem = ((!i) ? XMaterial.RED_STAINED_GLASS_PANE.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopDecreasePath() + ".material")).parseItem());
-        purchaseItem = ((!i) ? XMaterial.YELLOW_STAINED_GLASS.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopPurchasePath() + ".material")).parseItem());
+        decreaseItem = ((!d) ? XMaterial.RED_STAINED_GLASS_PANE.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopDecreasePath() + ".material")).parseItem());
+        purchaseItem = ((!p) ? XMaterial.YELLOW_STAINED_GLASS.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopPurchasePath() + ".material")).parseItem());
+        purchaseItem = InventoryHelper.setDisplayName(purchaseItem, epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopPurchasePath() + ".name"));
 
         for (String s : epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopIncreasePath() + ".slots").split(",")) {
             increaseSlots.add(Integer.parseInt(s));
         }
         for (String s : epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopDecreasePath() + ".slots").split(",")) {
-            increaseSlots.add(Integer.parseInt(s));
+            decreaseSlots.add(Integer.parseInt(s));
         }
+
+
     }
 
     private void loadData() {
         useBackButtons = shops.getBoolean("use-back-buttons");
+        closeAfterPurchase = epicBuckets.getConfig().getBoolean("CLOSE-GUI-AFTER-PURCHASE");
+        bulkInventoryName = epicBuckets.getConfig().getString(bulkShopPath + ".inventory-name");
+        bulkInventorySize = epicBuckets.getConfig().getInt(bulkShopPath + ".size");
+        bulkBackButtonSlot = epicBuckets.getConfig().getInt(bulkShopPath + ".return-back-slot");
+        bulkFillInventory = epicBuckets.getConfig().getBoolean(bulkShopPath + ".fill");
+        bulkMainItemSlot = epicBuckets.getConfig().getInt(bulkShopPath + ".main-item-slot");
     }
 
     private void loadShops() {
-        for (String key : epicBuckets.getConfig().getConfigurationSection(configPath).getKeys(false)) {
-            if (!epicBuckets.getConfig().isConfigurationSection(configPath + "." + key)) {
+        for (String key : epicBuckets.getConfig().getConfigurationSection(epicBuckets.getConfigManager().getMenuItemsPath()).getKeys(false)) {
+            if (!epicBuckets.getConfig().isConfigurationSection(epicBuckets.getConfigManager().getMenuItemsPath() + "." + key)) {
                 continue;
             }
 
-            shopDatabase.put(epicBuckets.getConfig().getString(configPath + "." + key), new Shop(epicBuckets.getConfig().getString(configPath + "." + key), epicBuckets.getConfig().getString(configPath + "." + key + ".shop"), configPath + "." + key));
+            shopDatabase.put(key, new Shop(key, epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getMenuItemsPath() + "." + key + ".shop"), epicBuckets.getConfigManager().getMenuItemsPath() + "." + key));
         }
     }
 
-    public String getConfigPath() {
-        return configPath;
+    public boolean hasEnoughFunds(Player buyer, SubShop s) {
+        if (epicBuckets.getEcon().getBalance(Bukkit.getOfflinePlayer(buyer.getUniqueId())) >= s.getPrice()) return true;
+        return false;
+    }
+
+    public void buyFromShop(Player buyer, SubShop s) {
+        epicBuckets.getEcon().withdrawPlayer(Bukkit.getOfflinePlayer(buyer.getUniqueId()), s.getPrice());
+        buyer.getInventory().addItem(s.getGenShopItem());
+    }
+
+    public Collection<Shop> getShops() {
+        return shopDatabase.values();
     }
 
     public String getShopPath() {
@@ -115,4 +143,27 @@ public class ShopManager {
         return useBackButtons;
     }
 
+    public boolean isCloseAfterPurchase() {
+        return closeAfterPurchase;
+    }
+
+    public String getBulkInventoryName() {
+        return bulkInventoryName;
+    }
+
+    public int getBulkInventorySize() {
+        return bulkInventorySize;
+    }
+
+    public boolean isBulkFillInventory() {
+        return bulkFillInventory;
+    }
+
+    public int getBulkBackButtonSlot() {
+        return bulkBackButtonSlot;
+    }
+
+    public int getBulkMainItemSlot() {
+        return bulkMainItemSlot;
+    }
 }
