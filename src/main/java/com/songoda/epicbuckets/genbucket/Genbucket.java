@@ -2,6 +2,7 @@ package com.songoda.epicbuckets.genbucket;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.shop.SubShop;
+import com.songoda.epicbuckets.util.XMaterial;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -63,6 +64,10 @@ public abstract class Genbucket {
     protected Block getNextBlock() {
         currentBlock = currentBlock.getRelative(getBlockFace());
         return currentBlock;
+    }
+
+    protected void fixHole(Block block) {
+        if (block.getType() == XMaterial.AIR.parseMaterial()) block.setType(getGenItem().getType());
     }
 
     protected boolean placeGen(Block block) {
