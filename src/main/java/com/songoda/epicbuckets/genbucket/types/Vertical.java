@@ -22,7 +22,7 @@ public class Vertical extends Genbucket {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (blocksPlaced >= epicBuckets.getConfigManager().getMaxVerticalHeight() || !placeGen(getNextBlock())) {
+                if (isBelowVoid(blocksPlaced) || blocksPlaced >= epicBuckets.getConfigManager().getMaxVerticalHeight() || !placeGen(getNextBlock())) {
                     epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
                     cancel();
                 }

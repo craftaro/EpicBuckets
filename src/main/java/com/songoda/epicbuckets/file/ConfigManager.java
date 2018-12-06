@@ -25,8 +25,8 @@ public class ConfigManager {
     private String bulkShopPurchasePath = "BULK-SHOP-INVENTORY.purchase-item";
     private String menuItemsPath = "MENU-ITEMS";
 
-    private List<String> ignoredMaterials;
-    private List<String> psuedoMaterials;
+    private List<XMaterial> ignoredMaterials;
+    private List<XMaterial> psuedoMaterials;
 
     private LinkedHashMap<String, Integer> genbucketGroups;
 
@@ -53,25 +53,34 @@ public class ConfigManager {
 
     public ConfigManager() {
         this.epicBuckets = EpicBuckets.getInstance();
-        ignoredMaterials = new ArrayList<>();
-        psuedoMaterials = new ArrayList<>();
-        configDatabase = new HashMap<>();
-        genbucketGroups = new LinkedHashMap<>();
 
         setup();
     }
 
     private void setup() {
         epicBuckets.saveDefaultConfig();
+        configDatabase = new HashMap<>();
+        loadData();
         createConfig("shops", true);
+        setupBackButton();
+        setupFillItem();
+    }
 
+    public void reload() {
+        reloadConfig("shops");
+        epicBuckets.reloadConfig();
         loadData();
         setupBackButton();
         setupFillItem();
     }
 
     private void loadData() {
-        ignoredMaterials = epicBuckets.getConfig().getStringList("IGNORE-MATERIALS");
+        ignoredMaterials = new ArrayList<>();
+        psuedoMaterials = new ArrayList<>();
+        genbucketGroups = new LinkedHashMap<>();
+
+        ignoredMaterials = InventoryHelper.convertMaterialList(epicBuckets.getConfig().getStringList("IGNORE-MATERIALS"));
+        psuedoMaterials = InventoryHelper.convertMaterialList(epicBuckets.getConfig().getStringList("PSUEDO-MATERIALS"));
         supportFactions = epicBuckets.getConfig().getBoolean("FACTIONS-SUPPORT");
         supportWorldGuard = epicBuckets.getConfig().getBoolean("WORLDGUARD-SUPPORT");
         supportGriefPrevention = epicBuckets.getConfig().getBoolean("GRIEFPREVENTION-SUPPORT");
@@ -140,11 +149,11 @@ public class ConfigManager {
         return bulkShopPurchasePath;
     }
 
-    public List<String> getIgnoredMaterials() {
+    public List<XMaterial> getIgnoredMaterials() {
         return ignoredMaterials;
     }
 
-    public List<String> getPsuedoMaterials() {
+    public List<XMaterial> getPsuedoMaterials() {
         return psuedoMaterials;
     }
 

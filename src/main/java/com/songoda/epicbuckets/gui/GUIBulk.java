@@ -65,7 +65,7 @@ public class GUIBulk extends Gui {
     }
 
     public void handleBuy() {
-        if (shopManager.hasEnoughFunds(getPlayer(), subShop, getSlot(shopManager.getBulkMainItemSlot()).getItem().getAmount())) shopManager.buyFromShop(getPlayer(), subShop, getSlot(shopManager.getBulkMainItemSlot()).getItem().getAmount());
+        if (shopManager.hasEnoughFunds(getPlayer(), subShop, getSlot(shopManager.getBulkMainItemSlot()).getItem().getAmount()) && !shopManager.inventoryFull(getPlayer())) shopManager.buyFromShop(getPlayer(), subShop, getSlot(shopManager.getBulkMainItemSlot()).getItem().getAmount());
         if (shopManager.isCloseAfterPurchase()) new GUIMain(getPlayer()).open();
     }
 

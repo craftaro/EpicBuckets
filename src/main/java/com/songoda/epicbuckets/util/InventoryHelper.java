@@ -2,16 +2,22 @@ package com.songoda.epicbuckets.util;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class InventoryHelper {
+
+    public static List<XMaterial> convertMaterialList(List<String> toConvert) {
+        List<XMaterial> converted = new ArrayList<>();
+        toConvert.forEach(s -> converted.add(XMaterial.valueOf(s.toUpperCase())));
+        return converted;
+    }
 
     public static int[] emptySlots(int size) {
         List<Integer> slots = new ArrayList<>();

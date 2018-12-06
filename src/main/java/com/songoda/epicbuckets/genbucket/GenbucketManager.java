@@ -1,10 +1,14 @@
 package com.songoda.epicbuckets.genbucket;
 
 import com.songoda.epicbuckets.EpicBuckets;
+import com.songoda.epicbuckets.regionhandler.RegionFactions;
+import com.songoda.epicbuckets.regionhandler.RegionGriefPrevention;
+import com.songoda.epicbuckets.regionhandler.RegionWorldBorder;
+import com.songoda.epicbuckets.regionhandler.RegionWorldGuard;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class GenbucketManager {
 
@@ -42,6 +46,21 @@ public class GenbucketManager {
             if (owner.hasPermission(perm)) return groups.get(perm);
         }
         return epicBuckets.getConfigManager().getMaxGenbucketsPerPlayer();
+    }
+
+    public boolean canPlaceGenbucket(Player player, Location location) {
+        boolean factionsCheck = RegionFactions.canBuild(player, location);
+        boolean factionsUUIDCheck = RegionFactions.canBuild(player, location);
+        boolean griefPreventionCheck = RegionGriefPrevention.canBuild(player, location);
+        boolean worldGuardCheck = RegionWorldGuard.canBuild(player, location);
+        boolean worldBorderCheck = RegionWorldBorder.isOutsideOfBorder(location);
+
+        if (!factionsCheck || !factionsUUIDCheck || !griefPreventionCheck || !worldGuardCheck || worldBorderCheck) {
+            player.sendMessage(epicBuckets.getLocale().getMessage("event.place.nothere"));
+            return false;
+        }
+
+        return true;
     }
 
 }

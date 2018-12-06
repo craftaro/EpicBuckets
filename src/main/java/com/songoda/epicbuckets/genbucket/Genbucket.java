@@ -42,6 +42,10 @@ public abstract class Genbucket {
         return genUUID;
     }
 
+    public GenbucketType getGenbucketType() {
+        return genbucketType;
+    }
+
     public boolean isValidBlockFace() {
         switch(genbucketType) {
             case VERTICAL:
@@ -55,6 +59,11 @@ public abstract class Genbucket {
             default:
                 return false;
         }
+    }
+
+    protected boolean isBelowVoid(int moved) {
+        if (blockFace != BlockFace.DOWN) return false;
+        return clickedBlock.getRelative(0, -moved, 0).getLocation().getBlockY() == 0;
     }
 
     protected Block getNextBlock(int moved, BlockFace blockFace) {
@@ -71,7 +80,7 @@ public abstract class Genbucket {
     }
 
     protected boolean placeGen(Block block) {
-        if (!epicBuckets.getConfigManager().getIgnoredMaterials().contains(block.getType().name())) return false;
+        if (!epicBuckets.getConfigManager().getIgnoredMaterials().contains(XMaterial.requestXMaterial(block.getType().name(), block.getData()))) return false;
         block.setType(getGenItem().getType());
         return true;
     }

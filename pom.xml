@@ -99,7 +99,7 @@
             <groupId>me.lucko</groupId>
             <artifactId>helper</artifactId>
             <version>LATEST</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.github.tr7zw</groupId>

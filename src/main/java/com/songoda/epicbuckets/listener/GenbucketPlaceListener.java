@@ -2,13 +2,15 @@ package com.songoda.epicbuckets.listener;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.Genbucket;
-import com.songoda.epicbuckets.genbucket.GenbucketItem;
 import com.songoda.epicbuckets.genbucket.GenbucketType;
 import com.songoda.epicbuckets.genbucket.types.Horizontal;
 import com.songoda.epicbuckets.genbucket.types.Infused;
 import com.songoda.epicbuckets.genbucket.types.PsuedoVertical;
 import com.songoda.epicbuckets.genbucket.types.Vertical;
+import com.songoda.epicbuckets.util.XMaterial;
 import de.tr7zw.itemnbtapi.NBTItem;
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -42,9 +44,22 @@ public class GenbucketPlaceListener implements Listener {
 
         e.setCancelled(true);
 
-        if (!e.getPlayer().hasPermission("genbucket.place")) return;
-        if (epicBuckets.getConfigManager().isGenbucketsDisabled()) return;
-        if (!epicBuckets.getGenbucketManager().canRegisterNewGenbucket(e.getPlayer())) return;
+        if (!e.getPlayer().hasPermission("genbucket.place")) {
+            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.place.nothere"));
+            return;
+        }
+        if (epicBuckets.getConfigManager().isGenbucketsDisabled()) {
+            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.genbucket.disabled"));
+            return;
+        }
+        if (!epicBuckets.getGenbucketManager().canRegisterNewGenbucket(e.getPlayer())) {
+            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.place.wait"));
+            return;
+        }
+        if (!epicBuckets.getGenbucketManager().canPlaceGenbucket(e.getPlayer(), e.getClickedBlock().getLocation())) {
+            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.place.nothere"));
+            return;
+        }
 
         Genbucket genbucket = null;
 
@@ -62,9 +77,23 @@ public class GenbucketPlaceListener implements Listener {
                 genbucket = new Horizontal(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), epicBuckets.getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
         }
 
-        if (!genbucket.isValidBlockFace()) return;
+        if (!genbucket.isValidBlockFace()) {
+            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.genbucket.placedwrong").replace("%genbucket%", StringUtils.capitalize(genbucket.getGenbucketType().name.toLowerCase()) + " genbucket"));
+            return;
+        }
+        if (genbucket.getGenbucketType() == GenbucketType.PSUEDO && !epicBuckets.getConfigManager().getPsuedoMaterials().contains(XMaterial.requestXMaterial(e.getClickedBlock().getType().name(), e.getClickedBlock().getData()))) {
+            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.genbucket.wrongmaterialpsuedo"));
+            return;
+        }
 
-        //GenbucketItem genbucketItem = new GenbucketItem(e.getPlayer(), genbucket, e.getClickedBlock().getLocation(), e.getBlockFace());
+        if (e.getPlayer().getGameMode() != GameMode.CREATIVE || !epicBuckets.getConfigManager().isUnlimitedGenbuckets()) {
+            if (e.getItem().getAmount() > 1) {
+                e.getItem().setAmount(e.getItem().getAmount() - 1);
+            } else {
+                e.getItem().setAmount(0);
+            }
+        }
+
         epicBuckets.getGenbucketManager().registerGenbucketForPlayer(e.getPlayer(), genbucket);
         genbucket.generate();
     }

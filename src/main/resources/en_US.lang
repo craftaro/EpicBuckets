@@ -5,9 +5,6 @@ general.nametag.prefix = "&8[&6EpicBuckets&8]"
 #Command Messages
 
 command.reload.success = "&7You've reloaded the config"
-command.admin.on = "&7You have toggled admin-mode &aon"
-command.admin.off = "&7You have toggled admin-mode &coff"
-command.settings.modify = "&7You've set &e%setting%&7 to &e%value%"
 
 #Interface Messages
 
@@ -25,6 +22,5 @@ event.place.wait = "&7You must &ewait&7 before your other gen(s) finishes!"
 event.translate.directionup = "on top of blocks"
 event.translate.directionside = "on the side of blocks"
 event.genbucket.disabled = "&eGenbuckets &7are currently disabled!"
-event.genbucket.placedwrong = "&e%genbucket% &7can be placed %direction%"
-event.genbucket.wrongmaterialpsuedo = "&7You cannot use this genbucket on this &eblock!"
-event.admin.playerplaced = "&e%player% &7placed a &e%type% genbucket&7!"
+event.genbucket.placedwrong = "&e%genbucket% &7cant be placed on that side of the block!"
+event.genbucket.wrongmaterialpsuedo = "&7You cannot use the psuedo bucket on this &eblock!"

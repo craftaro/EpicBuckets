@@ -52,7 +52,8 @@ public class GUIShop extends Gui {
     }
 
     private void handleSubShop(SubShop s) {
-        if (shopManager.hasEnoughFunds(getPlayer(), s, 1)) shopManager.buyFromShop(getPlayer(), s, 1);
+        if (shopManager.hasEnoughFunds(getPlayer(), s, 1) && !shopManager.inventoryFull(getPlayer())) shopManager.buyFromShop(getPlayer(), s, 1);
+        if (shopManager.isCloseAfterPurchase()) new GUIMain(getPlayer()).open();
     }
 
 }

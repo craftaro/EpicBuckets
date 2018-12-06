@@ -1,10 +1,7 @@
 package com.songoda.epicbuckets.shop;
 
 import com.songoda.epicbuckets.EpicBuckets;
-import com.songoda.epicbuckets.util.InventoryHelper;
-import com.songoda.epicbuckets.util.NBTHelper;
-import com.songoda.epicbuckets.util.Validator;
-import com.songoda.epicbuckets.util.XMaterial;
+import com.songoda.epicbuckets.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -28,7 +25,7 @@ public class ShopManager {
 
     private List<Integer> increaseSlots;
     private List<Integer> decreaseSlots;
-    private List<Integer> bulkAmounts = new ArrayList<>(Arrays.asList(1, 5, 10));
+    private List<Integer> bulkAmounts = new ArrayList<>(Arrays.asList(1, 10, 64));
     private int purchaseSlot;
 
     private String bulkInventoryName;
@@ -42,16 +39,20 @@ public class ShopManager {
 
     public ShopManager() {
         epicBuckets = EpicBuckets.getInstance();
-        shopDatabase = new HashMap<>();
-        increaseSlots = new ArrayList<>();
-        decreaseSlots = new ArrayList<>();
-        shops = EpicBuckets.getInstance().getConfigManager().getConfig("shops");
     }
 
     public void init() {
+        shops = epicBuckets.getConfigManager().getConfig("shops");
+        shopDatabase = new HashMap<>();
+        increaseSlots = new ArrayList<>();
+        decreaseSlots = new ArrayList<>();
         loadData();
         loadShops();
         setupBulkShop();
+    }
+
+    public void reload() {
+        init();
     }
 
     private void setupBulkShop() {
@@ -99,8 +100,17 @@ public class ShopManager {
         }
     }
 
+    public boolean inventoryFull(Player buyer) {
+        if (buyer.getInventory().firstEmpty() == -1) {
+            buyer.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("event.purchase.inventoryfull")));
+            return true;
+        }
+        return false;
+    }
+
     public boolean hasEnoughFunds(Player buyer, SubShop s, int amount) {
         if (epicBuckets.getEcon().getBalance(Bukkit.getOfflinePlayer(buyer.getUniqueId())) >= (s.getPrice() * amount)) return true;
+        buyer.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("event.purchase.notenoughmoney").replace("%money%", (s.getPrice() * amount) - epicBuckets.getBalance(buyer) + "")));
         return false;
     }
 
