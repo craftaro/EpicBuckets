@@ -10,6 +10,11 @@ command.admin.toggle = "&7Spy mode: %mode%"
 #Interface Messages
 
 interface.withdrawl.success = "&e$%amount%&7 was taken from your &eaccount&7!"
+interface.admin.panel.title = "Active Genbuckets"
+interface.admin.panel.player = "&a%player%"
+interface.admin.panel.type = "&7Type: &f%genbucket%"
+interface.admin.panel.location = "&7Location: &f%location%"
+interface.admin.panel.teleport = "&f&oClick to teleport"
 
 #Event Messages
 

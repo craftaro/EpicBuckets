@@ -12,7 +12,6 @@ import fr.minuskube.inv.content.Pagination;
 import fr.minuskube.inv.content.SlotIterator;
 import me.lucko.helper.item.ItemStackBuilder;
 import org.bukkit.Material;
-import org.bukkit.SkullType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -27,7 +26,7 @@ public class GUIPanel implements InventoryProvider {
             .id("GUIPanel")
             .provider(new GUIPanel())
             .size(6, 9)
-            .title("Active Genbuckets")
+            .title(ChatUtil.colorString(EpicBuckets.getInstance().getLocale().getMessage("interface.admin.panel.title")))
             .manager(EpicBuckets.getInstance().getInventoryManager())
             .build();
 
@@ -40,8 +39,8 @@ public class GUIPanel implements InventoryProvider {
                 ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
                 SkullMeta meta = (SkullMeta) skull.getItemMeta();
                 meta.setOwner(genbucket.getOwner().getName());
-                meta.setDisplayName(ChatUtil.colorString("&a" + genbucket.getOwner().getName()));
-                meta.setLore(ChatUtil.colorList(new ArrayList<>(Arrays.asList("&7Type: &f" + genbucket.getGenbucketType().name.toLowerCase(), "&7Location: &f" + ChatUtil.getCoordinatesFromLocation(genbucket.getClickedLocation()), "", "&f&oClick to teleport"))));
+                meta.setDisplayName(ChatUtil.colorString(EpicBuckets.getInstance().getLocale().getMessage("interface.admin.panel.player").replace("%player%", genbucket.getOwner().getName())));
+                meta.setLore(ChatUtil.colorList(new ArrayList<>(Arrays.asList(EpicBuckets.getInstance().getLocale().getMessage("interface.admin.panel.type").replace("%genbucket%", genbucket.getGenbucketType().name.toLowerCase()), EpicBuckets.getInstance().getLocale().getMessage("interface.admin.panel.location").replace("%location%", ChatUtil.getCoordinatesFromLocation(genbucket.getClickedLocation())), "", EpicBuckets.getInstance().getLocale().getMessage("interface.admin.panel.teleport")))));
                 skull.setItemMeta(meta);
                 itemList.add(ClickableItem.of(skull, e -> player.teleport(genbucket.getPlayerLocation())));
             }
