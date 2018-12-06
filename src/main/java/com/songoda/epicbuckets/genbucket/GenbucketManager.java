@@ -31,10 +31,11 @@ public class GenbucketManager {
     public void toggleAdmin(Player player) {
         if (admins.contains(player)) {
             removeAdmin(player);
+            player.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("command.admin.toggle").replace("%mode%", "&cdisabled")));
             return;
         }
         addAdmin(player);
-        player.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("command.admin.toggle").replace("%mode%", ((admins.contains(player)) ? "&aenabled" : "&cdisabled"))));
+        player.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("command.admin.toggle").replace("%mode%", "&aenabled")));
     }
 
     private void removeAdmin(Player player) {
@@ -43,6 +44,20 @@ public class GenbucketManager {
 
     private void addAdmin(Player player) {
         admins.add(player);
+    }
+
+    public List<Genbucket> activeGensInOneList() {
+        List<Genbucket> gens = new ArrayList<>();
+        activeGens.forEach((uuid, genbuckets) -> gens.addAll(genbuckets));
+        return gens;
+    }
+
+    public int getTotalActiveGenbuckets(HashMap<UUID, List<Genbucket>> gens) {
+        int total = 0;
+        for (UUID uuid : gens.keySet()) {
+            total += gens.get(uuid).size();
+        }
+        return total;
     }
 
     public void unregisterGenbucketForPlayer(Player owner, UUID genUUID) {
@@ -88,4 +103,7 @@ public class GenbucketManager {
         return true;
     }
 
+    public HashMap<UUID, List<Genbucket>> getActiveGens() {
+        return activeGens;
+    }
 }

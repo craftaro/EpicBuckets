@@ -3,6 +3,7 @@ package com.songoda.epicbuckets.genbucket;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.shop.SubShop;
 import com.songoda.epicbuckets.util.XMaterial;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -20,6 +21,7 @@ public abstract class Genbucket {
     private Block currentBlock;
     private SubShop subShop;
     private UUID genUUID;
+    private Location playerLocation;
 
     public Genbucket(GenbucketType genbucketType, Block clickedBlock, BlockFace blockFace, SubShop s, Player owner) {
         epicBuckets = EpicBuckets.getInstance();
@@ -30,12 +32,21 @@ public abstract class Genbucket {
         this.clickedBlock = clickedBlock;
         this.currentBlock = clickedBlock;
         this.subShop = s;
+        this.playerLocation = owner.getLocation();
     }
 
     public abstract void generate();
 
     public Player getOwner() {
         return owner;
+    }
+
+    public Location getPlayerLocation() {
+        return playerLocation;
+    }
+
+    public Location getClickedLocation() {
+        return clickedBlock.getLocation();
     }
 
     public UUID getGenUUID() {

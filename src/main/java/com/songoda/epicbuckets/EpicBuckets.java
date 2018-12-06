@@ -8,14 +8,15 @@ import com.songoda.epicbuckets.listener.GenbucketPlaceListener;
 import com.songoda.epicbuckets.shop.ShopManager;
 import com.songoda.epicbuckets.util.ChatUtil;
 import com.songoda.epicbuckets.util.Debugger;
+import fr.minuskube.inv.InventoryManager;
+import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class EpicBuckets extends JavaPlugin {
+public class EpicBuckets extends ExtendedJavaPlugin {
 
     private static EpicBuckets instance;
     private static CommandSender console = Bukkit.getConsoleSender();
@@ -26,13 +27,14 @@ public class EpicBuckets extends JavaPlugin {
     private GenbucketManager genbucketManager;
     private Economy econ;
     private PaperCommandManager commandManager;
+    private InventoryManager inventoryManager;
 
     private Locale locale;
 
     public static EpicBuckets getInstance() { return instance; }
 
     @Override
-    public void onEnable() {
+    protected void enable() {
         console.sendMessage(ChatUtil.colorString("&a============================="));
         console.sendMessage(ChatUtil.colorString("&7EpicBuckets " + this.getDescription().getVersion() + " by &5Songoda <3!"));
         console.sendMessage(ChatUtil.colorString("&7Action: &aEnabling&7..."));
@@ -53,6 +55,9 @@ public class EpicBuckets extends JavaPlugin {
         genbucketManager = new GenbucketManager();
         commandManager = new PaperCommandManager(this);
 
+        inventoryManager = new InventoryManager(this);
+        inventoryManager.init();
+
         commandManager.registerCommand(new CommandGenbucket());
 
         getServer().getPluginManager().registerEvents(new GenbucketPlaceListener(), this);
@@ -63,7 +68,7 @@ public class EpicBuckets extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
+    protected void disable() {
         console.sendMessage(ChatUtil.colorString("&a============================="));
         console.sendMessage(ChatUtil.colorString("&7EpicBuckets " + this.getDescription().getVersion() + " by &5Songoda <3!"));
         console.sendMessage(ChatUtil.colorString("&7Action: &cDisabling&7..."));
@@ -114,6 +119,10 @@ public class EpicBuckets extends JavaPlugin {
 
     public GenbucketManager getGenbucketManager() {
         return genbucketManager;
+    }
+
+    public InventoryManager getInventoryManager() {
+        return inventoryManager;
     }
 
     public Economy getEcon() {
