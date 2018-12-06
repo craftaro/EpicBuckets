@@ -95,6 +95,7 @@ public class GenbucketPlaceListener implements Listener {
         }
 
         epicBuckets.getGenbucketManager().registerGenbucketForPlayer(e.getPlayer(), genbucket);
+        epicBuckets.getGenbucketManager().notifyAdmins(e.getPlayer(), genbucket);
         genbucket.generate();
     }
 

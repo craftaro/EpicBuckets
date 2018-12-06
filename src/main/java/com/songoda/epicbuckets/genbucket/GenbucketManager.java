@@ -5,6 +5,8 @@ import com.songoda.epicbuckets.regionhandler.RegionFactions;
 import com.songoda.epicbuckets.regionhandler.RegionGriefPrevention;
 import com.songoda.epicbuckets.regionhandler.RegionWorldBorder;
 import com.songoda.epicbuckets.regionhandler.RegionWorldGuard;
+import com.songoda.epicbuckets.util.ChatUtil;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -14,10 +16,33 @@ public class GenbucketManager {
 
     private EpicBuckets epicBuckets;
     private HashMap<UUID, List<Genbucket>> activeGens;
+    private List<Player> admins;
 
     public GenbucketManager() {
         this.epicBuckets = EpicBuckets.getInstance();
         activeGens = new HashMap<>();
+        admins = new ArrayList<>();
+    }
+
+    public void notifyAdmins(Player user, Genbucket genbucket) {
+        admins.forEach(player -> player.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("event.genbucket.admin").replace("%player%", user.getName()).replace("%genbucket%", StringUtils.capitalize(genbucket.getGenbucketType().name.toLowerCase()) + " genbucket"))));
+    }
+
+    public void toggleAdmin(Player player) {
+        if (admins.contains(player)) {
+            removeAdmin(player);
+            return;
+        }
+        addAdmin(player);
+        player.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("command.admin.toggle").replace("%mode%", ((admins.contains(player)) ? "&aenabled" : "&cdisabled"))));
+    }
+
+    private void removeAdmin(Player player) {
+        admins.remove(player);
+    }
+
+    private void addAdmin(Player player) {
+        admins.add(player);
     }
 
     public void unregisterGenbucketForPlayer(Player owner, UUID genUUID) {
@@ -56,7 +81,7 @@ public class GenbucketManager {
         boolean worldBorderCheck = RegionWorldBorder.isOutsideOfBorder(location);
 
         if (!factionsCheck || !factionsUUIDCheck || !griefPreventionCheck || !worldGuardCheck || worldBorderCheck) {
-            player.sendMessage(epicBuckets.getLocale().getMessage("event.place.nothere"));
+            player.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("event.place.nothere")));
             return false;
         }
 

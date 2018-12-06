@@ -41,4 +41,9 @@ public class CommandGenbucket extends BaseCommand {
         player.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("command.reload.success")));
     }
 
+    public void admin(Player player) {
+        if (!permCheck(player, "genbucket.admin") || !permCheck(player, "genbucket.admin.toggle")) return;
+        epicBuckets.getGenbucketManager().toggleAdmin(player);
+    }
+
 }

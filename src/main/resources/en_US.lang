@@ -5,6 +5,7 @@ general.nametag.prefix = "&8[&6EpicBuckets&8]"
 #Command Messages
 
 command.reload.success = "&7You've reloaded the config"
+command.admin.toggle = "&7Spy mode: %mode%"
 
 #Interface Messages
 
@@ -24,3 +25,4 @@ event.translate.directionside = "on the side of blocks"
 event.genbucket.disabled = "&eGenbuckets &7are currently disabled!"
 event.genbucket.placedwrong = "&e%genbucket% &7cant be placed on that side of the block!"
 event.genbucket.wrongmaterialpsuedo = "&7You cannot use the psuedo bucket on this &eblock!"
+event.genbucket.admin = "&e%player% &7has placed a &e%genbucket%&7!"

@@ -49,12 +49,6 @@ CUSTOM-ACTIVE-GEN-PER-PLAY: # Put the highest first
 
 IGNORE-MATERIALS:
   - "AIR" # <- Don't remove unless you know what you're doing
-  - "SNOW"
-  - "LONG_GRASS"
-  - "DEAD_BUSH"
-  - "YELLOW_FLOWER"
-  - "DOUBLE_PLANT"
-  - "RED_ROSE"
 
 PSUEDO-MATERIALS: # Which materials should the psuedo genbucket work on?
   - "cobblestone"
