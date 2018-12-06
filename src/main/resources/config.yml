@@ -28,11 +28,11 @@ MAX-ACTIVE-GEN-PER-PLAYER: 10 # Amount of gens a player can have active at time
 
 PLACE-UNLIMTED-GENS: true # This will override MAX-ACTIVE-GEN-PER-PLAYER and let them place unlimted gens
 
-MAX-VERTICAL-HEIGHT: 256 # Vertical gen height, the gen will stop if y > 256
+MAX-VERTICAL-HEIGHT: 50 # Vertical gen height, the gen will stop if y > 256
 
 MAX-HORIZONTAL-LENGTH: 50 # Horizontal height
 
-DELAY: 10 # If delay is set to 20 it will place one block every second. 10 will place two blocks each second
+DELAY: 5 # If delay is set to 20 it will place one block every second. 10 will place two blocks each second
 
 DISABLE-GENBUCKETS: false # If enabled placing any genbuckets wont be placeable
 
