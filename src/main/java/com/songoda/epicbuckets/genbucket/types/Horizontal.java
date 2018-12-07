@@ -25,6 +25,7 @@ public class Horizontal extends Genbucket {
                 if (blocksPlaced >= epicBuckets.getConfigManager().getMaxHorizontalLength() || !placeGen(getNextBlock())) {
                     epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
                     cancel();
+                    return;
                 }
                 blocksPlaced++;
             }

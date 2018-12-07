@@ -76,7 +76,7 @@ public class GenbucketManager {
 
     public boolean canRegisterNewGenbucket(Player owner) {
         if (!activeGens.containsKey(owner.getUniqueId())) return true;
-        if (activeGens.get(owner.getUniqueId()).size() < getMaxGenbucketsForPlayer(owner)) return true;
+        if (activeGens.get(owner.getUniqueId()).size() <= getMaxGenbucketsForPlayer(owner)) return true;
         return false;
     }
 

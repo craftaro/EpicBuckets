@@ -25,6 +25,7 @@ public class Vertical extends Genbucket {
                 if (isBelowVoid(blocksPlaced) || blocksPlaced >= epicBuckets.getConfigManager().getMaxVerticalHeight() || !placeGen(getNextBlock())) {
                     epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
                     cancel();
+                    return;
                 }
                 blocksPlaced++;
             }

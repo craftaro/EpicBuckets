@@ -25,6 +25,7 @@ public class PsuedoVertical extends Genbucket {
                 if (isBelowVoid(blocksUp) || blocksUp >= epicBuckets.getConfigManager().getMaxVerticalHeight()) {
                     epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
                     cancel();
+                    return;
                 }
                 fixHole(getNextBlock());
                 blocksUp++;

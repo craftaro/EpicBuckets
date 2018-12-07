@@ -1,16 +1,15 @@
 package com.songoda.epicbuckets.command;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.Description;
-import co.aikar.commands.annotation.Subcommand;
+import co.aikar.commands.annotation.*;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.gui.GUIMain;
 import com.songoda.epicbuckets.gui.GUIPanel;
 import com.songoda.epicbuckets.util.ChatUtil;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandAlias("genbucket")
+@CommandAlias("epicbuckets|eb")
 public class CommandGenbucket extends BaseCommand {
 
     private EpicBuckets epicBuckets;
@@ -25,6 +24,13 @@ public class CommandGenbucket extends BaseCommand {
             return false;
         }
         return true;
+    }
+
+    @Subcommand("help")
+    @CatchUnknown @Default
+    public void doHelp(CommandSender sender) {
+        sender.sendMessage("&3&lEpicBuckets");
+
     }
 
     @Subcommand("shop")
@@ -50,6 +56,7 @@ public class CommandGenbucket extends BaseCommand {
     }
 
     @Subcommand("admin panel")
+    @Description("Opens up the panel with all the active genbuckets")
     public void panel(Player player) {
         if (!permCheck(player, "genbucket.admin") || !permCheck(player, "genbucket.admin.panel")) return;
         GUIPanel.PANEL.open(player);

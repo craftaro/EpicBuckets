@@ -1,6 +1,7 @@
 package com.songoda.epicbuckets.util;
 
 import com.songoda.epicbuckets.EpicBuckets;
+import com.songoda.epicbuckets.shop.SubShop;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -36,6 +37,19 @@ public class InventoryHelper {
         ItemMeta im = item.getItemMeta();
         List<String> newLore = new ArrayList<>();
         lore.forEach(s -> newLore.add(ChatColor.translateAlternateColorCodes('&', s)));
+        im.setLore(newLore);
+        item.setItemMeta(im);
+        return item;
+    }
+
+    public static ItemStack setSubShopLore(ItemStack item, List<String> lore, SubShop subShop) {
+        ItemMeta im = item.getItemMeta();
+        List<String> newLore = new ArrayList<>();
+        lore.forEach(s -> newLore.add(ChatColor.translateAlternateColorCodes('&', s)));
+        newLore.forEach(s -> {
+            if (s.contains("${price}")) s.replace("${price}", subShop.getPrice() + "");
+            if (s.contains("${material}")) s.replace("${material}", subShop.getGenItem().getType().name());
+        });
         im.setLore(newLore);
         item.setItemMeta(im);
         return item;

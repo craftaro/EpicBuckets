@@ -27,6 +27,7 @@ public class Infused extends Genbucket {
                 if ((!side1 && !side2) || blocksPlaced >= epicBuckets.getConfigManager().getMaxVerticalHeight()) {
                     epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
                     cancel();
+                    return;
                 }
                 if (side1 && !placeGen(getNextBlock(blocksPlaced, getBlockFace()))) {
                     side1 = false;

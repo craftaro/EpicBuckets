@@ -75,12 +75,12 @@ public class SubShop {
         }
 
         shopItem = ((!m) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".icon")).parseItem());
-        shopItem = InventoryHelper.setDisplayName(InventoryHelper.setLore(shopItem, getDescription()), getShopName());
+        shopItem = InventoryHelper.setDisplayName(InventoryHelper.setSubShopLore(shopItem, getDescription(), this), getShopName());
 
         genItem = ((!t) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".type")).parseItem());
 
         genShopItem = ((!m) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".icon")).parseItem());
-        genShopItem = InventoryHelper.setDisplayName(InventoryHelper.setLore(genShopItem, getGenItemLore()), getShopName());
+        genShopItem = InventoryHelper.setDisplayName(InventoryHelper.setSubShopLore(genShopItem, getGenItemLore(), this), getShopName());
     }
 
     public void setEnabled(boolean enabled) {
