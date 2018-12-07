@@ -20,6 +20,7 @@ public class SubShop {
     private ItemStack shopItem;
     private ItemStack genItem;
     private ItemStack genShopItem;
+    private XMaterial type;
 
     private Shop parent;
     private String item;
@@ -59,6 +60,7 @@ public class SubShop {
             setEnabled(false);
         }
 
+        this.type = XMaterial.valueOf(shops.getString(subShopPath + ".type"));
         this.shopName = shops.getString(subShopPath + ".name");
         this.description = shops.getStringList(subShopPath + ".description");
         this.genItemLore = shops.getStringList(subShopPath + ".item-lore");
@@ -80,7 +82,7 @@ public class SubShop {
         genItem = ((!t) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".type")).parseItem());
 
         genShopItem = ((!m) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".icon")).parseItem());
-        genShopItem = InventoryHelper.setDisplayName(InventoryHelper.setSubShopLore(genShopItem, getGenItemLore(), this), getShopName());
+        genShopItem = InventoryHelper.setDisplayName(InventoryHelper.setLore(genShopItem, getGenItemLore()), getShopName());
     }
 
     public void setEnabled(boolean enabled) {
@@ -129,5 +131,9 @@ public class SubShop {
 
     public String getItem() {
         return item;
+    }
+
+    public XMaterial getType() {
+        return type;
     }
 }

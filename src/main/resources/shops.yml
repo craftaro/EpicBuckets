@@ -30,9 +30,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -56,9 +56,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -82,9 +82,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -122,9 +122,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -150,9 +150,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -179,9 +179,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -217,9 +217,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -243,9 +243,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -269,9 +269,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -307,9 +307,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -333,9 +333,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased
@@ -359,9 +359,9 @@ shops:
       - ""
       - "&7&o((Left click to buy or right click to open bulk shop))"
       - ""
-      - "&7Price for one &e${price}" # The {price} and {material} placeholders only works in description
+      - "&7Price for one &e%price%" # The {price} and {material} placeholders only works in description
       - ""
-      - "&7Spawns &e{material} &7blocks"
+      - "&7Spawns &e%material% &7blocks"
       - ""
 
       item-lore: # New lore after the gen has been purchased

@@ -48,7 +48,7 @@ public class InventoryHelper {
         lore.forEach(s -> {
             String line = s;
             if (line.contains("%price%")) line.replace("%price%", subShop.getPrice() + "");
-            if (line.contains("%material%")) line.replace("%material%", subShop.getGenItem().getType().name());
+            if (line.contains("%material%")) line.replace("%material%", subShop.getType().parseMaterial().name());
             newLore.add(ChatColor.translateAlternateColorCodes('&', line));
         });
         im.setLore(newLore);
