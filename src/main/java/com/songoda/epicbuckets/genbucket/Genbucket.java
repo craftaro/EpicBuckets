@@ -3,6 +3,7 @@ package com.songoda.epicbuckets.genbucket;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.shop.SubShop;
 import com.songoda.epicbuckets.util.XMaterial;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -90,8 +91,20 @@ public abstract class Genbucket {
         if (block.getType() == XMaterial.AIR.parseMaterial()) block.setType(getGenItem().getType());
     }
 
+    protected boolean spongeInRange(Block block) {
+        if (!epicBuckets.getConfigManager().isSpongeCheck()) return false;
+        int radius = (epicBuckets.getConfigManager().getSpongeRadius() - 1) / 2;
+        for (int x = -radius; x <= radius; x++) {
+            for (int z = -radius; z <= radius; z++) {
+                if (block.getRelative(x, 0, z).getType() == XMaterial.SPONGE.parseMaterial()) return true;
+            }
+        }
+        return false;
+    }
+
     protected boolean placeGen(Block block) {
         if (!epicBuckets.getConfigManager().getIgnoredMaterials().contains(XMaterial.requestXMaterial(block.getType().name(), block.getData()))) return false;
+        if (spongeInRange(block)) return false;
         block.setType(getGenItem().getType());
         return true;
     }
