@@ -91,13 +91,14 @@ public class ShopManager {
     }
 
     private void loadShops() {
+        System.out.println("Loading shops..");
         for (String key : epicBuckets.getConfig().getConfigurationSection(epicBuckets.getConfigManager().getMenuItemsPath()).getKeys(false)) {
             if (!epicBuckets.getConfig().isConfigurationSection(epicBuckets.getConfigManager().getMenuItemsPath() + "." + key)) {
                 continue;
             }
-
             shopDatabase.put(key, new Shop(key, epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getMenuItemsPath() + "." + key + ".shop"), epicBuckets.getConfigManager().getMenuItemsPath() + "." + key));
         }
+        System.out.println("Loaded " + shopDatabase.size() + " shop(s)");
     }
 
     public boolean inventoryFull(Player buyer) {

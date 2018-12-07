@@ -44,6 +44,8 @@ public class EpicBuckets extends ExtendedJavaPlugin {
             return;
         }
 
+        saveDefaultConfig();
+
         Locale.init(this);
         Locale.saveDefaultLocale("en_US");
         this.locale = Locale.getLocale(getConfig().getString("Locale", "en_US"));
@@ -51,7 +53,7 @@ public class EpicBuckets extends ExtendedJavaPlugin {
         debugger = new Debugger();
         configManager = new ConfigManager();
         shopManager = new ShopManager();
-        shopManager.init();
+        configManager.setup();
         genbucketManager = new GenbucketManager();
         commandManager = new PaperCommandManager(this);
 

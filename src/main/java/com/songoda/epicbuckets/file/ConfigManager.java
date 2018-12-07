@@ -53,17 +53,15 @@ public class ConfigManager {
 
     public ConfigManager() {
         this.epicBuckets = EpicBuckets.getInstance();
-
-        setup();
     }
 
-    private void setup() {
-        epicBuckets.saveDefaultConfig();
+    public void setup() {
         configDatabase = new HashMap<>();
-        loadData();
         createConfig("shops", true);
+        loadData();
         setupBackButton();
         setupFillItem();
+        epicBuckets.getShopManager().init();
     }
 
     public void reload() {
