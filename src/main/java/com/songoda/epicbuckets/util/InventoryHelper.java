@@ -45,11 +45,7 @@ public class InventoryHelper {
     public static ItemStack setSubShopLore(ItemStack item, List<String> lore, SubShop subShop) {
         ItemMeta im = item.getItemMeta();
         List<String> newLore = new ArrayList<>();
-        lore.forEach(s -> newLore.add(ChatColor.translateAlternateColorCodes('&', s)));
-        newLore.forEach(s -> {
-            if (s.contains("${price}")) s.replace("${price}", subShop.getPrice() + "");
-            if (s.contains("${material}")) s.replace("${material}", subShop.getGenItem().getType().name());
-        });
+        lore.forEach(s -> newLore.add(ChatColor.translateAlternateColorCodes('&', s.replace("${price}", subShop.getPrice() + "").replace("${material}", subShop.getGenItem().getType().name()))));
         im.setLore(newLore);
         item.setItemMeta(im);
         return item;

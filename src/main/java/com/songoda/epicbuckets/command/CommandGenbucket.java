@@ -29,8 +29,12 @@ public class CommandGenbucket extends BaseCommand {
     @Subcommand("help")
     @CatchUnknown @Default
     public void doHelp(CommandSender sender) {
-        sender.sendMessage("&3&lEpicBuckets");
-
+        sender.sendMessage(ChatUtil.colorString("&3&lEpicBuckets"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets|eb help: &7shows this help"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets|eb reload: &7reloads the config"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets|eb shop: &7opens up the genbucket shop"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets|eb admin toggle: &7toggle your status to receive genbucket placement notifications"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets|eb admin panel: &7opens up the panel with all active genbuckets"));
     }
 
     @Subcommand("shop")
