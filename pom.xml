@@ -7,25 +7,6 @@
         <defaultGoal>clean package</defaultGoal>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>EpicAnchors-API/src/main/java</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <version>3.6.1</version>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -37,29 +18,83 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.4.3</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>shaded</shadedClassifierName>
+                            <artifactSet>
+                                <includes>
+                                    <include>fr.minuskube.inv:smart-invs</include>
+                                    <include>co.aikar:acf-paper</include>
+                                    <include>me.lucko:helper</include>
+                                    <include>com.github.tr7zw:Item-NBT-API:*</include>
+                                    <include>org.apache.commons:commons-lang3</include>
+                                    <include>co.aikar:acf-bukkit</include>
+                                    <include>co.aikar:acf-core</include>
+                                    <include>co.aikar:Table</include>
+                                    <include>co.aikar:locales</include>
+                                    <include>co.aikar:minecraft-timings</include>
+                                    <include>net.jodah:expiringmap</include>
+                                    <include>org.jetbrains:annotations</include>
+                                    <include>com.flowpowered:flow-math</include>
+                                    <include>com.google.code.findbugs</include>
+                                </includes>
+                            </artifactSet>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.intellij</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.intellij</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>javax.annotation</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.annotation</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>me.lucko.helper</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.helper</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.jetbrains</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.jetbrains</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.flowpowered</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.flowpowered</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>net.jodah</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.jodah</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.google</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.google</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.apache</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.apache</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>fr.minuskube.inv</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.inv</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>co.aikar</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.acf</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.github.tr7zw</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.itemnbtapi</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <shadedArtifactAttached>true</shadedArtifactAttached>
-                    <shadedClassifierName>shaded</shadedClassifierName>
-                    <relocations>
-                        <relocation>
-                            <pattern>co.aikar.commands</pattern>
-                            <shadedPattern>${project.groupId}.${project.artifactId}.acf</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>de.tr7zw.itemnbtapi</pattern>
-                            <shadedPattern>${project.groupId}.${project.artifactId}.itemnbtapi</shadedPattern>
-                        </relocation>
-                    </relocations>
-                </configuration>
             </plugin>
         </plugins>
         <resources>
@@ -126,12 +161,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org</groupId>
-            <artifactId>kingdoms</artifactId>
-            <version>LATEST</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>VaultAPI</artifactId>
             <version>LATEST</version>
@@ -162,39 +191,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.palmergames.bukkit</groupId>
-            <artifactId>towny</artifactId>
-            <version>LATEST</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.wasteofplastic</groupId>
-            <artifactId>askyblock</artifactId>
-            <version>3.0.6.8</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>us.talabrek</groupId>
-            <artifactId>ultimateskyblock</artifactId>
-            <version>LATEST</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>me.markeh</groupId>
             <artifactId>factionsframework</artifactId>
             <version>1.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>br.net.fabiozumbi12</groupId>
-            <artifactId>RedProtect</artifactId>
-            <version>7.3.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.songoda</groupId>
-            <artifactId>epicspawners</artifactId>
-            <version>LATEST</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
