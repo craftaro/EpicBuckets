@@ -90,12 +90,11 @@ public class GenbucketManager {
 
     public boolean canPlaceGenbucket(Player player, Location location) {
         boolean factionsCheck = RegionFactions.canBuild(player, location);
-        boolean factionsUUIDCheck = RegionFactions.canBuild(player, location);
         boolean griefPreventionCheck = RegionGriefPrevention.canBuild(player, location);
         boolean worldGuardCheck = RegionWorldGuard.canBuild(player, location);
         boolean worldBorderCheck = RegionWorldBorder.isOutsideOfBorder(location);
 
-        if (!factionsCheck || !factionsUUIDCheck || !griefPreventionCheck || !worldGuardCheck || worldBorderCheck) {
+        if (!factionsCheck || !griefPreventionCheck || !worldGuardCheck || worldBorderCheck) {
             player.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("event.place.nothere")));
             return false;
         }

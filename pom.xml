@@ -26,24 +26,31 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <minimizeJar>true</minimizeJar>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <shadedClassifierName>shaded</shadedClassifierName>
                             <artifactSet>
                                 <includes>
                                     <include>fr.minuskube.inv:smart-invs</include>
-                                    <include>co.aikar:acf-paper</include>
+                                    <include>co.aikar</include>
                                     <include>me.lucko:helper</include>
-                                    <include>com.github.tr7zw:Item-NBT-API:*</include>
-                                    <include>org.apache.commons:commons-lang3</include>
-                                    <include>co.aikar:acf-bukkit</include>
-                                    <include>co.aikar:acf-core</include>
-                                    <include>co.aikar:Table</include>
-                                    <include>co.aikar:locales</include>
-                                    <include>co.aikar:minecraft-timings</include>
+                                    <include>com.github.tr7zw.Item-NBT-API</include>
                                     <include>net.jodah:expiringmap</include>
                                     <include>org.jetbrains:annotations</include>
                                     <include>com.flowpowered:flow-math</include>
                                     <include>com.google.code.findbugs</include>
+                                    <include>com.google.guava</include>
+                                    <include>org.apache.commons:commons-lang3</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
@@ -88,7 +95,7 @@
                                     <shadedPattern>${project.groupId}.${project.artifactId}.acf</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>com.github.tr7zw</pattern>
+                                    <pattern>de.tr7zw.itemnbtapi</pattern>
                                     <shadedPattern>${project.groupId}.${project.artifactId}.itemnbtapi</shadedPattern>
                                 </relocation>
                             </relocations>

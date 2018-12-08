@@ -78,7 +78,7 @@ public class GenbucketPlaceListener implements Listener {
         }
 
         if (!genbucket.isValidBlockFace()) {
-            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.genbucket.placedwrong").replace("%genbucket%", StringUtils.capitalize(genbucket.getGenbucketType().name.toLowerCase()) + " genbucket"));
+            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.genbucket.placedwrong").replace("%genbucket%", genbucket.getGenbucketType().name.toUpperCase() + " genbucket"));
             return;
         }
         if (genbucket.getGenbucketType() == GenbucketType.PSUEDO && !epicBuckets.getConfigManager().getPsuedoMaterials().contains(XMaterial.requestXMaterial(e.getClickedBlock().getType().name(), e.getClickedBlock().getData()))) {
