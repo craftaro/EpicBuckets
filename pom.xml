@@ -50,7 +50,6 @@
                                     <include>com.flowpowered:flow-math</include>
                                     <include>com.google.code.findbugs</include>
                                     <include>com.google.guava</include>
-                                    <include>org.apache.commons:commons-lang3</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
@@ -81,10 +80,6 @@
                                 <relocation>
                                     <pattern>com.google</pattern>
                                     <shadedPattern>${project.groupId}.${project.artifactId}.google</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>org.apache</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.apache</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>fr.minuskube.inv</pattern>

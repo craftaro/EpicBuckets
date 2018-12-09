@@ -46,8 +46,6 @@ public class EpicBuckets extends ExtendedJavaPlugin {
 
         saveDefaultConfig();
 
-        Locale.init(this);
-        Locale.saveDefaultLocale("en_US");
         this.locale = Locale.getLocale(getConfig().getString("Locale", "en_US"));
 
         debugger = new Debugger();
@@ -65,6 +63,9 @@ public class EpicBuckets extends ExtendedJavaPlugin {
         getServer().getPluginManager().registerEvents(new GenbucketPlaceListener(), this);
 
         setupEconomy();
+
+        Locale.init(this);
+        Locale.saveDefaultLocale("en_US");
 
         console.sendMessage(ChatUtil.colorString("&a============================="));
     }
