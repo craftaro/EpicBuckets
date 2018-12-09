@@ -77,8 +77,8 @@ public class ConfigManager {
         psuedoMaterials = new ArrayList<>();
         genbucketGroups = new LinkedHashMap<>();
 
-        ignoredMaterials = InventoryHelper.convertMaterialList(epicBuckets.getConfig().getStringList("IGNORE-MATERIALS"));
-        psuedoMaterials = InventoryHelper.convertMaterialList(epicBuckets.getConfig().getStringList("PSUEDO-MATERIALS"));
+        ignoredMaterials = InventoryHelper.convertMaterialList(epicBuckets.getConfig().getStringList("IGNORE-MATERIALS"), "IGNORE-MATERIALS");
+        psuedoMaterials = InventoryHelper.convertMaterialList(epicBuckets.getConfig().getStringList("PSUEDO-MATERIALS"), "PSUEDO-MATERIALS");
         supportFactions = epicBuckets.getConfig().getBoolean("FACTIONS-SUPPORT");
         supportWorldGuard = epicBuckets.getConfig().getBoolean("WORLDGUARD-SUPPORT");
         supportGriefPrevention = epicBuckets.getConfig().getBoolean("GRIEFPREVENTION-SUPPORT");

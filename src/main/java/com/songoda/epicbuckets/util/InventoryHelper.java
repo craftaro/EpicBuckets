@@ -3,8 +3,6 @@ package com.songoda.epicbuckets.util;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.shop.SubShop;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -14,9 +12,15 @@ import java.util.stream.IntStream;
 
 public class InventoryHelper {
 
-    public static List<XMaterial> convertMaterialList(List<String> toConvert) {
+    public static List<XMaterial> convertMaterialList(List<String> toConvert, String item) {
         List<XMaterial> converted = new ArrayList<>();
-        toConvert.forEach(s -> converted.add(XMaterial.valueOf(s.toUpperCase())));
+        for (String s : toConvert) {
+            if (!Validator.isMaterial(s.toUpperCase())) {
+                EpicBuckets.getInstance().getDebugger().sendConsole("Invalid material " + s.toUpperCase() + " in " + item + ", skipping..");
+                continue;
+            }
+            converted.add(XMaterial.valueOf(s.toUpperCase()));
+        }
         return converted;
     }
 
