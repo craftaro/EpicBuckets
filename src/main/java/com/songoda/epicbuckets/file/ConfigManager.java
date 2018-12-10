@@ -1,17 +1,17 @@
 package com.songoda.epicbuckets.file;
 
 import com.songoda.epicbuckets.EpicBuckets;
+import com.songoda.epicbuckets.genbucket.GenbucketType;
 import com.songoda.epicbuckets.util.InventoryHelper;
 import com.songoda.epicbuckets.util.Validator;
 import com.songoda.epicbuckets.util.XMaterial;
+import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ConfigManager {
 
@@ -29,6 +29,10 @@ public class ConfigManager {
     private List<XMaterial> psuedoMaterials;
 
     private LinkedHashMap<String, Integer> genbucketGroups;
+
+    private HashMap<GenbucketType, List<BlockFace>> genbucketValidFaces;
+    private HashMap<GenbucketType, BlockFace> genbucketDefaultFace;
+    private HashMap<GenbucketType, List<BlockFace>> genbucketLogicalFaces;
 
     private boolean supportFactions;
     private boolean supportWorldGuard;
@@ -77,6 +81,8 @@ public class ConfigManager {
         psuedoMaterials = new ArrayList<>();
         genbucketGroups = new LinkedHashMap<>();
 
+        loadValidFaces();
+
         ignoredMaterials = InventoryHelper.convertMaterialList(epicBuckets.getConfig().getStringList("IGNORE-MATERIALS"), "IGNORE-MATERIALS");
         psuedoMaterials = InventoryHelper.convertMaterialList(epicBuckets.getConfig().getStringList("PSUEDO-MATERIALS"), "PSUEDO-MATERIALS");
         supportFactions = epicBuckets.getConfig().getBoolean("FACTIONS-SUPPORT");
@@ -96,6 +102,22 @@ public class ConfigManager {
         inventoryName = epicBuckets.getConfig().getString(menuItemsPath + ".inventory-name");
         fillInventory = epicBuckets.getConfig().getBoolean(menuItemsPath + ".fill");
         epicBuckets.getConfig().getConfigurationSection("CUSTOM-ACTIVE-GEN-PER-PLAY").getKeys(false).forEach(s -> genbucketGroups.put(epicBuckets.getConfig().getString("CUSTOM-ACTIVE-GEN-PER-PLAY." + s).split(":")[1], Integer.parseInt(epicBuckets.getConfig().getString("CUSTOM-ACTIVE-GEN-PER-PLAY." + s).split(":")[0])));
+    }
+
+    private void loadValidFaces() {
+        genbucketValidFaces = new HashMap<>();
+        genbucketDefaultFace = new HashMap<>();
+        genbucketLogicalFaces = new HashMap<>();
+
+        epicBuckets.getConfig().getConfigurationSection("VALID-FACES").getKeys(false).forEach(s -> {
+            genbucketDefaultFace.put(GenbucketType.valueOf(s), BlockFace.valueOf(epicBuckets.getConfig().getString("VALID-FACES" + s + "DEFAULT")));
+            genbucketValidFaces.put(GenbucketType.valueOf(s), epicBuckets.getConfig().getStringList("VALID-FACES" + s + "WHITELIST").stream().map(s1 -> BlockFace.valueOf(s1)).collect(Collectors.toList()));
+        });
+
+        genbucketLogicalFaces.put(GenbucketType.HORIZONTAL, new ArrayList<>(Arrays.asList(BlockFace.EAST, BlockFace.NORTH, BlockFace.WEST, BlockFace.SOUTH)));
+        genbucketLogicalFaces.put(GenbucketType.VERTICAL, new ArrayList<>(Arrays.asList(BlockFace.UP, BlockFace.DOWN)));
+        genbucketLogicalFaces.put(GenbucketType.INFUSED, new ArrayList<>(Arrays.asList(BlockFace.EAST, BlockFace.NORTH, BlockFace.WEST, BlockFace.SOUTH)));
+        genbucketLogicalFaces.put(GenbucketType.PSUEDO, new ArrayList<>(Arrays.asList(BlockFace.UP, BlockFace.DOWN)));
     }
 
     private void setupFillItem() {
@@ -237,5 +259,17 @@ public class ConfigManager {
 
     public LinkedHashMap<String, Integer> getGenbucketGroups() {
         return genbucketGroups;
+    }
+
+    public List<BlockFace> getValidFacesForGenbucket(GenbucketType genbucketType) {
+        return genbucketValidFaces.get(genbucketType);
+    }
+
+    public BlockFace getDefaultFaceForGenbucket(GenbucketType genbucketType) {
+        return genbucketDefaultFace.get(genbucketType);
+    }
+
+    public List<BlockFace> getLogicalFacesForGenbucket(GenbucketType genbucketType) {
+        return genbucketLogicalFaces.get(genbucketType);
     }
 }

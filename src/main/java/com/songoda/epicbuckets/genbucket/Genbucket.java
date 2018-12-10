@@ -59,18 +59,15 @@ public abstract class Genbucket {
     }
 
     public boolean isValidBlockFace() {
-        switch(genbucketType) {
-            case VERTICAL:
-            case PSUEDO:
-                if (blockFace == BlockFace.UP || blockFace == BlockFace.DOWN) return true;
-                return false;
-            case HORIZONTAL:
-            case INFUSED:
-                if (blockFace == BlockFace.UP || blockFace == BlockFace.DOWN) return false;
-                return true;
-            default:
-                return false;
+        return epicBuckets.getConfigManager().getValidFacesForGenbucket(getGenbucketType()).contains(getBlockFace());
+    }
+
+    public boolean calculateBlockFace() {
+        if (!isValidBlockFace()) return false;
+        if (!epicBuckets.getConfigManager().getLogicalFacesForGenbucket(getGenbucketType()).contains(getBlockFace())) {
+            blockFace = epicBuckets.getConfigManager().getDefaultFaceForGenbucket(genbucketType);
         }
+        return true;
     }
 
     protected boolean isBelowVoid(int moved) {

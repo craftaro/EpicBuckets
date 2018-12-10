@@ -44,6 +44,39 @@ CUSTOM-ACTIVE-GEN-PER-PLAY: # Put the highest first
   VETERAN: "25:genbucket.limit.veteran"
   VIP: "20:genbucket.limit.vip"
 
+# Valid values are: UP, DOWN, SOUTH, NORTH, EAST, WEST
+# Whitelist means what faces the genbucket will work on
+# Default means when, for example, you allow a vertical genbucket to work on a side that is different from
+# UP or DOWN, the plugin will then get this value to allow the genbucket to work. Please make sure this value
+# is logical. For the vertical genbucket, that would be either UP or DOWN. Any other value just makes it
+# act like a horizontal genbucket, which ofcourse isnt going to work
+
+VALID-FACES:
+  HORIZONTAL:
+    WHITELIST:
+      - "EAST"
+      - "WEST"
+      - "NORTH"
+      - "SOUTH"
+    DEFAULT: "NORTH"
+  VERTICAL:
+    WHITELIST:
+      - "UP"
+      - "DOWN"
+    DEFAULT: "UP"
+  PSUEDO:
+    WHITELIST:
+      - "UP"
+      - "DOWN"
+    DEFAULT: "UP"
+  INFUSED:
+    WHITELIST:
+      - "EAST"
+      - "WEST"
+      - "NORTH"
+      - "SOUTH"
+    DEFAULT: "NORTH"
+
 # All genbuckets will run over these materials
 # except the psuedo.
 # Make all words capital!
