@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.UUID;
 
@@ -19,10 +20,12 @@ public abstract class Genbucket {
     private GenbucketType genbucketType;
     private BlockFace blockFace;
     private Block clickedBlock;
+    private Block sourceBlock;
     private Block currentBlock;
     private SubShop subShop;
     private UUID genUUID;
     private Location playerLocation;
+    private BukkitTask generation;
 
     public Genbucket(GenbucketType genbucketType, Block clickedBlock, BlockFace blockFace, SubShop s, Player owner) {
         epicBuckets = EpicBuckets.getInstance();
@@ -37,6 +40,10 @@ public abstract class Genbucket {
     }
 
     public abstract void generate();
+
+    public Block getSourceBlock() {
+        return sourceBlock;
+    }
 
     public Player getOwner() {
         return owner;
@@ -66,8 +73,17 @@ public abstract class Genbucket {
         if (!isValidBlockFace()) return false;
         if (!epicBuckets.getConfigManager().getLogicalFacesForGenbucket(getGenbucketType()).contains(getBlockFace())) {
             blockFace = epicBuckets.getConfigManager().getDefaultFaceForGenbucket(genbucketType);
+            sourceBlock = clickedBlock.getRelative(blockFace);
         }
         return true;
+    }
+
+    public BukkitTask getGeneration() {
+        return generation;
+    }
+
+    public void setGeneration(BukkitTask task) {
+        generation = task;
     }
 
     protected boolean isBelowVoid(int moved) {

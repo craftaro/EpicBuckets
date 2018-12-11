@@ -21,7 +21,7 @@ public class Infused extends Genbucket {
 
     @Override
     public void generate() {
-        new BukkitRunnable() {
+        BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
                 if ((!side1 && !side2) || blocksPlaced >= epicBuckets.getConfigManager().getMaxVerticalHeight()) {
@@ -37,6 +37,7 @@ public class Infused extends Genbucket {
                 }
                 blocksPlaced++;
             }
-        }.runTaskTimer(EpicBuckets.getInstance(), 0, epicBuckets.getConfigManager().getDelay());
+        };
+        setGeneration(runnable.runTaskTimer(EpicBuckets.getInstance(), 0, epicBuckets.getConfigManager().getDelay()));
     }
 }

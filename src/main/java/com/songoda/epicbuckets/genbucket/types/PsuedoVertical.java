@@ -19,7 +19,7 @@ public class PsuedoVertical extends Genbucket {
 
     @Override
     public void generate() {
-        new BukkitRunnable() {
+        BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
                 if (isBelowVoid(blocksUp) || blocksUp >= epicBuckets.getConfigManager().getMaxVerticalHeight()) {
@@ -30,6 +30,7 @@ public class PsuedoVertical extends Genbucket {
                 fixHole(getNextBlock());
                 blocksUp++;
             }
-        }.runTaskTimer(EpicBuckets.getInstance(), 0, epicBuckets.getConfigManager().getDelay());
+        };
+        setGeneration(runnable.runTaskTimer(EpicBuckets.getInstance(), 0, epicBuckets.getConfigManager().getDelay()));
     }
 }

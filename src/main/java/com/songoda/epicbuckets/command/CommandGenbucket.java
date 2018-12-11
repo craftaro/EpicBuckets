@@ -9,7 +9,7 @@ import com.songoda.epicbuckets.util.ChatUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandAlias("epicbuckets|eb")
+@CommandAlias("epicbuckets|eb|genbucket")
 public class CommandGenbucket extends BaseCommand {
 
     private EpicBuckets epicBuckets;
@@ -30,11 +30,11 @@ public class CommandGenbucket extends BaseCommand {
     @CatchUnknown @Default
     public void doHelp(CommandSender sender) {
         sender.sendMessage(ChatUtil.colorString("&3&lEpicBuckets"));
-        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets|eb help: &7shows this help"));
-        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets|eb reload: &7reloads the config"));
-        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets|eb shop: &7opens up the genbucket shop"));
-        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets|eb admin toggle: &7toggle your status to receive genbucket placement notifications"));
-        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets|eb admin panel: &7opens up the panel with all active genbuckets"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets help: &7shows this help"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets reload: &7reloads the config"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets shop: &7opens up the genbucket shop"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets admin toggle: &7toggle your status to receive genbucket placement notifications"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets admin panel: &7opens up the panel with all active genbuckets"));
     }
 
     @Subcommand("shop")

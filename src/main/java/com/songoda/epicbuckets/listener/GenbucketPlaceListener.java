@@ -9,7 +9,6 @@ import com.songoda.epicbuckets.genbucket.types.PsuedoVertical;
 import com.songoda.epicbuckets.genbucket.types.Vertical;
 import com.songoda.epicbuckets.util.XMaterial;
 import de.tr7zw.itemnbtapi.NBTItem;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -77,7 +76,7 @@ public class GenbucketPlaceListener implements Listener {
                 genbucket = new Horizontal(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), epicBuckets.getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
         }
 
-        if (!genbucket.isValidBlockFace()) {
+        if (!genbucket.calculateBlockFace()) {
             e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.genbucket.placedwrong").replace("%genbucket%", genbucket.getGenbucketType().name.toUpperCase() + " genbucket"));
             return;
         }

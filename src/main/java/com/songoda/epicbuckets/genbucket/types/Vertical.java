@@ -19,7 +19,7 @@ public class Vertical extends Genbucket {
 
     @Override
     public void generate() {
-        new BukkitRunnable() {
+        BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
                 if (isBelowVoid(blocksPlaced) || blocksPlaced >= epicBuckets.getConfigManager().getMaxVerticalHeight() || !placeGen(getNextBlock())) {
@@ -29,6 +29,7 @@ public class Vertical extends Genbucket {
                 }
                 blocksPlaced++;
             }
-        }.runTaskTimer(EpicBuckets.getInstance(), 0, epicBuckets.getConfigManager().getDelay());
+        };
+        setGeneration(runnable.runTaskTimer(EpicBuckets.getInstance(), 0, epicBuckets.getConfigManager().getDelay()));
     }
 }

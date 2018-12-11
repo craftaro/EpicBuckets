@@ -19,7 +19,7 @@ public class Horizontal extends Genbucket {
 
     @Override
     public void generate() {
-        new BukkitRunnable() {
+        BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
                 if (blocksPlaced >= epicBuckets.getConfigManager().getMaxHorizontalLength() || !placeGen(getNextBlock())) {
@@ -29,6 +29,7 @@ public class Horizontal extends Genbucket {
                 }
                 blocksPlaced++;
             }
-        }.runTaskTimer(EpicBuckets.getInstance(), 0, epicBuckets.getConfigManager().getDelay());
+        };
+        setGeneration(runnable.runTaskTimer(EpicBuckets.getInstance(), 0, epicBuckets.getConfigManager().getDelay()));
     }
 }
