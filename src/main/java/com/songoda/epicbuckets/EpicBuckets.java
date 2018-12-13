@@ -5,6 +5,7 @@ import com.songoda.epicbuckets.command.CommandGenbucket;
 import com.songoda.epicbuckets.file.ConfigManager;
 import com.songoda.epicbuckets.genbucket.GenbucketManager;
 import com.songoda.epicbuckets.listener.GenbucketPlaceListener;
+import com.songoda.epicbuckets.listener.SourceBlockBreakListener;
 import com.songoda.epicbuckets.shop.ShopManager;
 import com.songoda.epicbuckets.util.ChatUtil;
 import com.songoda.epicbuckets.util.Debugger;
@@ -63,6 +64,7 @@ public class EpicBuckets extends ExtendedJavaPlugin {
         commandManager.registerCommand(new CommandGenbucket());
 
         getServer().getPluginManager().registerEvents(new GenbucketPlaceListener(), this);
+        getServer().getPluginManager().registerEvents(new SourceBlockBreakListener(), this);
 
         setupEconomy();
 

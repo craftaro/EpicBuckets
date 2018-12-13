@@ -197,12 +197,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>me.markeh</groupId>
-            <artifactId>factionsframework</artifactId>
-            <version>1.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>factions</artifactId>
             <version>LATEST</version>

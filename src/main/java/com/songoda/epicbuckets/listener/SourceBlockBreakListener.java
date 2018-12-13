@@ -18,7 +18,7 @@ public class SourceBlockBreakListener implements Listener {
         epicBuckets.getGenbucketManager().getActiveGens().forEach((uuid, genbuckets) -> {
             if (genbuckets.size() > 0) {
                 genbuckets.forEach(genbucket -> {
-                    if (genbucket.getSourceBlock().getLocation() == e.getBlock().getLocation()) {
+                    if (genbucket.getSourceBlock().getLocation().equals(e.getBlock().getLocation())) {
                         genbucket.getGeneration().cancel();
                         return;
                     }
