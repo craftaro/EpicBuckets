@@ -24,6 +24,20 @@ public class Infused extends Genbucket {
         BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
+                if (isGravityGen()) {
+                    if (!side1 && !side2) {
+                        epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
+                        cancel();
+                        return;
+                    }
+                    if (side1 && !gravityGenInfused(blocksPlaced, getBlockFace())) {
+                        side1 = false;
+                    }
+                    if (side2 && !gravityGenInfused(blocksPlaced, getBlockFace().getOppositeFace())) {
+                        side2 = false;
+                    }
+                }
+
                 if ((!side1 && !side2) || blocksPlaced >= epicBuckets.getConfigManager().getMaxVerticalHeight()) {
                     epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
                     cancel();
