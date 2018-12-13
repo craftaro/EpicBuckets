@@ -110,8 +110,22 @@ public abstract class Genbucket {
         return true;
     }
 
+    protected boolean gravityGenInfused(int moved, BlockFace blockFace) {
+        Block b = getNextBlock(moved, blockFace);
+        if (isBelowVoid(moved + 1)) return false;
+        if (b.getRelative(getBlockFace()).getType() != Material.AIR) {
+            if (b.getRelative(getBlockFace()).getType() != XMaterial.COBBLESTONE.parseMaterial()) {
+                b.setType(getGenItem().getType());
+                return false;
+            }
+        }
+        b.getRelative(getBlockFace()).setType(XMaterial.COBBLESTONE.parseMaterial());
+        b.setType(getGenItem().getType());
+        return true;
+    }
+
     protected Block getNextBlock(int moved, BlockFace blockFace) {
-        return clickedBlock.getRelative(blockFace).getRelative(0, moved, 0);
+        return sourceBlock.getRelative(0, moved, 0);
     }
 
     protected Block getNextBlock() {
