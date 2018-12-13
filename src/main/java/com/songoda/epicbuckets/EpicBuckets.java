@@ -1,6 +1,6 @@
 package com.songoda.epicbuckets;
 
-import co.aikar.commands.PaperCommandManager;
+import co.aikar.commands.BukkitCommandManager;
 import com.songoda.epicbuckets.command.CommandGenbucket;
 import com.songoda.epicbuckets.file.ConfigManager;
 import com.songoda.epicbuckets.genbucket.GenbucketManager;
@@ -26,7 +26,7 @@ public class EpicBuckets extends ExtendedJavaPlugin {
     private Debugger debugger;
     private GenbucketManager genbucketManager;
     private Economy econ;
-    private PaperCommandManager commandManager;
+    private BukkitCommandManager commandManager;
     private InventoryManager inventoryManager;
 
     private Locale locale;
@@ -46,6 +46,8 @@ public class EpicBuckets extends ExtendedJavaPlugin {
 
         saveDefaultConfig();
 
+        Locale.init(this);
+        Locale.saveDefaultLocale("en_US");
         this.locale = Locale.getLocale(getConfig().getString("Locale", "en_US"));
 
         debugger = new Debugger();
@@ -53,7 +55,7 @@ public class EpicBuckets extends ExtendedJavaPlugin {
         shopManager = new ShopManager();
         configManager.setup();
         genbucketManager = new GenbucketManager();
-        commandManager = new PaperCommandManager(this);
+        commandManager = new BukkitCommandManager(this);
 
         inventoryManager = new InventoryManager(this);
         inventoryManager.init();
@@ -63,9 +65,6 @@ public class EpicBuckets extends ExtendedJavaPlugin {
         getServer().getPluginManager().registerEvents(new GenbucketPlaceListener(), this);
 
         setupEconomy();
-
-        Locale.init(this);
-        Locale.saveDefaultLocale("en_US");
 
         console.sendMessage(ChatUtil.colorString("&a============================="));
     }

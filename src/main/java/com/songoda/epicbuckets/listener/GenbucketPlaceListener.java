@@ -1,5 +1,6 @@
 package com.songoda.epicbuckets.listener;
 
+
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.Genbucket;
 import com.songoda.epicbuckets.genbucket.GenbucketType;
@@ -17,12 +18,6 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class GenbucketPlaceListener implements Listener {
-
-    private EpicBuckets epicBuckets;
-
-    public GenbucketPlaceListener() {
-        epicBuckets = EpicBuckets.getInstance();
-    }
 
     @EventHandler
     public void emptyBucket(PlayerBucketEmptyEvent e) {
@@ -44,19 +39,19 @@ public class GenbucketPlaceListener implements Listener {
         e.setCancelled(true);
 
         if (!e.getPlayer().hasPermission("genbucket.place")) {
-            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.place.nothere"));
+            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.place.nothere"));
             return;
         }
-        if (epicBuckets.getConfigManager().isGenbucketsDisabled()) {
-            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.genbucket.disabled"));
+        if (EpicBuckets.getInstance().getConfigManager().isGenbucketsDisabled()) {
+            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.disabled"));
             return;
         }
-        if (!epicBuckets.getGenbucketManager().canRegisterNewGenbucket(e.getPlayer())) {
-            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.place.wait"));
+        if (!EpicBuckets.getInstance().getGenbucketManager().canRegisterNewGenbucket(e.getPlayer())) {
+            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.place.wait"));
             return;
         }
-        if (!epicBuckets.getGenbucketManager().canPlaceGenbucket(e.getPlayer(), e.getClickedBlock().getLocation())) {
-            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.place.nothere"));
+        if (!EpicBuckets.getInstance().getGenbucketManager().canPlaceGenbucket(e.getPlayer(), e.getClickedBlock().getLocation())) {
+            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.place.nothere"));
             return;
         }
 
@@ -64,28 +59,28 @@ public class GenbucketPlaceListener implements Listener {
 
         switch(GenbucketType.valueOf(nbtItem.getString("Type"))) {
             case PSUEDO:
-                genbucket = new PsuedoVertical(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), epicBuckets.getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
+                genbucket = new PsuedoVertical(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), EpicBuckets.getInstance().getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
                 break;
             case INFUSED:
-                genbucket = new Infused(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), epicBuckets.getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
+                genbucket = new Infused(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), EpicBuckets.getInstance().getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
                 break;
             case VERTICAL:
-                genbucket = new Vertical(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), epicBuckets.getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
+                genbucket = new Vertical(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), EpicBuckets.getInstance().getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
                 break;
             case HORIZONTAL:
-                genbucket = new Horizontal(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), epicBuckets.getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
+                genbucket = new Horizontal(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), EpicBuckets.getInstance().getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
         }
 
         if (!genbucket.calculateBlockFace()) {
-            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.genbucket.placedwrong").replace("%genbucket%", genbucket.getGenbucketType().name.toUpperCase() + " genbucket"));
+            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.placedwrong").replace("%genbucket%", genbucket.getGenbucketType().name.toUpperCase() + " genbucket"));
             return;
         }
-        if (genbucket.getGenbucketType() == GenbucketType.PSUEDO && !epicBuckets.getConfigManager().getPsuedoMaterials().contains(XMaterial.requestXMaterial(e.getClickedBlock().getType().name(), e.getClickedBlock().getData()))) {
-            e.getPlayer().sendMessage(epicBuckets.getLocale().getMessage("event.genbucket.wrongmaterialpsuedo"));
+        if (genbucket.getGenbucketType() == GenbucketType.PSUEDO && !EpicBuckets.getInstance().getConfigManager().getPsuedoMaterials().contains(XMaterial.requestXMaterial(e.getClickedBlock().getType().name(), e.getClickedBlock().getData()))) {
+            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.wrongmaterialpsuedo"));
             return;
         }
 
-        if (e.getPlayer().getGameMode() != GameMode.CREATIVE || !epicBuckets.getConfigManager().isUnlimitedGenbuckets()) {
+        if (e.getPlayer().getGameMode() != GameMode.CREATIVE || !EpicBuckets.getInstance().getConfigManager().isUnlimitedGenbuckets()) {
             if (e.getItem().getAmount() > 1) {
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
             } else {
@@ -93,8 +88,8 @@ public class GenbucketPlaceListener implements Listener {
             }
         }
 
-        epicBuckets.getGenbucketManager().registerGenbucketForPlayer(e.getPlayer(), genbucket);
-        epicBuckets.getGenbucketManager().notifyAdmins(e.getPlayer(), genbucket);
+        EpicBuckets.getInstance().getGenbucketManager().registerGenbucketForPlayer(e.getPlayer(), genbucket);
+        EpicBuckets.getInstance().getGenbucketManager().notifyAdmins(e.getPlayer(), genbucket);
         genbucket.generate();
     }
 

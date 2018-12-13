@@ -110,8 +110,8 @@ public class ConfigManager {
         genbucketLogicalFaces = new HashMap<>();
 
         epicBuckets.getConfig().getConfigurationSection("VALID-FACES").getKeys(false).forEach(s -> {
-            genbucketDefaultFace.put(GenbucketType.valueOf(s), BlockFace.valueOf(epicBuckets.getConfig().getString("VALID-FACES" + s + "DEFAULT")));
-            genbucketValidFaces.put(GenbucketType.valueOf(s), epicBuckets.getConfig().getStringList("VALID-FACES" + s + "WHITELIST").stream().map(s1 -> BlockFace.valueOf(s1)).collect(Collectors.toList()));
+            genbucketDefaultFace.put(GenbucketType.valueOf(s), BlockFace.valueOf(epicBuckets.getConfig().getString("VALID-FACES." + s + ".DEFAULT")));
+            genbucketValidFaces.put(GenbucketType.valueOf(s), epicBuckets.getConfig().getStringList("VALID-FACES." + s + ".WHITELIST").stream().map(s1 -> BlockFace.valueOf(s1)).collect(Collectors.toList()));
         });
 
         genbucketLogicalFaces.put(GenbucketType.HORIZONTAL, new ArrayList<>(Arrays.asList(BlockFace.EAST, BlockFace.NORTH, BlockFace.WEST, BlockFace.SOUTH)));

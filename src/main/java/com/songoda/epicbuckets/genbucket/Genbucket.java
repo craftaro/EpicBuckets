@@ -5,6 +5,7 @@ import com.songoda.epicbuckets.shop.SubShop;
 import com.songoda.epicbuckets.util.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -26,6 +27,7 @@ public abstract class Genbucket {
     private UUID genUUID;
     private Location playerLocation;
     private BukkitTask generation;
+    private boolean isGravityGen;
 
     public Genbucket(GenbucketType genbucketType, Block clickedBlock, BlockFace blockFace, SubShop s, Player owner) {
         epicBuckets = EpicBuckets.getInstance();
@@ -35,8 +37,10 @@ public abstract class Genbucket {
         this.blockFace = blockFace;
         this.clickedBlock = clickedBlock;
         this.currentBlock = clickedBlock;
+        this.sourceBlock = clickedBlock.getRelative(blockFace);
         this.subShop = s;
         this.playerLocation = owner.getLocation();
+        isGravityGen = s.getGenItem().getType().hasGravity();
     }
 
     public abstract void generate();
@@ -73,7 +77,8 @@ public abstract class Genbucket {
         if (!isValidBlockFace()) return false;
         if (!epicBuckets.getConfigManager().getLogicalFacesForGenbucket(getGenbucketType()).contains(getBlockFace())) {
             blockFace = epicBuckets.getConfigManager().getDefaultFaceForGenbucket(genbucketType);
-            sourceBlock = clickedBlock.getRelative(blockFace);
+            clickedBlock = sourceBlock.getRelative(getBlockFace().getOppositeFace());
+            currentBlock = clickedBlock;
         }
         return true;
     }
@@ -88,7 +93,21 @@ public abstract class Genbucket {
 
     protected boolean isBelowVoid(int moved) {
         if (blockFace != BlockFace.DOWN) return false;
-        return clickedBlock.getRelative(0, -moved, 0).getLocation().getBlockY() == 0;
+        return sourceBlock.getRelative(0, -moved, 0).getLocation().getBlockY() < 0;
+    }
+
+    protected boolean gravityGen(int moved) {
+        Block b = getNextBlock();
+        if (isBelowVoid(moved + 1)) return false;
+        if (b.getRelative(getBlockFace()).getType() != Material.AIR) {
+            if (b.getRelative(getBlockFace()).getType() != XMaterial.COBBLESTONE.parseMaterial()) {
+                b.setType(getGenItem().getType());
+                return false;
+            }
+        }
+        b.getRelative(getBlockFace()).setType(XMaterial.COBBLESTONE.parseMaterial());
+        b.setType(getGenItem().getType());
+        return true;
     }
 
     protected Block getNextBlock(int moved, BlockFace blockFace) {
@@ -128,6 +147,10 @@ public abstract class Genbucket {
 
     protected BlockFace getBlockFace() {
         return blockFace;
+    }
+
+    protected boolean isGravityGen() {
+        return isGravityGen && getBlockFace() == BlockFace.DOWN;
     }
 
 }
