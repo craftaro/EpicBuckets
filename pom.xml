@@ -121,7 +121,7 @@
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
         <repository>
-            <id>33_aikar</id>
+            <id>3_aikar</id>
             <url>https://repo.aikar.co/content/groups/aikar/</url>
         </repository>
         <repository>
