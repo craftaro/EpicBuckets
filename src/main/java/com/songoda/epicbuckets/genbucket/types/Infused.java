@@ -25,31 +25,31 @@ public class Infused extends Genbucket {
             @Override
             public void run() {
                 if (isGravityGen()) {
-                    if (!side1 && !side2) {
+                        if (!side1 && !side2) {
+                            epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
+                            cancel();
+                            return;
+                        }
+                        if (side1 && !gravityGenInfused(blocksPlaced, getBlockFace())) {
+                            side1 = false;
+                        }
+                        if (side2 && !gravityGenInfused(blocksPlaced, getBlockFace().getOppositeFace())) {
+                            side2 = false;
+                        }
+                } else {
+                    if ((!side1 && !side2) || blocksPlaced >= epicBuckets.getConfigManager().getMaxVerticalHeight()) {
                         epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
                         cancel();
                         return;
                     }
-                    if (side1 && !gravityGenInfused(blocksPlaced, getBlockFace())) {
+                    if (side1 && !placeGen(getNextBlock(blocksPlaced, getBlockFace()))) {
                         side1 = false;
                     }
-                    if (side2 && !gravityGenInfused(blocksPlaced, getBlockFace().getOppositeFace())) {
+                    if (side2 && !placeGen(getNextBlock(blocksPlaced, getBlockFace().getOppositeFace()))) {
                         side2 = false;
                     }
+                    blocksPlaced++;
                 }
-
-                if ((!side1 && !side2) || blocksPlaced >= epicBuckets.getConfigManager().getMaxVerticalHeight()) {
-                    epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
-                    cancel();
-                    return;
-                }
-                if (side1 && !placeGen(getNextBlock(blocksPlaced, getBlockFace()))) {
-                    side1 = false;
-                }
-                if (side2 && !placeGen(getNextBlock(blocksPlaced, getBlockFace().getOppositeFace()))) {
-                    side2 = false;
-                }
-                blocksPlaced++;
             }
         };
         setGeneration(runnable.runTaskTimer(EpicBuckets.getInstance(), 0, epicBuckets.getConfigManager().getDelay()));
