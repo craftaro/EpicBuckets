@@ -9,7 +9,7 @@ import com.songoda.epicbuckets.util.ChatUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandAlias("epicbuckets|eb|genbucket")
+@CommandAlias("epicbuckets|eb|genbucket|gen")
 public class CommandGenbucket extends BaseCommand {
 
     private EpicBuckets epicBuckets;
@@ -27,7 +27,7 @@ public class CommandGenbucket extends BaseCommand {
     }
 
     @Subcommand("help")
-    @CatchUnknown @Default
+    @CatchUnknown
     public void doHelp(CommandSender sender) {
         sender.sendMessage(ChatUtil.colorString("&3&lEpicBuckets"));
         sender.sendMessage(ChatUtil.colorString("&f/epicbuckets help: &7shows this help"));
@@ -38,6 +38,7 @@ public class CommandGenbucket extends BaseCommand {
     }
 
     @Subcommand("shop")
+    @Default
     @Description("Opens up the Genbucket shop")
     public void shop(Player player) {
         if (!permCheck(player, "genbucket.shop")) return;

@@ -2,7 +2,7 @@
     <groupId>com.songoda</groupId>
     <artifactId>EpicBuckets</artifactId>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.2</version>
+    <version>1.2.3</version>
     <build>
         <defaultGoal>clean package</defaultGoal>
         <plugins>
@@ -197,10 +197,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.massivecraft</groupId>
-            <artifactId>factions</artifactId>
-            <version>LATEST</version>
-            <scope>provided</scope>
+            <groupId>me.markeh</groupId>
+            <artifactId>factionsframework</artifactId>
+            <version>1.2.0</version>
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
