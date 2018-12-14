@@ -201,11 +201,5 @@
             <artifactId>factionsframework</artifactId>
             <version>1.2.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.massivecraft</groupId>
-            <artifactId>factionsuuid</artifactId>
-            <version>LATEST</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 </project>
