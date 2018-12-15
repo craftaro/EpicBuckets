@@ -41,14 +41,14 @@ public class CommandGenbucket extends BaseCommand {
     @Default
     @Description("Opens up the Genbucket shop")
     public void shop(Player player) {
-        if (!permCheck(player, "genbucket.shop")) return;
+        if (!permCheck(player, "epicbuckets.shop")) return;
         new GUIMain(player).open();
     }
 
     @Subcommand("reload")
     @Description("Reloads the messages & config files")
     public void reload(Player player) {
-        if (!permCheck(player, "genbucket.reload")) return;
+        if (!permCheck(player, "epicbuckets.reload")) return;
         epicBuckets.reload();
         player.sendMessage(ChatUtil.colorPrefix(epicBuckets.getLocale().getMessage("command.reload.success")));
     }
@@ -56,14 +56,14 @@ public class CommandGenbucket extends BaseCommand {
     @Subcommand("admin toggle")
     @Description("Toggles your admin status to receive genbucket placement notifications")
     public void admin(Player player) {
-        if (!permCheck(player, "genbucket.admin") || !permCheck(player, "genbucket.admin.toggle")) return;
+        if (!permCheck(player, "epicbuckets.admin") || !permCheck(player, "epicbuckets.admin.toggle")) return;
         epicBuckets.getGenbucketManager().toggleAdmin(player);
     }
 
     @Subcommand("admin panel")
     @Description("Opens up the panel with all the active genbuckets")
     public void panel(Player player) {
-        if (!permCheck(player, "genbucket.admin") || !permCheck(player, "genbucket.admin.panel")) return;
+        if (!permCheck(player, "epicbuckets.admin") || !permCheck(player, "epicbuckets.admin.panel")) return;
         GUIPanel.PANEL.open(player);
     }
 

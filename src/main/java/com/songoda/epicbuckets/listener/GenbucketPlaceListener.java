@@ -38,7 +38,7 @@ public class GenbucketPlaceListener implements Listener {
 
         e.setCancelled(true);
 
-        if (!e.getPlayer().hasPermission("genbucket.place")) {
+        if (!e.getPlayer().hasPermission("epicbuckets.place")) {
             e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.place.nothere"));
             return;
         }
@@ -80,7 +80,7 @@ public class GenbucketPlaceListener implements Listener {
             return;
         }
 
-        if (e.getPlayer().getGameMode() != GameMode.CREATIVE || !EpicBuckets.getInstance().getConfigManager().isUnlimitedGenbuckets()) {
+        if (e.getPlayer().getGameMode() != GameMode.CREATIVE && !EpicBuckets.getInstance().getConfigManager().isUnlimitedGenbuckets()) {
             if (e.getItem().getAmount() > 1) {
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
             } else {
