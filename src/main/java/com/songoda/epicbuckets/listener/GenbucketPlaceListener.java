@@ -80,11 +80,12 @@ public class GenbucketPlaceListener implements Listener {
             return;
         }
 
-        if (e.getPlayer().getGameMode() != GameMode.CREATIVE && !EpicBuckets.getInstance().getConfigManager().isUnlimitedGenbuckets()) {
+        if (e.getPlayer().getGameMode() != GameMode.CREATIVE && !EpicBuckets.getInstance().getConfigManager().isInfiniteUse()) {
             if (e.getItem().getAmount() > 1) {
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
             } else {
-                e.getItem().setAmount(0);
+                System.out.println("hi");
+                e.getPlayer().getInventory().remove(e.getItem());
             }
         }
 

@@ -72,6 +72,7 @@ public class GenbucketManager {
     }
 
     public boolean canRegisterNewGenbucket(Player owner) {
+        if (epicBuckets.getConfigManager().isUnlimitedGenbuckets()) return true;
         if (!activeGens.containsKey(owner.getUniqueId())) return true;
         if (activeGens.get(owner.getUniqueId()).size() <= getMaxGenbucketsForPlayer(owner)) return true;
         return false;

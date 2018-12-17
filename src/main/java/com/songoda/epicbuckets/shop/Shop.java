@@ -32,11 +32,11 @@ public class Shop {
     private boolean fillInventory;
     private String inventoryName;
 
-    private boolean enabled = true;
+    private boolean enabled;
 
     public Shop(String menuItem, String name, String path) {
         this.epicBuckets = EpicBuckets.getInstance();
-        this.shops = EpicBuckets.getInstance().getConfigManager().getConfig("shops");;
+        this.shops = EpicBuckets.getInstance().getConfigManager().getConfig("shops");
 
         this.subShops = new HashMap<>();
 
@@ -45,6 +45,7 @@ public class Shop {
 
         this.path = path;
         this.shopPath = epicBuckets.getShopManager().getShopPath() + "." + shopName;
+        this.enabled = shops.getBoolean(shopPath + ".enabled");
 
         loadData();
         setupShopItem();

@@ -44,6 +44,7 @@ public class ConfigManager {
     private int spongeRadius;
     private int maxGenbucketsPerPlayer;
     private boolean unlimitedGenbuckets;
+    private boolean infiniteUse;
     private int maxVerticalHeight;
     private int maxHorizontalLength;
     private int delay;
@@ -94,6 +95,7 @@ public class ConfigManager {
         spongeRadius = epicBuckets.getConfig().getInt("SPONGE-RADIUS");
         maxGenbucketsPerPlayer = epicBuckets.getConfig().getInt("MAX-ACTIVE-GEN-PER-PLAYER");
         unlimitedGenbuckets = epicBuckets.getConfig().getBoolean("PLACE-UNLIMTED-GENS");
+        infiniteUse = epicBuckets.getConfig().getBoolean("INFINITE-USE");
         maxVerticalHeight = epicBuckets.getConfig().getInt("MAX-VERTICAL-HEIGHT");
         maxHorizontalLength = epicBuckets.getConfig().getInt("MAX-HORIZONTAL-LENGTH");
         delay = epicBuckets.getConfig().getInt("DELAY");
@@ -271,5 +273,9 @@ public class ConfigManager {
 
     public List<BlockFace> getLogicalFacesForGenbucket(GenbucketType genbucketType) {
         return genbucketLogicalFaces.get(genbucketType);
+    }
+
+    public boolean isInfiniteUse() {
+        return infiniteUse;
     }
 }

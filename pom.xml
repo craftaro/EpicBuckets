@@ -2,7 +2,7 @@
     <groupId>com.songoda</groupId>
     <artifactId>EpicBuckets</artifactId>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.2.4</version>
+    <version>1.2.5</version>
     <build>
         <defaultGoal>clean package</defaultGoal>
         <plugins>
@@ -121,7 +121,7 @@
             <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
         <repository>
-            <id>3_aikar</id>
+            <id>33_aikar</id>
             <url>https://repo.aikar.co/content/groups/aikar/</url>
         </repository>
         <repository>
