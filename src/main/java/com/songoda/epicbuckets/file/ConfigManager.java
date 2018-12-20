@@ -44,7 +44,11 @@ public class ConfigManager {
     private int spongeRadius;
     private int maxGenbucketsPerPlayer;
     private boolean unlimitedGenbuckets;
+
     private boolean infiniteUse;
+    private boolean chargeInfiniteUse;
+    private int infiniteUseCost;
+
     private int maxVerticalHeight;
     private int maxHorizontalLength;
     private int delay;
@@ -104,6 +108,8 @@ public class ConfigManager {
         inventoryName = epicBuckets.getConfig().getString(menuItemsPath + ".inventory-name");
         fillInventory = epicBuckets.getConfig().getBoolean(menuItemsPath + ".fill");
         epicBuckets.getConfig().getConfigurationSection("CUSTOM-ACTIVE-GEN-PER-PLAY").getKeys(false).forEach(s -> genbucketGroups.put(epicBuckets.getConfig().getString("CUSTOM-ACTIVE-GEN-PER-PLAY." + s).split(":")[1], Integer.parseInt(epicBuckets.getConfig().getString("CUSTOM-ACTIVE-GEN-PER-PLAY." + s).split(":")[0])));
+        chargeInfiniteUse = epicBuckets.getConfig().getBoolean("CHARGE-FOR-INFINITE-USE");
+        infiniteUseCost = epicBuckets.getConfig().getInt("COST-FOR-INFINITE-USE");
     }
 
     private void loadValidFaces() {
@@ -277,5 +283,13 @@ public class ConfigManager {
 
     public boolean isInfiniteUse() {
         return infiniteUse;
+    }
+
+    public boolean isChargeInfiniteUse() {
+        return chargeInfiniteUse;
+    }
+
+    public int getInfiniteUseCost() {
+        return infiniteUseCost;
     }
 }

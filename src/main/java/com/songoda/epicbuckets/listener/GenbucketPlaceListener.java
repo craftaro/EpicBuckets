@@ -10,6 +10,7 @@ import com.songoda.epicbuckets.genbucket.types.PsuedoVertical;
 import com.songoda.epicbuckets.genbucket.types.Vertical;
 import com.songoda.epicbuckets.util.XMaterial;
 import de.tr7zw.itemnbtapi.NBTItem;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -87,6 +88,15 @@ public class GenbucketPlaceListener implements Listener {
                 System.out.println("hi");
                 e.getPlayer().getInventory().remove(e.getItem());
             }
+        }
+
+        if (EpicBuckets.getInstance().getConfigManager().isInfiniteUse() && EpicBuckets.getInstance().getConfigManager().isChargeInfiniteUse()) {
+            if (EpicBuckets.getInstance().getEcon().getBalance(Bukkit.getOfflinePlayer(e.getPlayer().getUniqueId())) < EpicBuckets.getInstance().getConfigManager().getInfiniteUseCost()) {
+                e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.infiniteuse.notenough"));
+                return;
+            }
+            EpicBuckets.getInstance().getEcon().withdrawPlayer(Bukkit.getOfflinePlayer(e.getPlayer().getUniqueId()), EpicBuckets.getInstance().getConfigManager().getInfiniteUseCost());
+            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.infiniteuse.charge").replace("%charge%", EpicBuckets.getInstance().getConfigManager().getInfiniteUseCost() + ""));
         }
 
         EpicBuckets.getInstance().getGenbucketManager().registerGenbucketForPlayer(e.getPlayer(), genbucket);

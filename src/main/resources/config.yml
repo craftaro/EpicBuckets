@@ -21,6 +21,8 @@ ENCHANT: false # Enchant genbuckets in all guis
 CLOSE-GUI-AFTER-PURCHASE: false # Close the inventory after purchase
 
 INFINITE-USE: false # If enabled, you won't lose a genbucket when you place it down
+CHARGE-FOR-INFINITE-USE: false # This requires infinite use to be enabled and will charge the player when placing a genbucket
+COST-FOR-INFINITE-USE: 400 # Money charged for placing a genbucket when the above is enabled
 
 USE-SPONGE-SUPPORT: false # If a sponge is found it will stop the genbucket
 SPONGE-RADIUS: 3 # <- SPONGE-RADIUS 3 == 3x3. I do not recommending putting this higher than 3
