@@ -29,6 +29,7 @@ public class GenbucketPlaceListener implements Listener {
 
     public GenbucketPlaceListener() {
         if (EpicBuckets.getInstance().getConfigManager().getGenbucketDelay() > 0) {
+            System.out.println("delay!");
             cooldownMap = CooldownMap.create(Cooldown.of(EpicBuckets.getInstance().getConfigManager().getGenbucketDelay() / 20, TimeUnit.SECONDS));
         }
     }
@@ -52,12 +53,12 @@ public class GenbucketPlaceListener implements Listener {
 
         e.setCancelled(true);
 
-        if (cooldownMap != null && !cooldownMap.test(e.getPlayer())) {
-            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.place.delay"));
-            return;
-        }
         if (!e.getPlayer().hasPermission("epicbuckets.place")) {
             e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.place.nothere"));
+            return;
+        }
+        if (cooldownMap != null && !cooldownMap.test(e.getPlayer())) {
+            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.place.delay"));
             return;
         }
         if (EpicBuckets.getInstance().getConfigManager().isGenbucketsDisabled()) {
