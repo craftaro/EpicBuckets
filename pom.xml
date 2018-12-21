@@ -50,6 +50,7 @@
                                     <include>com.flowpowered:flow-math</include>
                                     <include>com.google.code.findbugs</include>
                                     <include>com.google.guava</include>
+                                    <include>com.google.code.gson</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
