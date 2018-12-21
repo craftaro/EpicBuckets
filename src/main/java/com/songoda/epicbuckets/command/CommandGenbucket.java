@@ -29,7 +29,7 @@ public class CommandGenbucket extends BaseCommand {
     @Subcommand("help")
     @CatchUnknown
     public void doHelp(CommandSender sender) {
-        sender.sendMessage(ChatUtil.colorString("&3&lEpicBuckets"));
+        sender.sendMessage(ChatUtil.colorString("&3&lEpicBuckets &r&7(&feb&8/&fgenbucket&8/&fgen&7)"));
         sender.sendMessage(ChatUtil.colorString("&f/epicbuckets help: &7shows this help"));
         sender.sendMessage(ChatUtil.colorString("&f/epicbuckets reload: &7reloads the config"));
         sender.sendMessage(ChatUtil.colorString("&f/epicbuckets shop: &7opens up the genbucket shop"));

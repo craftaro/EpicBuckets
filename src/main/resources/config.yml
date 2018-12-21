@@ -24,6 +24,7 @@ INFINITE-USE: false # If enabled, you won't lose a genbucket when you place it d
 CHARGE-FOR-INFINITE-USE: false # This requires infinite use to be enabled and will charge the player when placing a genbucket
 COST-FOR-INFINITE-USE: 400 # Money charged for placing a genbucket when the above is enabled
 
+GENBUCKET-DELAY: 10 # Ticks delay between genbucket placements, 20 ticks = 1 second, set to 0 for no delay
 USE-SPONGE-SUPPORT: false # If a sponge is found it will stop the genbucket
 SPONGE-RADIUS: 3 # <- SPONGE-RADIUS 3 == 3x3. I do not recommending putting this higher than 3
 

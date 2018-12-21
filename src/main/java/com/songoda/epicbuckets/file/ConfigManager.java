@@ -49,6 +49,8 @@ public class ConfigManager {
     private boolean chargeInfiniteUse;
     private int infiniteUseCost;
 
+    private int genbucketDelay;
+
     private int maxVerticalHeight;
     private int maxHorizontalLength;
     private int delay;
@@ -110,6 +112,7 @@ public class ConfigManager {
         epicBuckets.getConfig().getConfigurationSection("CUSTOM-ACTIVE-GEN-PER-PLAY").getKeys(false).forEach(s -> genbucketGroups.put(epicBuckets.getConfig().getString("CUSTOM-ACTIVE-GEN-PER-PLAY." + s).split(":")[1], Integer.parseInt(epicBuckets.getConfig().getString("CUSTOM-ACTIVE-GEN-PER-PLAY." + s).split(":")[0])));
         chargeInfiniteUse = epicBuckets.getConfig().getBoolean("CHARGE-FOR-INFINITE-USE");
         infiniteUseCost = epicBuckets.getConfig().getInt("COST-FOR-INFINITE-USE");
+        genbucketDelay = epicBuckets.getConfig().getInt("GENBUCKET-DELAY");
     }
 
     private void loadValidFaces() {
@@ -291,5 +294,9 @@ public class ConfigManager {
 
     public int getInfiniteUseCost() {
         return infiniteUseCost;
+    }
+
+    public int getGenbucketDelay() {
+        return genbucketDelay;
     }
 }

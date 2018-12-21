@@ -33,3 +33,4 @@ event.genbucket.wrongmaterialpsuedo = "&7You cannot use the psuedo bucket on thi
 event.genbucket.admin = "&e%player% &7has placed a &e%genbucket%&7!"
 event.genbucket.infiniteuse.charge = "&7You were charged &a%charge% &7for placing a genbucket"
 event.genbucket.infiniteuse.notenough = "&cYou do not have enough to place a genbucket!"
+event.place.delay = "&7Please wait before placing a genbucket!"
