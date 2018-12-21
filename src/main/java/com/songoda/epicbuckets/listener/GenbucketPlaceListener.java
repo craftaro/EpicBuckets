@@ -29,7 +29,6 @@ public class GenbucketPlaceListener implements Listener {
 
     public GenbucketPlaceListener() {
         if (EpicBuckets.getInstance().getConfigManager().getGenbucketDelay() > 0) {
-            System.out.println("delay!");
             cooldownMap = CooldownMap.create(Cooldown.of(EpicBuckets.getInstance().getConfigManager().getGenbucketDelay() / 20, TimeUnit.SECONDS));
         }
     }

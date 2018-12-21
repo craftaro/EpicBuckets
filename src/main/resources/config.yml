@@ -33,7 +33,7 @@ MAX-ACTIVE-GEN-PER-PLAYER: 10 # Amount of gens a player can have active at time
 
 PLACE-UNLIMTED-GENS: true # This will override MAX-ACTIVE-GEN-PER-PLAYER and let them place unlimted gens
 
-MAX-VERTICAL-HEIGHT: 50 # Vertical gen height, the gen will stop if y > 256
+MAX-VERTICAL-HEIGHT: 50 # Vertical gen height, the gen will stop if y > value
 
 MAX-HORIZONTAL-LENGTH: 50 # Horizontal height
 
