@@ -5,12 +5,16 @@ import com.songoda.epicbuckets.genbucket.GenbucketType;
 import com.songoda.epicbuckets.util.InventoryHelper;
 import com.songoda.epicbuckets.util.Validator;
 import com.songoda.epicbuckets.util.XMaterial;
+import me.lucko.helper.cooldown.Cooldown;
+import me.lucko.helper.cooldown.CooldownMap;
 import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class ConfigManager {
@@ -50,6 +54,7 @@ public class ConfigManager {
     private int infiniteUseCost;
 
     private int genbucketDelay;
+    private CooldownMap<Player> cooldownMap;
 
     private int maxVerticalHeight;
     private int maxHorizontalLength;
@@ -113,6 +118,12 @@ public class ConfigManager {
         chargeInfiniteUse = epicBuckets.getConfig().getBoolean("CHARGE-FOR-INFINITE-USE");
         infiniteUseCost = epicBuckets.getConfig().getInt("COST-FOR-INFINITE-USE");
         genbucketDelay = epicBuckets.getConfig().getInt("GENBUCKET-DELAY");
+
+        if (getGenbucketDelay() > 0) {
+            cooldownMap = CooldownMap.create(Cooldown.of(getGenbucketDelay() / 20, TimeUnit.SECONDS));
+        } else {
+            cooldownMap = null;
+        }
     }
 
     private void loadValidFaces() {
@@ -143,6 +154,11 @@ public class ConfigManager {
 
         backButton = ((!m) ? XMaterial.BARRIER.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(getBackButtonPath() + ".material")).parseItem());
         backButton = InventoryHelper.setDisplayName(backButton, epicBuckets.getConfig().getString(getBackButtonPath() + ".name"));
+    }
+
+    public boolean isOnCooldown(Player player) {
+        if (cooldownMap == null) return false;
+        return !cooldownMap.test(player);
     }
 
     public void createConfig(String name, boolean resource) {

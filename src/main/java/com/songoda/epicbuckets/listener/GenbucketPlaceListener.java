@@ -10,28 +10,15 @@ import com.songoda.epicbuckets.genbucket.types.PsuedoVertical;
 import com.songoda.epicbuckets.genbucket.types.Vertical;
 import com.songoda.epicbuckets.util.XMaterial;
 import de.tr7zw.itemnbtapi.NBTItem;
-import me.lucko.helper.cooldown.Cooldown;
-import me.lucko.helper.cooldown.CooldownMap;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import java.util.concurrent.TimeUnit;
-
 public class GenbucketPlaceListener implements Listener {
-
-    private CooldownMap<Player> cooldownMap = null;
-
-    public GenbucketPlaceListener() {
-        if (EpicBuckets.getInstance().getConfigManager().getGenbucketDelay() > 0) {
-            cooldownMap = CooldownMap.create(Cooldown.of(EpicBuckets.getInstance().getConfigManager().getGenbucketDelay() / 20, TimeUnit.SECONDS));
-        }
-    }
 
     @EventHandler
     public void emptyBucket(PlayerBucketEmptyEvent e) {
@@ -56,7 +43,7 @@ public class GenbucketPlaceListener implements Listener {
             e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.place.nothere"));
             return;
         }
-        if (cooldownMap != null && !cooldownMap.test(e.getPlayer())) {
+        if (EpicBuckets.getInstance().getConfigManager().isOnCooldown(e.getPlayer())) {
             e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.place.delay"));
             return;
         }
