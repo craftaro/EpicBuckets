@@ -2,6 +2,7 @@ package com.songoda.epicbuckets.command;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
+import co.aikar.commands.contexts.OnlinePlayer;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.gui.GUIMain;
 import com.songoda.epicbuckets.gui.GUIPanel;
@@ -38,9 +39,10 @@ public class CommandGenbucket extends BaseCommand {
     }
 
     @Subcommand("give")
+    @CommandCompletion("@players @traits @genitems")
     @Description("Gives a genbucket to a player")
-    public void give(CommandSender sender, ) {
-
+    public void give(CommandSender sender, OnlinePlayer onlinePlayer, String trait, String genitem, @Optional int cost) {
+        
     }
 
     @Subcommand("shop")

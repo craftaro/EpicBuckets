@@ -2,6 +2,7 @@ package com.songoda.epicbuckets;
 
 import co.aikar.commands.BukkitCommandManager;
 import com.songoda.epicbuckets.command.CommandGenbucket;
+import com.songoda.epicbuckets.command.CommandTabbing;
 import com.songoda.epicbuckets.file.ConfigManager;
 import com.songoda.epicbuckets.genbucket.GenbucketManager;
 import com.songoda.epicbuckets.listener.GenbucketPlaceListener;
@@ -61,6 +62,7 @@ public class EpicBuckets extends ExtendedJavaPlugin {
         inventoryManager = new InventoryManager(this);
         inventoryManager.init();
 
+        CommandTabbing.registerCommandCompletions();
         commandManager.registerCommand(new CommandGenbucket());
 
         getServer().getPluginManager().registerEvents(new GenbucketPlaceListener(), this);
