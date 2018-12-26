@@ -137,4 +137,7 @@ public class EpicBuckets extends ExtendedJavaPlugin {
         return locale;
     }
 
+    public BukkitCommandManager getCommandManager() {
+        return commandManager;
+    }
 }

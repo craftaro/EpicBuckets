@@ -117,7 +117,10 @@ public class ShopManager {
 
     public void buyFromShop(Player buyer, SubShop s, int amount) {
         epicBuckets.getEcon().withdrawPlayer(Bukkit.getOfflinePlayer(buyer.getUniqueId()), s.getPrice());
+        giveGenbucketToPlayer(buyer, s, amount);
+    }
 
+    public void giveGenbucketToPlayer(Player buyer, SubShop s, int amount) {
         ItemStack genBucket = s.getGenShopItem();
         genBucket.setAmount(amount);
         buyer.getInventory().addItem(NBTHelper.addGenbucketData(genBucket, s.getParent().getTrait(), s));

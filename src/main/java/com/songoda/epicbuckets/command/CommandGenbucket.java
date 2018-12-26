@@ -37,6 +37,12 @@ public class CommandGenbucket extends BaseCommand {
         sender.sendMessage(ChatUtil.colorString("&f/epicbuckets admin panel: &7opens up the panel with all active genbuckets"));
     }
 
+    @Subcommand("give")
+    @Description("Gives a genbucket to a player")
+    public void give(CommandSender sender, ) {
+
+    }
+
     @Subcommand("shop")
     @Default
     @Description("Opens up the Genbucket shop")
