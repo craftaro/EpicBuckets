@@ -6,7 +6,10 @@ import co.aikar.commands.contexts.OnlinePlayer;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.gui.GUIMain;
 import com.songoda.epicbuckets.gui.GUIPanel;
+import com.songoda.epicbuckets.shop.Shop;
+import com.songoda.epicbuckets.shop.SubShop;
 import com.songoda.epicbuckets.util.ChatUtil;
+import com.songoda.epicbuckets.util.Validator;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -41,8 +44,33 @@ public class CommandGenbucket extends BaseCommand {
     @Subcommand("give")
     @CommandCompletion("@players @traits @genitems")
     @Description("Gives a genbucket to a player")
-    public void give(CommandSender sender, OnlinePlayer onlinePlayer, String trait, String genitem, @Optional int cost) {
-        
+    public void give(Player player, OnlinePlayer onlinePlayer, String trait, String genitem, String amount, @Optional String cost) {
+        if (!permCheck(player, "epicbuckets.give")) return;
+        if (!Validator.isInt(amount)) {
+            player.sendMessage(EpicBuckets.getInstance().getLocale().getMessage("command.general.invalidsyntax"));
+            return;
+        }
+
+        SubShop subShop = null;
+
+        for (Shop s : EpicBuckets.getInstance().getShopManager().getShops()) {
+            if (s.getTrait().name().equals(trait)) {
+                for (SubShop ss : s.getSubShops()) {
+                    if (ss.getGenItem().getType().name().equals(genitem)) subShop = ss;
+                }
+            }
+        }
+
+        if (subShop != null) {
+            if (Validator.isDouble(cost)) {
+                EpicBuckets.getInstance().getShopManager().buyFromShop(player, subShop, Integer.parseInt(amount));
+                return;
+            }
+            EpicBuckets.getInstance().getShopManager().giveGenbucketToPlayer(player, subShop, 0);
+            return;
+        }
+
+        player.sendMessage(EpicBuckets.getInstance().getLocale().getMessage("command.give.genbucketnotfound"));
     }
 
     @Subcommand("shop")
