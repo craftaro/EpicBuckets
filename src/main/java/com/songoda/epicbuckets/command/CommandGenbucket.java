@@ -39,6 +39,7 @@ public class CommandGenbucket extends BaseCommand {
         sender.sendMessage(ChatUtil.colorString("&f/epicbuckets shop: &7opens up the genbucket shop"));
         sender.sendMessage(ChatUtil.colorString("&f/epicbuckets admin toggle: &7toggle your status to receive genbucket placement notifications"));
         sender.sendMessage(ChatUtil.colorString("&f/epicbuckets admin panel: &7opens up the panel with all active genbuckets"));
+        sender.sendMessage(ChatUtil.colorString("&f/epicbuckets give <player> <trait> <genItem> <amount> [cost]: &7gives the player a specific genbucket and, if supplied, withdraw the cost"));
     }
 
     @Subcommand("give")
@@ -66,7 +67,7 @@ public class CommandGenbucket extends BaseCommand {
                 EpicBuckets.getInstance().getShopManager().buyFromShop(player, subShop, Integer.parseInt(amount));
                 return;
             }
-            EpicBuckets.getInstance().getShopManager().giveGenbucketToPlayer(player, subShop, 0);
+            EpicBuckets.getInstance().getShopManager().giveGenbucketToPlayer(player, subShop, Integer.parseInt(amount));
             return;
         }
 
