@@ -16,13 +16,18 @@ GRIEFPREVENTION-SUPPORT: false # GriefPrevention is needed
 
 ENABLE-GENS-IN-WILDERNESS: true
 
-ENCHANT: false # Enchant genbuckets in all guis
-
 CLOSE-GUI-AFTER-PURCHASE: false # Close the inventory after purchase
 
 INFINITE-USE: false # If enabled, you won't lose a genbucket when you place it down
+
 CHARGE-FOR-INFINITE-USE: false # This requires infinite use to be enabled and will charge the player when placing a genbucket
-COST-FOR-INFINITE-USE: 400 # Money charged for placing a genbucket when the above is enabled
+
+# Money charged for placing a genbucket when the above is enabled, put 0 if you want no charge
+COST-FOR-INFINITE-USE:
+  HORIZONTAL: 0
+  VERTICAL: 0
+  PSUEDO: 0
+  INFUSED: 0
 
 GENBUCKET-DELAY: 10 # Ticks delay between genbucket placements, 20 ticks = 1 second, set to 0 for no delay
 
