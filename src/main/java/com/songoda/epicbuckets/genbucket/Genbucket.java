@@ -155,7 +155,7 @@ public abstract class Genbucket {
         return true;
     }
 
-    protected ItemStack getGenItem() {
+    public ItemStack getGenItem() {
         return subShop.getGenItem();
     }
 

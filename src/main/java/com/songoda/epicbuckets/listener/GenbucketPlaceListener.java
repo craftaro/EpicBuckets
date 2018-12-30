@@ -94,13 +94,13 @@ public class GenbucketPlaceListener implements Listener {
         }
 
         if (EpicBuckets.getInstance().getConfigManager().isInfiniteUse() && EpicBuckets.getInstance().getConfigManager().isChargeInfiniteUse()) {
-            if (EpicBuckets.getInstance().getEcon().getBalance(Bukkit.getOfflinePlayer(e.getPlayer().getUniqueId())) < EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType())) {
+            if (EpicBuckets.getInstance().getEcon().getBalance(Bukkit.getOfflinePlayer(e.getPlayer().getUniqueId())) < EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType(), genbucket.getGenItem())) {
                 e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.infiniteuse.notenough"));
                 return;
             }
-            if (EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType()) > 0) {
-                EpicBuckets.getInstance().getEcon().withdrawPlayer(Bukkit.getOfflinePlayer(e.getPlayer().getUniqueId()), EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType()));
-                e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.infiniteuse.charge").replace("%charge%", EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType()) + ""));
+            if (EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType(), genbucket.getGenItem()) > 0) {
+                EpicBuckets.getInstance().getEcon().withdrawPlayer(Bukkit.getOfflinePlayer(e.getPlayer().getUniqueId()), EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType(), genbucket.getGenItem()));
+                e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.infiniteuse.charge").replace("%charge%", EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType(), genbucket.getGenItem()) + ""));
             }
         }
 
