@@ -106,6 +106,13 @@ public class Shop {
         return subShops.get(shop);
     }
 
+    public SubShop getSubShop(XMaterial mat) {
+        for (SubShop subShop : subShops.values()) {
+            if (subShop.getGenItem().isSimilar(mat.parseItem())) return subShop;
+        }
+        return null;
+    }
+
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }

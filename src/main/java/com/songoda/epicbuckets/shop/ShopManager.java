@@ -1,6 +1,7 @@
 package com.songoda.epicbuckets.shop;
 
 import com.songoda.epicbuckets.EpicBuckets;
+import com.songoda.epicbuckets.genbucket.GenbucketType;
 import com.songoda.epicbuckets.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -132,6 +133,13 @@ public class ShopManager {
 
     public Shop getShop(String shop) {
         return shopDatabase.get(shop);
+    }
+
+    public Shop getShop(GenbucketType genbucketType) {
+        for (Shop shop : shopDatabase.values()) {
+            if (shop.getTrait() == genbucketType) return shop;
+        }
+        return null;
     }
 
     public String getShopPath() {
