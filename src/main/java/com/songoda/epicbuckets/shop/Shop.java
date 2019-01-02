@@ -108,7 +108,10 @@ public class Shop {
 
     public SubShop getSubShop(XMaterial mat) {
         for (SubShop subShop : subShops.values()) {
-            if (subShop.getGenItem().isSimilar(mat.parseItem())) return subShop;
+            if (subShop.getGenItem().getType() == mat.parseMaterial() &&
+            subShop.getGenItem().getTypeId() == mat.parseItem().getTypeId()) {
+                return subShop;
+            }
         }
         return null;
     }
