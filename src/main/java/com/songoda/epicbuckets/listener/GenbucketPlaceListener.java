@@ -89,7 +89,7 @@ public class GenbucketPlaceListener implements Listener {
             if (e.getItem().getAmount() > 1) {
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
             } else {
-                e.getPlayer().getInventory().remove(e.getItem());
+                e.getPlayer().getInventory().setItem(e.getPlayer().getInventory().getHeldItemSlot(), null);
             }
         }
 

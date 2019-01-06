@@ -109,7 +109,7 @@ public class Shop {
     public SubShop getSubShop(XMaterial mat) {
         for (SubShop subShop : subShops.values()) {
             if (subShop.getGenItem().getType() == mat.parseMaterial() &&
-            subShop.getGenItem().getTypeId() == mat.parseItem().getTypeId()) {
+            subShop.getGenItem().getDurability() == mat.parseItem().getDurability()) {
                 return subShop;
             }
         }
