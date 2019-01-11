@@ -197,10 +197,28 @@
             <version>RELEASE</version>
             <scope>provided</scope>
         </dependency>
+        <!--The Dependencies below are for both FactionsUUID/SavageFactions/FactionsUltimate & MassiveCore Factions // By ProSavage <3 -->
         <dependency>
-            <groupId>me.markeh</groupId>
-            <artifactId>factionsframework</artifactId>
-            <version>1.2.0</version>
+            <groupId>com.github.ProSavage</groupId>
+            <artifactId>SavageFactions</artifactId>
+            <version>1.6.x-0.1.21-gbdd5473-400</version>
+            <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.massivecraft.</groupId>
+            <artifactId>factions</artifactId>
+            <scope>system</scope>
+            <version>2.14.1-SNAPSHOT</version>
+            <systemPath>${project.basedir}/dependencies/Factions.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.massivecraft</groupId>
+            <artifactId>massivecore</artifactId>
+            <scope>system</scope>
+            <version>2.14.1-SNAPSHOT</version>
+            <systemPath>${project.basedir}/dependencies/MassiveCore.jar</systemPath>
+        </dependency>
+        <!--The Dependencies above are for both FactionsUUID/SavageFactions/FactionsUltimate & MassiveCore Factions // By ProSavage <3 -->
+        <!--Try not to mess it up -->
     </dependencies>
 </project>
