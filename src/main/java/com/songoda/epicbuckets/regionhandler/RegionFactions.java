@@ -9,7 +9,7 @@ public class RegionFactions {
     public static boolean canBuild(Player player, Location location) {
         if (!EpicBuckets.getInstance().getConfigManager().isSupportFactions()) return true;
 
-        if (EpicBuckets.getInstance().getDescription().getAuthors().contains("Drtshock")) {
+        if (EpicBuckets.getInstance().getDescription().getAuthors().contains("drtshock")) {
             /*
             FactionsUUID and his clones/forks/whatever
              */
