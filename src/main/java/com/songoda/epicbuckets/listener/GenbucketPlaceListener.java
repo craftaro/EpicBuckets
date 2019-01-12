@@ -2,6 +2,7 @@ package com.songoda.epicbuckets.listener;
 
 
 import com.songoda.epicbuckets.EpicBuckets;
+import com.songoda.epicbuckets.event.GenbucketPlaceEvent;
 import com.songoda.epicbuckets.genbucket.Genbucket;
 import com.songoda.epicbuckets.genbucket.GenbucketType;
 import com.songoda.epicbuckets.genbucket.types.Horizontal;
@@ -39,6 +40,9 @@ public class GenbucketPlaceListener implements Listener {
 
         e.setCancelled(true);
 
+        boolean isInfiniteUse = EpicBuckets.getInstance().getConfigManager().isInfiniteUse();
+        boolean isInfiniteUseCharge = EpicBuckets.getInstance().getConfigManager().isChargeInfiniteUse();
+
         if (!e.getPlayer().hasPermission("epicbuckets.place")) {
             e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.place.nothere"));
             return;
@@ -62,7 +66,7 @@ public class GenbucketPlaceListener implements Listener {
 
         Genbucket genbucket = null;
 
-        switch(GenbucketType.valueOf(nbtItem.getString("Type"))) {
+        switch (GenbucketType.valueOf(nbtItem.getString("Type"))) {
             case PSUEDO:
                 genbucket = new PsuedoVertical(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), EpicBuckets.getInstance().getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
                 break;
@@ -85,7 +89,24 @@ public class GenbucketPlaceListener implements Listener {
             return;
         }
 
-        if (e.getPlayer().getGameMode() != GameMode.CREATIVE && !EpicBuckets.getInstance().getConfigManager().isInfiniteUse()) {
+        double infiniteUseCost = EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType(), genbucket.getGenItem());
+
+        if (isInfiniteUse && isInfiniteUseCharge && EpicBuckets.getInstance().getEcon().getBalance(Bukkit.getOfflinePlayer(e.getPlayer().getUniqueId())) < infiniteUseCost) {
+            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.infiniteuse.notenough"));
+            return;
+        }
+
+        /*
+        Call event and check if cancelled before proceeding to start the gen and charging the player
+         */
+        GenbucketPlaceEvent placeEvent = new GenbucketPlaceEvent(e.getPlayer(), genbucket);
+        Bukkit.getPluginManager().callEvent(placeEvent);
+        if (placeEvent.isCancelled()) return;
+
+        /*
+        Subtract bucket from players inventory
+         */
+        if (e.getPlayer().getGameMode() != GameMode.CREATIVE && !isInfiniteUse) {
             if (e.getItem().getAmount() > 1) {
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
             } else {
@@ -93,15 +114,12 @@ public class GenbucketPlaceListener implements Listener {
             }
         }
 
-        if (EpicBuckets.getInstance().getConfigManager().isInfiniteUse() && EpicBuckets.getInstance().getConfigManager().isChargeInfiniteUse()) {
-            if (EpicBuckets.getInstance().getEcon().getBalance(Bukkit.getOfflinePlayer(e.getPlayer().getUniqueId())) < EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType(), genbucket.getGenItem())) {
-                e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.infiniteuse.notenough"));
-                return;
-            }
-            if (EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType(), genbucket.getGenItem()) > 0) {
-                EpicBuckets.getInstance().getEcon().withdrawPlayer(Bukkit.getOfflinePlayer(e.getPlayer().getUniqueId()), EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType(), genbucket.getGenItem()));
-                e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.infiniteuse.charge").replace("%charge%", EpicBuckets.getInstance().getConfigManager().getInfiniteUseCostForGenbucketType(genbucket.getGenbucketType(), genbucket.getGenItem()) + ""));
-            }
+        /*
+        Charge for infinite use placement
+         */
+        if (isInfiniteUse && isInfiniteUseCharge && infiniteUseCost > 0) {
+            EpicBuckets.getInstance().getEcon().withdrawPlayer(Bukkit.getOfflinePlayer(e.getPlayer().getUniqueId()), infiniteUseCost);
+            e.getPlayer().sendMessage(EpicBuckets.getInstance().getLocale().getMessage("event.genbucket.infiniteuse.charge").replace("%charge%", infiniteUseCost + ""));
         }
 
         EpicBuckets.getInstance().getGenbucketManager().registerGenbucketForPlayer(e.getPlayer(), genbucket);
