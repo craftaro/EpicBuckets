@@ -201,4 +201,20 @@ public class ShopManager {
     public List<Integer> getBulkAmounts() {
         return bulkAmounts;
     }
+
+    public void setShopDatabase(HashMap<String, Shop> shopDatabase) {
+        this.shopDatabase = shopDatabase;
+    }
+
+    public void setBulkFillInventory(boolean bulkFillInventory) {
+        this.bulkFillInventory = bulkFillInventory;
+    }
+
+    public void setUseBackButtons(boolean useBackButtons) {
+        this.useBackButtons = useBackButtons;
+    }
+
+    public void setCloseAfterPurchase(boolean closeAfterPurchase) {
+        this.closeAfterPurchase = closeAfterPurchase;
+    }
 }

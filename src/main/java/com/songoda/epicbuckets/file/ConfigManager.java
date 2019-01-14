@@ -15,12 +15,20 @@ import org.bukkit.inventory.ItemStack;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class ConfigManager {
 
     private EpicBuckets epicBuckets;
     private HashMap<String, Config> configDatabase;
+
+    private HashMap<String, Consumer<Boolean>> settingsGenbucketBooleans;
+    private HashMap<String, Consumer<Integer>> settingsGenbucketIntegers;
+
+    private HashMap<String, Consumer<Boolean>> settingsHooks;
+
+    private HashMap<String, Consumer<Boolean>> settingsShop;
 
     private String backButtonPath = "BACK-BUTTON";
     private String fillItemPath = "FILL-ITEM";
@@ -77,7 +85,50 @@ public class ConfigManager {
         loadData();
         setupBackButton();
         setupFillItem();
+
+        loadBooleanSettings();
+        loadIntegerSettings();
+
         epicBuckets.getShopManager().init();
+    }
+
+    private void loadIntegerSettings() {
+        /*
+        Genbucket
+         */
+        settingsGenbucketIntegers.put("Cooldown between placements", this::setCooldown);
+        settingsGenbucketIntegers.put("Sponge radius", this::setSpongeRadius);
+        settingsGenbucketIntegers.put("Max active gens per player", this::setMaxGenbucketsPerPlayer);
+        settingsGenbucketIntegers.put("Max vertical height", this::setMaxVerticalHeight);
+        settingsGenbucketIntegers.put("Max horizontal length", this::setMaxHorizontalLength);
+        settingsGenbucketIntegers.put("Genbucket Speed", this::setDelay);
+    }
+
+    private void loadBooleanSettings() {
+        /*
+        Genbucket
+         */
+        settingsGenbucketBooleans.put("Gens in Wilderness", this::setGensInWilderness);
+        settingsGenbucketBooleans.put("Infinite genbucket use", this::setInfiniteUse);
+        settingsGenbucketBooleans.put("Charge infinite use placement", this::setChargeInfiniteUse);
+        settingsGenbucketBooleans.put("Sponge check", this::setSpongeCheck);
+        settingsGenbucketBooleans.put("Unlimited active gens", this::setUnlimitedGenbuckets);
+        settingsGenbucketBooleans.put("Disable genbuckets", this::setGenbucketsDisabled);
+
+        /*
+        Hooks
+         */
+        settingsHooks.put("Factions Support", this::setSupportFactions);
+        settingsHooks.put("Worldguard Support", this::setSupportWorldGuard);
+        settingsHooks.put("GriefPrevention Support", this::setSupportGriefPrevention);
+
+        /*
+        Shop
+         */
+        settingsShop.put("Close GUI after purchase", epicBuckets.getShopManager()::setCloseAfterPurchase);
+        settingsShop.put("Fill bulk shop", epicBuckets.getShopManager()::setBulkFillInventory);
+        settingsShop.put("Fill shops", this::setFillInventory);
+        settingsShop.put("Use back buttons in shops", epicBuckets.getShopManager()::setUseBackButtons);
     }
 
     public void reload() {
@@ -129,12 +180,7 @@ public class ConfigManager {
                     infiniteUseCost.put(GenbucketType.valueOf(bucket), chargingCostsPerItem);
                 });
 
-        genbucketDelay = epicBuckets.getConfig().getInt("GENBUCKET-DELAY");
-        if (getGenbucketDelay() > 0) {
-            cooldownMap = CooldownMap.create(Cooldown.of(getGenbucketDelay() / 20, TimeUnit.SECONDS));
-        } else {
-            cooldownMap = null;
-        }
+        setCooldown(epicBuckets.getConfig().getInt("GENBUCKET-DELAY"));
     }
 
     private void loadValidFaces() {
@@ -151,6 +197,15 @@ public class ConfigManager {
         genbucketLogicalFaces.put(GenbucketType.VERTICAL, new ArrayList<>(Arrays.asList(BlockFace.UP, BlockFace.DOWN)));
         genbucketLogicalFaces.put(GenbucketType.INFUSED, new ArrayList<>(Arrays.asList(BlockFace.EAST, BlockFace.NORTH, BlockFace.WEST, BlockFace.SOUTH)));
         genbucketLogicalFaces.put(GenbucketType.PSUEDO, new ArrayList<>(Arrays.asList(BlockFace.UP, BlockFace.DOWN)));
+    }
+
+    private void setCooldown(int genbucketDelay) {
+        setGenbucketDelay(genbucketDelay);
+        if (getGenbucketDelay() > 0) {
+            cooldownMap = CooldownMap.create(Cooldown.of(getGenbucketDelay() / 20, TimeUnit.SECONDS));
+        } else {
+            cooldownMap = null;
+        }
     }
 
     private void setupFillItem() {
@@ -325,5 +380,85 @@ public class ConfigManager {
 
     public int getGenbucketDelay() {
         return genbucketDelay;
+    }
+
+    public void setBackButtonPath(String backButtonPath) {
+        this.backButtonPath = backButtonPath;
+    }
+
+    public void setSupportFactions(boolean supportFactions) {
+        this.supportFactions = supportFactions;
+    }
+
+    public void setSupportWorldGuard(boolean supportWorldGuard) {
+        this.supportWorldGuard = supportWorldGuard;
+    }
+
+    public void setSupportGriefPrevention(boolean supportGriefPrevention) {
+        this.supportGriefPrevention = supportGriefPrevention;
+    }
+
+    public void setGensInWilderness(boolean gensInWilderness) {
+        this.gensInWilderness = gensInWilderness;
+    }
+
+    public void setSpongeCheck(boolean spongeCheck) {
+        this.spongeCheck = spongeCheck;
+    }
+
+    public void setSpongeRadius(int spongeRadius) {
+        this.spongeRadius = spongeRadius;
+    }
+
+    public void setMaxGenbucketsPerPlayer(int maxGenbucketsPerPlayer) {
+        this.maxGenbucketsPerPlayer = maxGenbucketsPerPlayer;
+    }
+
+    public void setUnlimitedGenbuckets(boolean unlimitedGenbuckets) {
+        this.unlimitedGenbuckets = unlimitedGenbuckets;
+    }
+
+    public void setInfiniteUse(boolean infiniteUse) {
+        this.infiniteUse = infiniteUse;
+    }
+
+    public void setChargeInfiniteUse(boolean chargeInfiniteUse) {
+        this.chargeInfiniteUse = chargeInfiniteUse;
+    }
+
+    public void setGenbucketDelay(int genbucketDelay) {
+        this.genbucketDelay = genbucketDelay;
+    }
+
+    public void setMaxVerticalHeight(int maxVerticalHeight) {
+        this.maxVerticalHeight = maxVerticalHeight;
+    }
+
+    public void setMaxHorizontalLength(int maxHorizontalLength) {
+        this.maxHorizontalLength = maxHorizontalLength;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
+    public void setFillInventory(boolean fillInventory) {
+        this.fillInventory = fillInventory;
+    }
+
+    public HashMap<String, Consumer<Boolean>> getSettingsGenbucketBooleans() {
+        return settingsGenbucketBooleans;
+    }
+
+    public HashMap<String, Consumer<Integer>> getSettingsGenbucketIntegers() {
+        return settingsGenbucketIntegers;
+    }
+
+    public HashMap<String, Consumer<Boolean>> getSettingsHooks() {
+        return settingsHooks;
+    }
+
+    public HashMap<String, Consumer<Boolean>> getSettingsShop() {
+        return settingsShop;
     }
 }
