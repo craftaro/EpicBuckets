@@ -96,6 +96,7 @@ public class ConfigManager {
         /*
         Genbucket
          */
+        settingsGenbucketIntegers = new HashMap<>();
         settingsGenbucketIntegers.put("Cooldown between placements", this::setCooldown);
         settingsGenbucketIntegers.put("Sponge radius", this::setSpongeRadius);
         settingsGenbucketIntegers.put("Max active gens per player", this::setMaxGenbucketsPerPlayer);
@@ -108,6 +109,7 @@ public class ConfigManager {
         /*
         Genbucket
          */
+        settingsGenbucketBooleans = new HashMap<>();
         settingsGenbucketBooleans.put("Gens in Wilderness", this::setGensInWilderness);
         settingsGenbucketBooleans.put("Infinite genbucket use", this::setInfiniteUse);
         settingsGenbucketBooleans.put("Charge infinite use placement", this::setChargeInfiniteUse);
@@ -118,6 +120,7 @@ public class ConfigManager {
         /*
         Hooks
          */
+        settingsHooks = new HashMap<>();
         settingsHooks.put("Factions Support", this::setSupportFactions);
         settingsHooks.put("Worldguard Support", this::setSupportWorldGuard);
         settingsHooks.put("GriefPrevention Support", this::setSupportGriefPrevention);
@@ -125,6 +128,7 @@ public class ConfigManager {
         /*
         Shop
          */
+        settingsShop = new HashMap<>();
         settingsShop.put("Close GUI after purchase", epicBuckets.getShopManager()::setCloseAfterPurchase);
         settingsShop.put("Fill bulk shop", epicBuckets.getShopManager()::setBulkFillInventory);
         settingsShop.put("Fill shops", this::setFillInventory);

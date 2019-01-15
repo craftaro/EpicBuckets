@@ -1,7 +1,7 @@
 name: EpicBuckets
-version: 1.4.3
+version: 1.4.4
 description: Generate walls fast and efficient with beautiful guis!
 author: Songoda
 main: com.songoda.epicbuckets.EpicBuckets
-softdepend: [WorldGuard, WorldEdit, Factions, MassiveCore, FactionsUUID, GriefPrevention]
+softdepend: [WorldGuard, WorldEdit, Factions, MassiveCore, GriefPrevention]
 depend: [Vault]
