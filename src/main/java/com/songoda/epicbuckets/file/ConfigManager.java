@@ -7,8 +7,10 @@ import com.songoda.epicbuckets.util.Validator;
 import com.songoda.epicbuckets.util.XMaterial;
 import me.lucko.helper.cooldown.Cooldown;
 import me.lucko.helper.cooldown.CooldownMap;
+import me.lucko.helper.item.ItemStackBuilder;
 import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -379,7 +381,12 @@ public class ConfigManager {
     }
 
     public double getInfiniteUseCostForGenbucketType(GenbucketType genbucketType, ItemStack item) {
-        return infiniteUseCost.get(genbucketType).get(item);
+        for (ItemStack itemStack : infiniteUseCost.get(genbucketType).keySet()) {
+            if (itemStack.getType() == item.getType() && itemStack.getData() == item.getData()) {
+                return infiniteUseCost.get(genbucketType).get(itemStack);
+            }
+        }
+        return 0;
     }
 
     public int getGenbucketDelay() {

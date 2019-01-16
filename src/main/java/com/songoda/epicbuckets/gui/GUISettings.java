@@ -31,6 +31,10 @@ public class GUISettings implements InventoryProvider {
                         .name("&6Hooks")
                         .build(),
                 e -> GUISettingsGenbucket.SETTINGS.open(player)));
+        contents.add(ClickableItem.of(ItemStackBuilder.of(XMaterial.CHEST.parseMaterial())
+                        .name("&6Shop settings")
+                        .build(),
+                e -> GUISettingsGenbucket.SETTINGS.open(player)));
     }
 
     @Override
