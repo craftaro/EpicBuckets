@@ -1,4 +1,4 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -8,10 +8,10 @@
         <version>maven-version-number</version>
     </parent>
     <groupId>com.songoda</groupId>
-    <artifactId>EpicBuckets-Hooks</artifactId>
+    <artifactId>EpicBuckets-Legacy-Hooks</artifactId>
     <build>
         <defaultGoal>clean install</defaultGoal>
-        <finalName>EpicBuckets-Hooks</finalName>
+        <finalName>EpicBuckets-Legacy-Hooks</finalName>
     </build>
     <repositories>
         <repository>
@@ -20,6 +20,12 @@
         </repository>
     </repositories>
     <dependencies>
+        <dependency>
+            <groupId>com.songoda</groupId>
+            <artifactId>EpicBuckets-Plugin</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldguard</artifactId>

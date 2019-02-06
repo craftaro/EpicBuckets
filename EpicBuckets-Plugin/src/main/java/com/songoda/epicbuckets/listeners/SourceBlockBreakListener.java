@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.listener;
+package com.songoda.epicbuckets.listeners;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import org.bukkit.event.EventHandler;

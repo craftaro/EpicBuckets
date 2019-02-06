@@ -2,6 +2,7 @@ package com.songoda.epicbuckets.hooks.legacy;
 
 import com.intellectualcrafters.plot.api.PlotAPI;
 import com.plotsquared.bukkit.BukkitMain;
+import com.songoda.epicbuckets.util.hooks.ProtectionPluginHook;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

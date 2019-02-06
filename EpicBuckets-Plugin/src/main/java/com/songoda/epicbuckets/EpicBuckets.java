@@ -5,8 +5,9 @@ import com.songoda.epicbuckets.command.CommandManager;
 import com.songoda.epicbuckets.file.ConfigManager;
 import com.songoda.epicbuckets.genbucket.GenbucketManager;
 import com.songoda.epicbuckets.hooks.*;
-import com.songoda.epicbuckets.listener.GenbucketPlaceListener;
-import com.songoda.epicbuckets.listener.SourceBlockBreakListener;
+import com.songoda.epicbuckets.listeners.GenbucketPlaceListener;
+import com.songoda.epicbuckets.listeners.PlayerJoinListeners;
+import com.songoda.epicbuckets.listeners.SourceBlockBreakListener;
 import com.songoda.epicbuckets.shop.ShopManager;
 import com.songoda.epicbuckets.util.ChatUtil;
 import com.songoda.epicbuckets.util.ConfigWrapper;
@@ -77,18 +78,27 @@ public class EpicBuckets extends JavaPlugin {
         // Event registration
         pluginManager.registerEvents(new GenbucketPlaceListener(this), this);
         pluginManager.registerEvents(new SourceBlockBreakListener(), this);
+        pluginManager.registerEvents(new PlayerJoinListeners(this), this);
 
         // Register default hooks
         if (pluginManager.isPluginEnabled("ASkyBlock")) aSkyblockHook = (ClaimableProtectionPluginHook) this.register(HookASkyBlock::new);
         if (pluginManager.isPluginEnabled("FactionsFramework")) factionsHook = (ClaimableProtectionPluginHook) this.register(HookFactions::new);
         if (pluginManager.isPluginEnabled("GriefPrevention")) this.register(HookGriefPrevention::new);
         if (pluginManager.isPluginEnabled("Kingdoms")) this.register(HookKingdoms::new);
-        if (pluginManager.isPluginEnabled("PlotSquared")) this.register(HookPlotSquared::new);
         if (pluginManager.isPluginEnabled("RedProtect")) this.register(HookRedProtect::new);
         if (pluginManager.isPluginEnabled("Towny")) townyHook = (ClaimableProtectionPluginHook) this.register(HookTowny::new);
         if (pluginManager.isPluginEnabled("USkyBlock")) uSkyblockHook = (ClaimableProtectionPluginHook) this.register(HookUSkyBlock::new);
         if (pluginManager.isPluginEnabled("SkyBlock")) skyBlockEarhHook = (ClaimableProtectionPluginHook) this.register(HookSkyBlockEarth::new);
-        if (pluginManager.isPluginEnabled("WorldGuard")) this.register(HookWorldGuard::new);
+
+        if (isServerVersionAtLeast(ServerVersion.V1_13)) {
+            if (pluginManager.isPluginEnabled("WorldGuard")) this.register(HookWorldGuard::new);
+            if (pluginManager.isPluginEnabled("PlotSquared")) this.register(HookPlotSquared::new);
+        } else {
+            if (pluginManager.isPluginEnabled("WorldGuard"))
+                this.register(com.songoda.epicbuckets.hooks.legacy.HookWorldGuard::new);
+            if (pluginManager.isPluginEnabled("PlotSquared"))
+                this.register(com.songoda.epicbuckets.hooks.legacy.HookPlotSquared::new);
+        }
 
         console.sendMessage(ChatUtil.colorString("&a============================="));
     }

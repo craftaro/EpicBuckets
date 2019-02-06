@@ -6,7 +6,6 @@ general.nametag.prefix = "&8[&6EpicBuckets&8]"
 
 command.reload.success = "&7You've reloaded the config"
 command.admin.toggle = "&7Spy mode: %mode%"
-command.general.invalidsyntax = "&7Invalid command syntax!"
 command.give.genbucketnotfound = "&7A genbucket with that combination was not registered!"
 
 #Interface Messages
