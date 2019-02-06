@@ -1,6 +1,5 @@
 package com.songoda.epicbuckets.utils.gui;
 
-import com.songoda.arconix.api.methods.formatting.TextComponent;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.utils.ServerVersion;
 import org.bukkit.Bukkit;
@@ -118,7 +117,7 @@ public abstract class AbstractGUI implements Listener {
         if (inventory == null
                 || inventory.getSize() != slots
                 || ChatColor.translateAlternateColorCodes('&', title) != inventory.getTitle()) {
-            this.inventory = Bukkit.getServer().createInventory(new GUIHolder(), slots, TextComponent.formatTitle(title));
+            this.inventory = Bukkit.getServer().createInventory(new GUIHolder(), slots, title);
             if (this.clickables.size() == 0)
                 registerClickables();
             if (this.onCloses.size() == 0)
