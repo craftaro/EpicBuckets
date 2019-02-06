@@ -176,7 +176,7 @@
 
     <build>
         <defaultGoal>clean install</defaultGoal>
-        <finalName>EpicBuckets-Legacy-${project.version}</finalName>
+        <finalName>EpicBuckets-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
