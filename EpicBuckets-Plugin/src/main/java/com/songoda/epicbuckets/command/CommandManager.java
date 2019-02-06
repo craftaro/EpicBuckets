@@ -8,19 +8,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CommandManager implements CommandExecutor {
+public class CommandManager implements CommandExecutor  {
 
     private EpicBuckets instance;
+    private TabManager tabManager;
 
     private List<AbstractCommand> commands = new ArrayList<>();
 
     public CommandManager(EpicBuckets instance) {
         this.instance = instance;
+        this.tabManager = new TabManager(this);
 
         instance.getCommand("EpicBuckets").setExecutor(this);
 
@@ -31,6 +34,11 @@ public class CommandManager implements CommandExecutor {
         addCommand(new CommandGive(commandEpicBuckets));
         addCommand(new CommandAdminToggle(commandEpicBuckets));
         addCommand(new CommandAdminPanel(commandEpicBuckets));
+
+        for (AbstractCommand abstractCommand : commands) {
+            if (abstractCommand.getParent() != null) continue;
+            instance.getCommand(abstractCommand.getCommand()).setTabCompleter(tabManager);
+        }
     }
 
     private AbstractCommand addCommand(AbstractCommand abstractCommand) {
@@ -41,12 +49,12 @@ public class CommandManager implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         for (AbstractCommand abstractCommand : commands) {
-            if (abstractCommand.getCommand() != null && abstractCommand.getCommand().contains(command.getName().toLowerCase())) {
+            if (abstractCommand.getCommand() != null && abstractCommand.getCommand().equalsIgnoreCase(command.getName().toLowerCase())) {
                 if (strings.length == 0) {
                     processRequirements(abstractCommand, commandSender, strings);
                     return true;
                 }
-            } else if (strings.length != 0 && abstractCommand.getParent() != null && abstractCommand.getParent().getCommand().contains(command.getName().toLowerCase())) {
+            } else if (strings.length != 0 && abstractCommand.getParent() != null && abstractCommand.getParent().getCommand().equalsIgnoreCase(command.getName())) {
                 String cmd = strings[0];
                 String cmd2 = strings.length >= 2 ? String.join(" ", strings[0], strings[1]) : null;
                 for (String cmds : abstractCommand.getSubCommand()) {
@@ -79,5 +87,9 @@ public class CommandManager implements CommandExecutor {
 
     public List<AbstractCommand> getCommands() {
         return Collections.unmodifiableList(commands);
+    }
+
+    public TabManager getTabManager() {
+        return tabManager;
     }
 }

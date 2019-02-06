@@ -6,6 +6,8 @@ import com.songoda.epicbuckets.gui.GUIPanel;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class CommandAdminPanel extends AbstractCommand {
 
     public CommandAdminPanel(AbstractCommand parent) {
@@ -16,6 +18,11 @@ public class CommandAdminPanel extends AbstractCommand {
     protected ReturnType runCommand(EpicBuckets instance, CommandSender sender, String... args) {
         new GUIPanel((Player) sender);
         return ReturnType.SUCCESS;
+    }
+
+    @Override
+    protected List<String> onTab(EpicBuckets instance, CommandSender sender, String... args) {
+        return null;
     }
 
     @Override

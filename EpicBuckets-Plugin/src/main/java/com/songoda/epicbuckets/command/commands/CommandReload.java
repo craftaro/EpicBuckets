@@ -5,6 +5,8 @@ import com.songoda.epicbuckets.command.AbstractCommand;
 import com.songoda.epicbuckets.utils.ChatUtil;
 import org.bukkit.command.CommandSender;
 
+import java.util.List;
+
 public class CommandReload extends AbstractCommand {
 
     public CommandReload(AbstractCommand parent) {
@@ -16,6 +18,11 @@ public class CommandReload extends AbstractCommand {
         instance.reload();
         sender.sendMessage(ChatUtil.colorPrefix(instance.getLocale().getMessage("command.reload.success")));
         return ReturnType.SUCCESS;
+    }
+
+    @Override
+    protected List<String> onTab(EpicBuckets instance, CommandSender sender, String... args) {
+        return null;
     }
 
     @Override

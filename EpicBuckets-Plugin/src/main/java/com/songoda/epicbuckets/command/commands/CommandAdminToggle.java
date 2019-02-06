@@ -5,6 +5,8 @@ import com.songoda.epicbuckets.command.AbstractCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class CommandAdminToggle extends AbstractCommand {
 
     public CommandAdminToggle(AbstractCommand parent) {
@@ -15,6 +17,11 @@ public class CommandAdminToggle extends AbstractCommand {
     protected ReturnType runCommand(EpicBuckets instance, CommandSender sender, String... args) {
         instance.getGenbucketManager().toggleAdmin((Player) sender);
         return ReturnType.SUCCESS;
+    }
+
+    @Override
+    protected List<String> onTab(EpicBuckets instance, CommandSender sender, String... args) {
+        return null;
     }
 
     @Override

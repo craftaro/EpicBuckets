@@ -61,7 +61,7 @@ public class ConfigManager {
     private int genbucketDelay;
 
     private int cooldown = 0;
-    private Map<UUID, Long> cooldowns;
+    private Map<UUID, Long> cooldowns = new HashMap<>();
 
     private int maxVerticalHeight;
     private int maxHorizontalLength;

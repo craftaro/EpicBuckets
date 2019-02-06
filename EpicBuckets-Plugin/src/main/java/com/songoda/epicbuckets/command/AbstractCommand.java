@@ -11,7 +11,7 @@ public abstract class AbstractCommand {
 
     private final AbstractCommand parent;
     private final boolean noConsole;
-    private List<String> command;
+    private String command;
 
     private List<String> subCommand = new ArrayList<>();
 
@@ -19,7 +19,7 @@ public abstract class AbstractCommand {
         if (parent != null) {
             this.subCommand = Arrays.asList(command);
         } else {
-            this.command = Arrays.asList(command);
+            this.command = Arrays.asList(command).get(0);
         }
         this.parent = parent;
         this.noConsole = noConsole;
@@ -29,7 +29,7 @@ public abstract class AbstractCommand {
         return parent;
     }
 
-    public List<String> getCommand() {
+    public String getCommand() {
         return command;
     }
 
@@ -42,6 +42,8 @@ public abstract class AbstractCommand {
     }
 
     protected abstract ReturnType runCommand(EpicBuckets instance, CommandSender sender, String... args);
+
+    protected abstract List<String> onTab(EpicBuckets instance, CommandSender sender, String... args);
 
     public abstract String getPermissionNode();
 

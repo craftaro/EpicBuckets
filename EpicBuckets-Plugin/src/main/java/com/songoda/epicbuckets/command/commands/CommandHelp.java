@@ -6,6 +6,8 @@ import com.songoda.epicbuckets.command.AbstractCommand;
 import com.songoda.epicbuckets.utils.ChatUtil;
 import org.bukkit.command.CommandSender;
 
+import java.util.List;
+
 public class CommandHelp extends AbstractCommand {
 
     public CommandHelp(AbstractCommand parent) {
@@ -25,6 +27,11 @@ public class CommandHelp extends AbstractCommand {
         sender.sendMessage("");
 
         return ReturnType.SUCCESS;
+    }
+
+    @Override
+    protected List<String> onTab(EpicBuckets instance, CommandSender sender, String... args) {
+        return null;
     }
 
     @Override
