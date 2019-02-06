@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.util;
+package com.songoda.epicbuckets.utils;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

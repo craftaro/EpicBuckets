@@ -5,7 +5,7 @@ import com.songoda.epicbuckets.file.ConfigManager;
 import com.songoda.epicbuckets.shop.Shop;
 import com.songoda.epicbuckets.shop.ShopManager;
 import com.songoda.epicbuckets.shop.SubShop;
-import com.songoda.epicbuckets.util.gui.AbstractGUI;
+import com.songoda.epicbuckets.utils.gui.AbstractGUI;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -70,16 +70,16 @@ public class GUIBulk extends AbstractGUI {
 
         shopManager.getDecreaseSlots().forEach(i ->
                 registerClickable(i, ((player1, inventory1, cursor, slot, type) -> {
-            ItemStack genbucket = inventory.getItem(shopManager.getBulkMainItemSlot());
-            int amount = shopManager.getBulkAmounts().get(shopManager.getDecreaseSlots().indexOf(i));
-            genbucket.setAmount(genbucket.getAmount() - amount < 1 ? 1 : genbucket.getAmount() - amount);
+                    ItemStack genbucket = inventory.getItem(shopManager.getBulkMainItemSlot());
+                    int amount = shopManager.getBulkAmounts().get(shopManager.getDecreaseSlots().indexOf(i));
+                    genbucket.setAmount(genbucket.getAmount() - amount < 1 ? 1 : genbucket.getAmount() - amount);
                 })));
 
         shopManager.getIncreaseSlots().forEach(i ->
                 registerClickable(i, ((player1, inventory1, cursor, slot, type) -> {
-            ItemStack genbucket = inventory.getItem(shopManager.getBulkMainItemSlot());
-            int amount = shopManager.getBulkAmounts().get(shopManager.getIncreaseSlots().indexOf(i));
-            genbucket.setAmount(genbucket.getAmount() + amount > 64 ? 64 : genbucket.getAmount() + amount);
+                    ItemStack genbucket = inventory.getItem(shopManager.getBulkMainItemSlot());
+                    int amount = shopManager.getBulkAmounts().get(shopManager.getIncreaseSlots().indexOf(i));
+                    genbucket.setAmount(genbucket.getAmount() + amount > 64 ? 64 : genbucket.getAmount() + amount);
                 })));
 
         registerClickable(shopManager.getPurchaseSlot(), ((player1, inventory1, cursor, slot, type) -> {

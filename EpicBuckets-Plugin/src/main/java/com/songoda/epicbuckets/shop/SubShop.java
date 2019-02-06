@@ -1,9 +1,9 @@
 package com.songoda.epicbuckets.shop;
 
 import com.songoda.epicbuckets.EpicBuckets;
-import com.songoda.epicbuckets.util.InventoryHelper;
-import com.songoda.epicbuckets.util.Validator;
-import com.songoda.epicbuckets.util.XMaterial;
+import com.songoda.epicbuckets.utils.InventoryHelper;
+import com.songoda.epicbuckets.utils.Validator;
+import com.songoda.epicbuckets.utils.XMaterial;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -85,12 +85,12 @@ public class SubShop {
         genShopItem = InventoryHelper.setDisplayName(InventoryHelper.setLore(genShopItem, getGenItemLore()), getShopName());
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public ItemStack getShopItem() {

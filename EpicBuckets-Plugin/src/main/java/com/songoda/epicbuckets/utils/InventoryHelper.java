@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.util;
+package com.songoda.epicbuckets.utils;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.shop.SubShop;
@@ -52,7 +52,8 @@ public class InventoryHelper {
         lore.forEach(s -> {
             String line = s;
             if (line.contains("%price%")) line = line.replace("%price%", subShop.getPrice() + "");
-            if (line.contains("%material%")) line = line.replace("%material%", subShop.getType().parseMaterial().name());
+            if (line.contains("%material%"))
+                line = line.replace("%material%", subShop.getType().parseMaterial().name());
             newLore.add(ChatColor.translateAlternateColorCodes('&', line));
         });
         im.setLore(newLore);

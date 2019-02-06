@@ -1,6 +1,6 @@
 package com.songoda.epicbuckets.hooks;
 
-import com.songoda.epicbuckets.util.hooks.ProtectionPluginHook;
+import com.songoda.epicbuckets.utils.hooks.ProtectionPluginHook;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import org.bukkit.Location;

@@ -2,7 +2,7 @@ package com.songoda.epicbuckets.shop;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.GenbucketType;
-import com.songoda.epicbuckets.util.*;
+import com.songoda.epicbuckets.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -171,8 +171,16 @@ public class ShopManager {
         return useBackButtons;
     }
 
+    public void setUseBackButtons(boolean useBackButtons) {
+        this.useBackButtons = useBackButtons;
+    }
+
     public boolean isCloseAfterPurchase() {
         return closeAfterPurchase;
+    }
+
+    public void setCloseAfterPurchase(boolean closeAfterPurchase) {
+        this.closeAfterPurchase = closeAfterPurchase;
     }
 
     public String getBulkInventoryName() {
@@ -185,6 +193,10 @@ public class ShopManager {
 
     public boolean isBulkFillInventory() {
         return bulkFillInventory;
+    }
+
+    public void setBulkFillInventory(boolean bulkFillInventory) {
+        this.bulkFillInventory = bulkFillInventory;
     }
 
     public int getBulkBackButtonSlot() {
@@ -201,17 +213,5 @@ public class ShopManager {
 
     public void setShopDatabase(HashMap<String, Shop> shopDatabase) {
         this.shopDatabase = shopDatabase;
-    }
-
-    public void setBulkFillInventory(boolean bulkFillInventory) {
-        this.bulkFillInventory = bulkFillInventory;
-    }
-
-    public void setUseBackButtons(boolean useBackButtons) {
-        this.useBackButtons = useBackButtons;
-    }
-
-    public void setCloseAfterPurchase(boolean closeAfterPurchase) {
-        this.closeAfterPurchase = closeAfterPurchase;
     }
 }

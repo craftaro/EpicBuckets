@@ -5,7 +5,7 @@ import com.songoda.epicbuckets.file.ConfigManager;
 import com.songoda.epicbuckets.shop.Shop;
 import com.songoda.epicbuckets.shop.ShopManager;
 import com.songoda.epicbuckets.shop.SubShop;
-import com.songoda.epicbuckets.util.gui.AbstractGUI;
+import com.songoda.epicbuckets.utils.gui.AbstractGUI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -56,9 +56,10 @@ public class GUIShop extends AbstractGUI {
             registerClickable(shop.getBackButtonSlot(), ((player, inventory, cursor, slot, type) -> new GUIMain(player)));
         }
 
-        shop.getSubShops().stream().filter(SubShop::isEnabled).forEach(subShop ->  {
+        shop.getSubShops().stream().filter(SubShop::isEnabled).forEach(subShop -> {
             registerClickable(subShop.getSlot(), ClickType.LEFT, ((player1, inventory1, cursor, slot, type) -> {
-                if (shopManager.hasEnoughFunds(player1, subShop, 1) && !shopManager.inventoryFull(player)) shopManager.buyFromShop(player, subShop, 1);
+                if (shopManager.hasEnoughFunds(player1, subShop, 1) && !shopManager.inventoryFull(player))
+                    shopManager.buyFromShop(player, subShop, 1);
                 if (shopManager.isCloseAfterPurchase()) new GUIMain(player);
             }));
             registerClickable(subShop.getSlot(), ClickType.RIGHT, ((player1, inventory1, cursor, slot, type) -> new GUIBulk(player, shop, subShop)));

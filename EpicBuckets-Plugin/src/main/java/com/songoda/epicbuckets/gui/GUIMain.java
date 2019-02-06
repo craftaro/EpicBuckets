@@ -4,7 +4,7 @@ import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.file.ConfigManager;
 import com.songoda.epicbuckets.shop.Shop;
 import com.songoda.epicbuckets.shop.ShopManager;
-import com.songoda.epicbuckets.util.gui.AbstractGUI;
+import com.songoda.epicbuckets.utils.gui.AbstractGUI;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 

@@ -9,15 +9,11 @@ import java.util.List;
 
 public abstract class AbstractCommand {
 
-    public enum ReturnType { SUCCESS, FAILURE, SYNTAX_ERROR }
-
     private final AbstractCommand parent;
-
+    private final boolean noConsole;
     private List<String> command;
 
     private List<String> subCommand = new ArrayList<>();
-
-    private final boolean noConsole;
 
     protected AbstractCommand(AbstractCommand parent, boolean noConsole, String... command) {
         if (parent != null) {
@@ -34,7 +30,6 @@ public abstract class AbstractCommand {
     }
 
     public List<String> getCommand() {
-        System.out.println(command + " " + (command != null && command.contains("epicbuckets")));
         return command;
     }
 
@@ -57,4 +52,6 @@ public abstract class AbstractCommand {
     public boolean isNoConsole() {
         return noConsole;
     }
+
+    public enum ReturnType {SUCCESS, FAILURE, SYNTAX_ERROR}
 }

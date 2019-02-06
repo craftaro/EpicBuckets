@@ -2,9 +2,9 @@ package com.songoda.epicbuckets.gui;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.Genbucket;
-import com.songoda.epicbuckets.util.ChatUtil;
-import com.songoda.epicbuckets.util.XMaterial;
-import com.songoda.epicbuckets.util.gui.AbstractGUI;
+import com.songoda.epicbuckets.utils.ChatUtil;
+import com.songoda.epicbuckets.utils.XMaterial;
+import com.songoda.epicbuckets.utils.gui.AbstractGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -42,8 +42,8 @@ public class GUIPanel extends AbstractGUI {
                 inventory.setItem(place, skull);
                 registerClickable(place, ((player1, inventory1, cursor, slot, type) ->
                         player.teleport(genbucket.getPlayerLocation()
-            )));
-                place ++;
+                        )));
+                place++;
             }
         }
     }

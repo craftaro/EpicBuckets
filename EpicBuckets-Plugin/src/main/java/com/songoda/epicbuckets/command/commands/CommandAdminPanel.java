@@ -14,7 +14,7 @@ public class CommandAdminPanel extends AbstractCommand {
 
     @Override
     protected ReturnType runCommand(EpicBuckets instance, CommandSender sender, String... args) {
-        new GUIPanel((Player)sender);
+        new GUIPanel((Player) sender);
         return ReturnType.SUCCESS;
     }
 

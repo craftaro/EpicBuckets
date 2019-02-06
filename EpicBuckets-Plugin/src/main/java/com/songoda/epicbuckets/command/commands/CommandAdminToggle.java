@@ -13,7 +13,7 @@ public class CommandAdminToggle extends AbstractCommand {
 
     @Override
     protected ReturnType runCommand(EpicBuckets instance, CommandSender sender, String... args) {
-        instance.getGenbucketManager().toggleAdmin((Player)sender);
+        instance.getGenbucketManager().toggleAdmin((Player) sender);
         return ReturnType.SUCCESS;
     }
 

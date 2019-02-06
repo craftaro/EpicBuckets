@@ -3,7 +3,7 @@ package com.songoda.epicbuckets.hooks;
 import br.net.fabiozumbi12.RedProtect.Bukkit.API.RedProtectAPI;
 import br.net.fabiozumbi12.RedProtect.Bukkit.RedProtect;
 import br.net.fabiozumbi12.RedProtect.Bukkit.Region;
-import com.songoda.epicbuckets.util.hooks.ProtectionPluginHook;
+import com.songoda.epicbuckets.utils.hooks.ProtectionPluginHook;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

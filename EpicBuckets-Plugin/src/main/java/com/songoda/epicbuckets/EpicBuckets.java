@@ -9,12 +9,12 @@ import com.songoda.epicbuckets.listeners.GenbucketPlaceListener;
 import com.songoda.epicbuckets.listeners.PlayerJoinListeners;
 import com.songoda.epicbuckets.listeners.SourceBlockBreakListener;
 import com.songoda.epicbuckets.shop.ShopManager;
-import com.songoda.epicbuckets.util.ChatUtil;
-import com.songoda.epicbuckets.util.ConfigWrapper;
-import com.songoda.epicbuckets.util.Debugger;
-import com.songoda.epicbuckets.util.ServerVersion;
-import com.songoda.epicbuckets.util.hooks.ClaimableProtectionPluginHook;
-import com.songoda.epicbuckets.util.hooks.ProtectionPluginHook;
+import com.songoda.epicbuckets.utils.ChatUtil;
+import com.songoda.epicbuckets.utils.ConfigWrapper;
+import com.songoda.epicbuckets.utils.Debugger;
+import com.songoda.epicbuckets.utils.ServerVersion;
+import com.songoda.epicbuckets.utils.hooks.ClaimableProtectionPluginHook;
+import com.songoda.epicbuckets.utils.hooks.ProtectionPluginHook;
 import net.milkbowl.vault.economy.Economy;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
@@ -51,6 +51,10 @@ public class EpicBuckets extends JavaPlugin {
     private List<ProtectionPluginHook> protectionHooks = new ArrayList<>();
     private ClaimableProtectionPluginHook factionsHook, townyHook, aSkyblockHook, uSkyblockHook, skyBlockEarhHook;
 
+    public static EpicBuckets getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public void onEnable() {
         INSTANCE = this;
@@ -81,14 +85,19 @@ public class EpicBuckets extends JavaPlugin {
         pluginManager.registerEvents(new PlayerJoinListeners(this), this);
 
         // Register default hooks
-        if (pluginManager.isPluginEnabled("ASkyBlock")) aSkyblockHook = (ClaimableProtectionPluginHook) this.register(HookASkyBlock::new);
-        if (pluginManager.isPluginEnabled("FactionsFramework")) factionsHook = (ClaimableProtectionPluginHook) this.register(HookFactions::new);
+        if (pluginManager.isPluginEnabled("ASkyBlock"))
+            aSkyblockHook = (ClaimableProtectionPluginHook) this.register(HookASkyBlock::new);
+        if (pluginManager.isPluginEnabled("FactionsFramework"))
+            factionsHook = (ClaimableProtectionPluginHook) this.register(HookFactions::new);
         if (pluginManager.isPluginEnabled("GriefPrevention")) this.register(HookGriefPrevention::new);
         if (pluginManager.isPluginEnabled("Kingdoms")) this.register(HookKingdoms::new);
         if (pluginManager.isPluginEnabled("RedProtect")) this.register(HookRedProtect::new);
-        if (pluginManager.isPluginEnabled("Towny")) townyHook = (ClaimableProtectionPluginHook) this.register(HookTowny::new);
-        if (pluginManager.isPluginEnabled("USkyBlock")) uSkyblockHook = (ClaimableProtectionPluginHook) this.register(HookUSkyBlock::new);
-        if (pluginManager.isPluginEnabled("SkyBlock")) skyBlockEarhHook = (ClaimableProtectionPluginHook) this.register(HookSkyBlockEarth::new);
+        if (pluginManager.isPluginEnabled("Towny"))
+            townyHook = (ClaimableProtectionPluginHook) this.register(HookTowny::new);
+        if (pluginManager.isPluginEnabled("USkyBlock"))
+            uSkyblockHook = (ClaimableProtectionPluginHook) this.register(HookUSkyBlock::new);
+        if (pluginManager.isPluginEnabled("SkyBlock"))
+            skyBlockEarhHook = (ClaimableProtectionPluginHook) this.register(HookSkyBlockEarth::new);
 
         if (isServerVersionAtLeast(ServerVersion.V1_13)) {
             if (pluginManager.isPluginEnabled("WorldGuard")) this.register(HookWorldGuard::new);
@@ -122,7 +131,6 @@ public class EpicBuckets extends JavaPlugin {
     private ProtectionPluginHook register(Supplier<ProtectionPluginHook> hookSupplier) {
         return this.registerProtectionHook(hookSupplier.get());
     }
-
 
     public ProtectionPluginHook registerProtectionHook(ProtectionPluginHook hook) {
         Preconditions.checkNotNull(hook, "Cannot register null hook");
@@ -219,6 +227,4 @@ public class EpicBuckets extends JavaPlugin {
     public References getReferences() {
         return references;
     }
-
-    public static EpicBuckets getInstance() { return INSTANCE; }
 }

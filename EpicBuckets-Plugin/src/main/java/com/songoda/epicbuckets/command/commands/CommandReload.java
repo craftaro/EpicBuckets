@@ -2,7 +2,7 @@ package com.songoda.epicbuckets.command.commands;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.command.AbstractCommand;
-import com.songoda.epicbuckets.util.ChatUtil;
+import com.songoda.epicbuckets.utils.ChatUtil;
 import org.bukkit.command.CommandSender;
 
 public class CommandReload extends AbstractCommand {

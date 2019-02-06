@@ -2,7 +2,7 @@ package com.songoda.epicbuckets.genbucket;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.shop.SubShop;
-import com.songoda.epicbuckets.util.XMaterial;
+import com.songoda.epicbuckets.utils.XMaterial;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -148,7 +148,8 @@ public abstract class Genbucket {
     }
 
     protected boolean placeGen(Block block) {
-        if (!epicBuckets.getConfigManager().getIgnoredMaterials().contains(XMaterial.requestXMaterial(block.getType().name(), block.getData()))) return false;
+        if (!epicBuckets.getConfigManager().getIgnoredMaterials().contains(XMaterial.requestXMaterial(block.getType().name(), block.getData())))
+            return false;
         if (spongeInRange(block)) return false;
         block.setType(getGenItem().getType());
         return true;

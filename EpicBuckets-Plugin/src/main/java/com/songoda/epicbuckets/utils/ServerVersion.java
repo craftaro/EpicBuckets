@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.util;
+package com.songoda.epicbuckets.utils;
 
 public enum ServerVersion {
 

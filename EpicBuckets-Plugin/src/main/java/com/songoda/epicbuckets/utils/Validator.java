@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.util;
+package com.songoda.epicbuckets.utils;
 
 import com.songoda.epicbuckets.genbucket.GenbucketType;
 
@@ -8,7 +8,7 @@ public class Validator {
         int i;
         if (isInt(s)) {
             i = Integer.parseInt(s);
-            if (i<=6) return i;
+            if (i <= 6) return i;
         }
         return -1;
     }

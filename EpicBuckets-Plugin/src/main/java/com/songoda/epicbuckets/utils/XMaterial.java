@@ -1,18 +1,19 @@
-package com.songoda.epicbuckets.util;
-/** The MIT License (MIT)
- *
+package com.songoda.epicbuckets.utils;
+/**
+ * The MIT License (MIT)
+ * <p>
  * Copyright (c) 2018 Hex_27
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"),
  * to deal in the Software without restriction, including without limitation
  * the rights to use, copy, modify, merge, publish, distribute, sublicense,
  * and/or sell copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included
  * in all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
@@ -22,10 +23,10 @@ package com.songoda.epicbuckets.util;
  * DEALINGS IN THE SOFTWARE.
  **/
 
-import java.util.HashMap;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.HashMap;
 
 public enum XMaterial {
 
@@ -878,29 +879,22 @@ public enum XMaterial {
     ZOMBIE_PIGMAN_SPAWN_EGG("MONSTER_EGG", 0),
     ZOMBIE_SPAWN_EGG("MONSTER_EGG", 0),
     ZOMBIE_VILLAGER_SPAWN_EGG("MONSTER_EGG", 0),
-    ZOMBIE_WALL_HEAD("SKULL", 0),
-    ;
+    ZOMBIE_WALL_HEAD("SKULL", 0),;
+    static int newV = -1;
+    private static HashMap<String, XMaterial> cachedSearch = new HashMap<>();
     String m;
     int data;
 
-    XMaterial(String m, int data ){
+    XMaterial(String m, int data) {
         this.m = m;
         this.data = data;
     }
 
-    public ItemStack parseItem(){
-        Material mat = parseMaterial();
-        if(isNewVersion()){
-            return new ItemStack(mat);
-        }
-        return new ItemStack(mat,1,(byte) data);
-    }
-    static int newV = -1;
-    public static boolean isNewVersion(){
-        if(newV == 0) return false;
-        if(newV == 1) return true;
+    public static boolean isNewVersion() {
+        if (newV == 0) return false;
+        if (newV == 1) return true;
         Material mat = Material.matchMaterial("RED_WOOL");
-        if(mat != null){
+        if (mat != null) {
             newV = 1;
             return true;
         }
@@ -908,43 +902,67 @@ public enum XMaterial {
         return false;
     }
 
-    private static HashMap<String, XMaterial> cachedSearch = new HashMap<>();
-    public static XMaterial requestXMaterial(String name, byte data){
-        if(cachedSearch.containsKey(name.toUpperCase()+","+data)){
-            return cachedSearch.get(name.toUpperCase()+","+data);
+    public static XMaterial requestXMaterial(String name, byte data) {
+        if (cachedSearch.containsKey(name.toUpperCase() + "," + data)) {
+            return cachedSearch.get(name.toUpperCase() + "," + data);
         }
-        for(XMaterial mat:XMaterial.values()){
-            if(name.toUpperCase().equals(mat.m) && ((byte)mat.data) == data){
-                cachedSearch.put(mat.m+","+data,mat);
+        for (XMaterial mat : XMaterial.values()) {
+            if (name.toUpperCase().equals(mat.m) && ((byte) mat.data) == data) {
+                cachedSearch.put(mat.m + "," + data, mat);
                 return mat;
             }
         }
         return null;
     }
 
-    public boolean isSameMaterial(ItemStack comp){
-        if(isNewVersion()){
+    public static XMaterial fromString(String key) {
+        XMaterial xmat = null;
+        try {
+            xmat = XMaterial.valueOf(key);
+            return xmat;
+        } catch (IllegalArgumentException e) {
+            String[] split = key.split(":");
+            if (split.length == 1) {
+                xmat = requestXMaterial(key, (byte) 0);
+            } else {
+                xmat = requestXMaterial(split[0], (byte) Integer.parseInt(split[1]));
+            }
+            return xmat;
+        }
+
+    }
+
+    public ItemStack parseItem() {
+        Material mat = parseMaterial();
+        if (isNewVersion()) {
+            return new ItemStack(mat);
+        }
+        return new ItemStack(mat, 1, (byte) data);
+    }
+
+    public boolean isSameMaterial(ItemStack comp) {
+        if (isNewVersion()) {
             return comp.getType() == this.parseMaterial();
         }
-        if(comp.getType() == this.parseMaterial() &&
-                (int) comp.getData().getData() == (int) this.data){
+        if (comp.getType() == this.parseMaterial() &&
+                (int) comp.getData().getData() == (int) this.data) {
             return true;
         }
         XMaterial xmat = fromMaterial(comp.getType());
-        if(isDamageable(xmat)){
-            if(this.parseMaterial() == comp.getType()){
+        if (isDamageable(xmat)) {
+            if (this.parseMaterial() == comp.getType()) {
                 return true;
             }
         }
         return false;
     }
 
-    public XMaterial fromMaterial(Material mat){
-        try{
+    public XMaterial fromMaterial(Material mat) {
+        try {
             return XMaterial.valueOf(mat.toString());
-        }catch(IllegalArgumentException e){
-            for(XMaterial xmat:XMaterial.values()){
-                if(xmat.m.equals(mat.toString())){
+        } catch (IllegalArgumentException e) {
+            for (XMaterial xmat : XMaterial.values()) {
+                if (xmat.m.equals(mat.toString())) {
                     return xmat;
                 }
             }
@@ -952,27 +970,10 @@ public enum XMaterial {
         return null;
     }
 
-    public static XMaterial fromString(String key){
-        XMaterial xmat = null;
-        try{
-            xmat = XMaterial.valueOf(key);
-            return xmat;
-        }catch(IllegalArgumentException e){
-            String[] split = key.split(":");
-            if(split.length == 1){
-                xmat = requestXMaterial(key,(byte) 0);
-            }else{
-                xmat = requestXMaterial(split[0],(byte) Integer.parseInt(split[1]));
-            }
-            return xmat;
-        }
-
-    }
-
-    public boolean isDamageable(XMaterial type){
+    public boolean isDamageable(XMaterial type) {
         String[] split = type.toString().split("_");
         int length = split.length;
-        switch(split[length-1]){
+        switch (split[length - 1]) {
             case "HELMET":
                 return true;
             case "CHESTPLATE":
@@ -1006,9 +1007,9 @@ public enum XMaterial {
         }
     }
 
-    public Material parseMaterial(){
+    public Material parseMaterial() {
         Material mat = Material.matchMaterial(this.toString());
-        if(mat != null){
+        if (mat != null) {
             return mat;
         }
         return Material.matchMaterial(m);

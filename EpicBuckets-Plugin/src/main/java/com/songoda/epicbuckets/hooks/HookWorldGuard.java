@@ -1,7 +1,7 @@
 package com.songoda.epicbuckets.hooks;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.songoda.epicbuckets.util.hooks.ProtectionPluginHook;
+import com.songoda.epicbuckets.utils.hooks.ProtectionPluginHook;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

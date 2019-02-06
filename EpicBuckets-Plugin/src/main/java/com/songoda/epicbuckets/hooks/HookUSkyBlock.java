@@ -1,6 +1,6 @@
 package com.songoda.epicbuckets.hooks;
 
-import com.songoda.epicbuckets.util.hooks.ClaimableProtectionPluginHook;
+import com.songoda.epicbuckets.utils.hooks.ClaimableProtectionPluginHook;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

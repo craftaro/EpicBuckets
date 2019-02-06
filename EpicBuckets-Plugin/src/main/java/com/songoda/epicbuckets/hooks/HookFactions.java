@@ -1,6 +1,6 @@
 package com.songoda.epicbuckets.hooks;
 
-import com.songoda.epicbuckets.util.hooks.ClaimableProtectionPluginHook;
+import com.songoda.epicbuckets.utils.hooks.ClaimableProtectionPluginHook;
 import me.markeh.factionsframework.FactionsFramework;
 import me.markeh.factionsframework.entities.FPlayer;
 import me.markeh.factionsframework.entities.FPlayers;

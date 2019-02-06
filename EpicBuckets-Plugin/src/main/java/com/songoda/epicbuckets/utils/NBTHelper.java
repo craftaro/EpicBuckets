@@ -1,8 +1,8 @@
-package com.songoda.epicbuckets.util;
+package com.songoda.epicbuckets.utils;
 
 import com.songoda.epicbuckets.genbucket.GenbucketType;
 import com.songoda.epicbuckets.shop.SubShop;
-import com.songoda.epicbuckets.util.itemnbtapi.NBTItem;
+import com.songoda.epicbuckets.utils.itemnbtapi.NBTItem;
 import org.bukkit.inventory.ItemStack;
 
 public class NBTHelper {

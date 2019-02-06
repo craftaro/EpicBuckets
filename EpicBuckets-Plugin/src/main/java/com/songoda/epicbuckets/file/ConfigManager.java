@@ -2,9 +2,9 @@ package com.songoda.epicbuckets.file;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.GenbucketType;
-import com.songoda.epicbuckets.util.InventoryHelper;
-import com.songoda.epicbuckets.util.Validator;
-import com.songoda.epicbuckets.util.XMaterial;
+import com.songoda.epicbuckets.utils.InventoryHelper;
+import com.songoda.epicbuckets.utils.Validator;
+import com.songoda.epicbuckets.utils.XMaterial;
 import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -253,6 +253,10 @@ public class ConfigManager {
         return backButtonPath;
     }
 
+    public void setBackButtonPath(String backButtonPath) {
+        this.backButtonPath = backButtonPath;
+    }
+
     public String getFillItemPath() {
         return fillItemPath;
     }
@@ -281,16 +285,32 @@ public class ConfigManager {
         return supportFactions;
     }
 
+    public void setSupportFactions(boolean supportFactions) {
+        this.supportFactions = supportFactions;
+    }
+
     public boolean isSupportWorldGuard() {
         return supportWorldGuard;
+    }
+
+    public void setSupportWorldGuard(boolean supportWorldGuard) {
+        this.supportWorldGuard = supportWorldGuard;
     }
 
     public boolean isSupportGriefPrevention() {
         return supportGriefPrevention;
     }
 
+    public void setSupportGriefPrevention(boolean supportGriefPrevention) {
+        this.supportGriefPrevention = supportGriefPrevention;
+    }
+
     public boolean isGensInWilderness() {
         return gensInWilderness;
+    }
+
+    public void setGensInWilderness(boolean gensInWilderness) {
+        this.gensInWilderness = gensInWilderness;
     }
 
     public boolean isEnchantGenbuckets() {
@@ -301,36 +321,64 @@ public class ConfigManager {
         return spongeCheck;
     }
 
+    public void setSpongeCheck(boolean spongeCheck) {
+        this.spongeCheck = spongeCheck;
+    }
+
     public int getSpongeRadius() {
         return spongeRadius;
+    }
+
+    public void setSpongeRadius(int spongeRadius) {
+        this.spongeRadius = spongeRadius;
     }
 
     public int getMaxGenbucketsPerPlayer() {
         return maxGenbucketsPerPlayer;
     }
 
+    public void setMaxGenbucketsPerPlayer(int maxGenbucketsPerPlayer) {
+        this.maxGenbucketsPerPlayer = maxGenbucketsPerPlayer;
+    }
+
     public boolean isUnlimitedGenbuckets() {
         return unlimitedGenbuckets;
+    }
+
+    public void setUnlimitedGenbuckets(boolean unlimitedGenbuckets) {
+        this.unlimitedGenbuckets = unlimitedGenbuckets;
     }
 
     public int getMaxVerticalHeight() {
         return maxVerticalHeight;
     }
 
+    public void setMaxVerticalHeight(int maxVerticalHeight) {
+        this.maxVerticalHeight = maxVerticalHeight;
+    }
+
     public int getMaxHorizontalLength() {
         return maxHorizontalLength;
+    }
+
+    public void setMaxHorizontalLength(int maxHorizontalLength) {
+        this.maxHorizontalLength = maxHorizontalLength;
     }
 
     public int getDelay() {
         return delay;
     }
 
-    public void setGenbucketsDisabled(boolean enabled) {
-        this.genbucketsDisabled = enabled;
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 
     public boolean isGenbucketsDisabled() {
         return genbucketsDisabled;
+    }
+
+    public void setGenbucketsDisabled(boolean enabled) {
+        this.genbucketsDisabled = enabled;
     }
 
     public ItemStack getBackButton() {
@@ -351,6 +399,10 @@ public class ConfigManager {
 
     public boolean isFillInventory() {
         return fillInventory;
+    }
+
+    public void setFillInventory(boolean fillInventory) {
+        this.fillInventory = fillInventory;
     }
 
     public ItemStack getFillItem() {
@@ -377,8 +429,16 @@ public class ConfigManager {
         return infiniteUse;
     }
 
+    public void setInfiniteUse(boolean infiniteUse) {
+        this.infiniteUse = infiniteUse;
+    }
+
     public boolean isChargeInfiniteUse() {
         return chargeInfiniteUse;
+    }
+
+    public void setChargeInfiniteUse(boolean chargeInfiniteUse) {
+        this.chargeInfiniteUse = chargeInfiniteUse;
     }
 
     public double getInfiniteUseCostForGenbucketType(GenbucketType genbucketType, ItemStack item) {
@@ -394,68 +454,8 @@ public class ConfigManager {
         return genbucketDelay;
     }
 
-    public void setBackButtonPath(String backButtonPath) {
-        this.backButtonPath = backButtonPath;
-    }
-
-    public void setSupportFactions(boolean supportFactions) {
-        this.supportFactions = supportFactions;
-    }
-
-    public void setSupportWorldGuard(boolean supportWorldGuard) {
-        this.supportWorldGuard = supportWorldGuard;
-    }
-
-    public void setSupportGriefPrevention(boolean supportGriefPrevention) {
-        this.supportGriefPrevention = supportGriefPrevention;
-    }
-
-    public void setGensInWilderness(boolean gensInWilderness) {
-        this.gensInWilderness = gensInWilderness;
-    }
-
-    public void setSpongeCheck(boolean spongeCheck) {
-        this.spongeCheck = spongeCheck;
-    }
-
-    public void setSpongeRadius(int spongeRadius) {
-        this.spongeRadius = spongeRadius;
-    }
-
-    public void setMaxGenbucketsPerPlayer(int maxGenbucketsPerPlayer) {
-        this.maxGenbucketsPerPlayer = maxGenbucketsPerPlayer;
-    }
-
-    public void setUnlimitedGenbuckets(boolean unlimitedGenbuckets) {
-        this.unlimitedGenbuckets = unlimitedGenbuckets;
-    }
-
-    public void setInfiniteUse(boolean infiniteUse) {
-        this.infiniteUse = infiniteUse;
-    }
-
-    public void setChargeInfiniteUse(boolean chargeInfiniteUse) {
-        this.chargeInfiniteUse = chargeInfiniteUse;
-    }
-
     public void setGenbucketDelay(int genbucketDelay) {
         this.genbucketDelay = genbucketDelay;
-    }
-
-    public void setMaxVerticalHeight(int maxVerticalHeight) {
-        this.maxVerticalHeight = maxVerticalHeight;
-    }
-
-    public void setMaxHorizontalLength(int maxHorizontalLength) {
-        this.maxHorizontalLength = maxHorizontalLength;
-    }
-
-    public void setDelay(int delay) {
-        this.delay = delay;
-    }
-
-    public void setFillInventory(boolean fillInventory) {
-        this.fillInventory = fillInventory;
     }
 
     public HashMap<String, Consumer<Boolean>> getSettingsGenbucketBooleans() {

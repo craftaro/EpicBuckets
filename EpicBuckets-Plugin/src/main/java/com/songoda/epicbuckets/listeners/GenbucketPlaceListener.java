@@ -9,8 +9,8 @@ import com.songoda.epicbuckets.genbucket.types.Horizontal;
 import com.songoda.epicbuckets.genbucket.types.Infused;
 import com.songoda.epicbuckets.genbucket.types.PsuedoVertical;
 import com.songoda.epicbuckets.genbucket.types.Vertical;
-import com.songoda.epicbuckets.util.XMaterial;
-import com.songoda.epicbuckets.util.itemnbtapi.NBTItem;
+import com.songoda.epicbuckets.utils.XMaterial;
+import com.songoda.epicbuckets.utils.itemnbtapi.NBTItem;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
@@ -20,9 +20,9 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class GenbucketPlaceListener implements Listener {
-    
+
     private final EpicBuckets instance;
-    
+
     public GenbucketPlaceListener(EpicBuckets instance) {
         this.instance = instance;
     }

@@ -3,7 +3,7 @@ package com.songoda.epicbuckets.command;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.References;
 import com.songoda.epicbuckets.command.commands.*;
-import com.songoda.epicbuckets.util.ChatUtil;
+import com.songoda.epicbuckets.utils.ChatUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -67,11 +67,11 @@ public class CommandManager implements CommandExecutor {
             return;
         }
         if (command.getPermissionNode() == null || sender.hasPermission(command.getPermissionNode())) {
-             AbstractCommand.ReturnType returnType = command.runCommand(instance, sender, strings);
-             if (returnType == AbstractCommand.ReturnType.SYNTAX_ERROR) {
-                 sender.sendMessage(References.getPrefix() + ChatUtil.colorString("&cInvalid Syntax!"));
-                 sender.sendMessage(References.getPrefix() + ChatUtil.colorString("&7The valid syntax is: &6" + command.getSyntax() + "&7."));
-             }
+            AbstractCommand.ReturnType returnType = command.runCommand(instance, sender, strings);
+            if (returnType == AbstractCommand.ReturnType.SYNTAX_ERROR) {
+                sender.sendMessage(References.getPrefix() + ChatUtil.colorString("&cInvalid Syntax!"));
+                sender.sendMessage(References.getPrefix() + ChatUtil.colorString("&7The valid syntax is: &6" + command.getSyntax() + "&7."));
+            }
             return;
         }
         sender.sendMessage(References.getPrefix() + instance.getLocale().getMessage("event.general.nopermission"));

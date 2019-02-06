@@ -8,6 +8,10 @@ import org.bukkit.event.HandlerList;
 
 public class GenbucketPlaceEvent extends Event implements Cancellable {
 
+    /*
+     Needed for the event
+    */
+    private static final HandlerList HANDLERS = new HandlerList();
     private final Player player;
     private final Genbucket genbucket;
     private boolean isCancelled;
@@ -18,6 +22,10 @@ public class GenbucketPlaceEvent extends Event implements Cancellable {
         this.isCancelled = false;
     }
 
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
+    }
+
     public Player getPlayer() {
         return this.player;
     }
@@ -26,16 +34,7 @@ public class GenbucketPlaceEvent extends Event implements Cancellable {
         return this.genbucket;
     }
 
-    /*
-     Needed for the event
-    */
-    private static final HandlerList HANDLERS = new HandlerList();
-
     public HandlerList getHandlers() {
-        return HANDLERS;
-    }
-
-    public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 

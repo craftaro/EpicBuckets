@@ -4,8 +4,7 @@ import com.palmergames.bukkit.towny.Towny;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import com.songoda.epicbuckets.util.hooks.ClaimableProtectionPluginHook;
-
+import com.songoda.epicbuckets.utils.hooks.ClaimableProtectionPluginHook;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

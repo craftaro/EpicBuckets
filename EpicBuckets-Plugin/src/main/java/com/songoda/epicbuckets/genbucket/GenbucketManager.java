@@ -1,7 +1,7 @@
 package com.songoda.epicbuckets.genbucket;
 
 import com.songoda.epicbuckets.EpicBuckets;
-import com.songoda.epicbuckets.util.ChatUtil;
+import com.songoda.epicbuckets.utils.ChatUtil;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.entity.Player;
 
@@ -63,7 +63,8 @@ public class GenbucketManager {
     }
 
     public void registerGenbucketForPlayer(Player owner, Genbucket genbucket) {
-        if (!activeGens.containsKey(owner.getUniqueId())) activeGens.put(owner.getUniqueId(), new ArrayList<>(Arrays.asList(genbucket)));
+        if (!activeGens.containsKey(owner.getUniqueId()))
+            activeGens.put(owner.getUniqueId(), new ArrayList<>(Arrays.asList(genbucket)));
         List<Genbucket> genbucketItems = activeGens.get(owner.getUniqueId());
         genbucketItems.add(genbucket);
         activeGens.put(owner.getUniqueId(), genbucketItems);

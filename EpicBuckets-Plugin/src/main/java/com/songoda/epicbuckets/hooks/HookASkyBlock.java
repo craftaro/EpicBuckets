@@ -1,6 +1,6 @@
 package com.songoda.epicbuckets.hooks;
 
-import com.songoda.epicbuckets.util.hooks.ClaimableProtectionPluginHook;
+import com.songoda.epicbuckets.utils.hooks.ClaimableProtectionPluginHook;
 import com.wasteofplastic.askyblock.ASkyBlock;
 import com.wasteofplastic.askyblock.ASkyBlockAPI;
 import com.wasteofplastic.askyblock.Island;

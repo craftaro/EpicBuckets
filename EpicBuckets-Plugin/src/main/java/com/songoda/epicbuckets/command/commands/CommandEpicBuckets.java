@@ -15,7 +15,7 @@ public class CommandEpicBuckets extends AbstractCommand {
 
     @Override
     protected AbstractCommand.ReturnType runCommand(EpicBuckets instance, CommandSender sender, String... args) {
-        new GUIMain((Player)sender);
+        new GUIMain((Player) sender);
         return ReturnType.SUCCESS;
     }
 

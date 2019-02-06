@@ -2,9 +2,9 @@ package com.songoda.epicbuckets.shop;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.GenbucketType;
-import com.songoda.epicbuckets.util.InventoryHelper;
-import com.songoda.epicbuckets.util.Validator;
-import com.songoda.epicbuckets.util.XMaterial;
+import com.songoda.epicbuckets.utils.InventoryHelper;
+import com.songoda.epicbuckets.utils.Validator;
+import com.songoda.epicbuckets.utils.XMaterial;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -109,19 +109,19 @@ public class Shop {
     public SubShop getSubShop(XMaterial mat) {
         for (SubShop subShop : subShops.values()) {
             if (subShop.getGenItem().getType() == mat.parseMaterial() &&
-            subShop.getGenItem().getDurability() == mat.parseItem().getDurability()) {
+                    subShop.getGenItem().getDurability() == mat.parseItem().getDurability()) {
                 return subShop;
             }
         }
         return null;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public int getSlot() {

@@ -1,6 +1,6 @@
 package com.songoda.epicbuckets.hooks;
 
-import com.songoda.epicbuckets.util.hooks.ClaimableProtectionPluginHook;
+import com.songoda.epicbuckets.utils.hooks.ClaimableProtectionPluginHook;
 import me.goodandevil.skyblock.SkyBlock;
 import me.goodandevil.skyblock.island.Island;
 import org.bukkit.Location;
