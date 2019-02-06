@@ -4,56 +4,56 @@ import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.file.ConfigManager;
 import com.songoda.epicbuckets.shop.Shop;
 import com.songoda.epicbuckets.shop.ShopManager;
-import com.songoda.epicbuckets.shop.SubShop;
-import com.songoda.epicbuckets.util.InventoryHelper;
-import me.lucko.helper.item.ItemStackBuilder;
-import me.lucko.helper.menu.Gui;
+import com.songoda.epicbuckets.util.gui.AbstractGUI;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
 
-public class GUIShop extends Gui {
+public class GUIMain extends AbstractGUI {
 
     private EpicBuckets epicBuckets;
     private ConfigManager configManager;
     private ShopManager shopManager;
-    private Shop s;
 
-    public GUIShop(Shop s, Player player) {
-        super(player, s.getInventorySize(), s.getInventoryName());
-        epicBuckets = EpicBuckets.getInstance();
+    private int size;
+
+    public GUIMain(Player player) {
+        super(player);
+        this.epicBuckets = EpicBuckets.getInstance();
         configManager = epicBuckets.getConfigManager();
         shopManager = epicBuckets.getShopManager();
-        this.s = s;
+        this.size = configManager.getInventorySize() * 9;
+
+        init(EpicBuckets.getInstance().getConfigManager().getInventoryName(), size);
     }
 
     @Override
-    public void redraw() {
-        if (isFirstDraw()) {
-            if (s.isFillInventory()) setItems(ItemStackBuilder.of(configManager.getFillItem()).buildItem().build(), InventoryHelper.emptySlots(s.getInventorySize() * 9));
-            if (shopManager.isUseBackButtons()) {
-                setItem(s.getBackButtonSlot(), ItemStackBuilder.of(configManager.getBackButton()).buildItem().build());
-                getSlot(s.getBackButtonSlot()).bind(ClickType.LEFT, this::handleBack);
-            }
-
-            s.getSubShops().stream().filter(SubShop::isEnabled).forEach(subShop -> {
-                setItem(subShop.getSlot(), ItemStackBuilder.of(subShop.getShopItem()).buildItem().build());
-                getSlot(subShop.getSlot()).bind(ClickType.LEFT, () -> handleSubShop(subShop));
-                getSlot(subShop.getSlot()).bind(ClickType.RIGHT, () -> handleBulk(subShop));
-            });
+    protected void constructGUI() {
+        int num = 0;
+        while (num != size) {
+            ItemStack glass = configManager.getFillItem();
+            inventory.setItem(num, glass);
+            num++;
         }
+
+        epicBuckets.getShopManager().getShops().stream().filter(Shop::isEnabled).forEach(shop -> {
+            inventory.setItem(shop.getSlot(), shop.getShopItem());
+        });
+
     }
 
-    private void handleBulk(SubShop s) {
-        new GUIBulk(s, getPlayer()).open();
+    @Override
+    protected void registerClickables() {
+        epicBuckets.getShopManager().getShops().stream().filter(Shop::isEnabled).forEach(shop -> {
+
+            new GUIShop(shop, player).open();
+
+            getSlot(shop.getSlot()).bind(ClickType.LEFT, () -> handleClick(shop));
+        });
+
     }
 
-    private void handleBack() {
-        new GUIMain(getPlayer()).open();
-    }
+    @Override
+    protected void registerOnCloses() {
 
-    private void handleSubShop(SubShop s) {
-        if (shopManager.hasEnoughFunds(getPlayer(), s, 1) && !shopManager.inventoryFull(getPlayer())) shopManager.buyFromShop(getPlayer(), s, 1);
-        if (shopManager.isCloseAfterPurchase()) new GUIMain(getPlayer()).open();
     }
-
 }

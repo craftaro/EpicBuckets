@@ -28,27 +28,25 @@ public class GUIMain extends AbstractGUI {
 
     @Override
     protected void constructGUI() {
-        int num = 0;
-        while (num != size) {
-            ItemStack glass = configManager.getFillItem();
-            inventory.setItem(num, glass);
-            num++;
+        if (configManager.isFillInventory()) {
+            int num = 0;
+            while (num != size) {
+                ItemStack glass = configManager.getFillItem();
+                inventory.setItem(num, glass);
+                num++;
+            }
         }
 
-        epicBuckets.getShopManager().getShops().stream().filter(Shop::isEnabled).forEach(shop -> {
-            inventory.setItem(shop.getSlot(), shop.getShopItem());
-        });
+        epicBuckets.getShopManager().getShops().stream().filter(Shop::isEnabled).forEach(shop ->
+                inventory.setItem(shop.getSlot(), shop.getShopItem()));
 
     }
 
     @Override
     protected void registerClickables() {
-        epicBuckets.getShopManager().getShops().stream().filter(Shop::isEnabled).forEach(shop -> {
-
-            registerClickable(shop.getSlot(), ((player1, inventory1, cursor, slot, type) -> {
-                new GUIShop(player, shop);
-            }));
-        });
+        epicBuckets.getShopManager().getShops().stream().filter(Shop::isEnabled).forEach(shop ->
+                registerClickable(shop.getSlot(), ((player1, inventory1, cursor, slot, type) ->
+                        new GUIShop(player, shop))));
 
     }
 
