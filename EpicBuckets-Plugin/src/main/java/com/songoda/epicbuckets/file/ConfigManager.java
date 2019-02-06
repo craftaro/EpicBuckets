@@ -234,6 +234,10 @@ public class ConfigManager {
         return (cooldowns.get(player.getUniqueId()) + cooldown) < System.currentTimeMillis();
     }
 
+    public void updateCooldown(Player player) {
+        cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+    }
+
     public void createConfig(String name, boolean resource) {
         File f = new File(epicBuckets.getDataFolder(), name + ".yml");
         configDatabase.put(name, new Config(f, resource));

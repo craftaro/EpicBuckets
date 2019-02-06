@@ -85,6 +85,7 @@ public class GenbucketPlaceListener implements Listener {
             case HORIZONTAL:
                 genbucket = new Horizontal(e.getPlayer(), e.getClickedBlock(), e.getBlockFace(), instance.getShopManager().getShop(nbtItem.getString("Shop")).getSubShop(nbtItem.getString("SubShop")));
         }
+        instance.getConfigManager().updateCooldown(e.getPlayer());
 
         if (!genbucket.calculateBlockFace()) {
             e.getPlayer().sendMessage(instance.getLocale().getMessage("event.genbucket.placedwrong").replace("%genbucket%", genbucket.getGenbucketType().name.toUpperCase() + " genbucket"));

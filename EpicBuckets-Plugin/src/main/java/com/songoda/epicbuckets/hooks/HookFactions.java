@@ -1,5 +1,6 @@
 package com.songoda.epicbuckets.hooks;
 
+import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.utils.hooks.ClaimableProtectionPluginHook;
 import me.markeh.factionsframework.FactionsFramework;
 import me.markeh.factionsframework.entities.FPlayer;
@@ -28,7 +29,9 @@ public class HookFactions implements ClaimableProtectionPluginHook {
         FPlayer fPlayer = FPlayers.getBySender(player);
         Faction faction = Factions.getFactionAt(location);
 
-        return faction.isNone() || fPlayer.getFaction().equals(faction);
+        if (faction.isNone()) return EpicBuckets.getInstance().getConfigManager().isGensInWilderness();
+
+        return fPlayer.getFaction().equals(faction);
     }
 
     @Override

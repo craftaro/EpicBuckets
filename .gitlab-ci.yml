@@ -4,7 +4,7 @@ stages:
 variables:
     name: "EpicBuckets"
     path: "/builds/Songoda/$name"
-    version: "1.4.4"
+    version: "1.5"
 
 build:
   stage: build
