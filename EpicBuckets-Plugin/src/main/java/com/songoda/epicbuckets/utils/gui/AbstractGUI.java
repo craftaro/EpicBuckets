@@ -1,8 +1,8 @@
-package com.songoda.epicbuckets.util.gui;
+package com.songoda.epicbuckets.utils.gui;
 
 import com.songoda.arconix.api.methods.formatting.TextComponent;
 import com.songoda.epicbuckets.EpicBuckets;
-import com.songoda.epicbuckets.util.ServerVersion;
+import com.songoda.epicbuckets.utils.ServerVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -76,7 +76,7 @@ public abstract class AbstractGUI implements Listener {
                         }
                     }
                 }
-                
+
                 Map<Range, Clickable> entries = new HashMap<>(gui.clickables);
 
                 for (Map.Entry<Range, Clickable> entry : entries.entrySet()) {
@@ -86,7 +86,7 @@ public abstract class AbstractGUI implements Listener {
                     if (event.getSlot() >= range.getMin() && event.getSlot() <= range.getMax()) {
                         entry.getValue().Clickable(player, inventory, event.getCursor(), event.getSlot(), event.getClick());
                         if (EpicBuckets.getInstance().isServerVersionAtLeast(ServerVersion.V1_12))
-                        player.playSound(player.getLocation(), entry.getKey().getOnClickSound(), 1F, 1F);
+                            player.playSound(player.getLocation(), entry.getKey().getOnClickSound(), 1F, 1F);
                     }
                 }
             }

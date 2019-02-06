@@ -1,7 +1,7 @@
-package com.songoda.epicbuckets.util.gui;
+package com.songoda.epicbuckets.utils.gui;
 
 import com.songoda.epicbuckets.EpicBuckets;
-import com.songoda.epicbuckets.util.ServerVersion;
+import com.songoda.epicbuckets.utils.ServerVersion;
 import org.bukkit.Sound;
 import org.bukkit.event.inventory.ClickType;
 

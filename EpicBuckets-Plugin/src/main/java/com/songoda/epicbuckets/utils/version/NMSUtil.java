@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.util.version;
+package com.songoda.epicbuckets.utils.version;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

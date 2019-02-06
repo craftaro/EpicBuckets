@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.util.gui;
+package com.songoda.epicbuckets.utils.gui;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;

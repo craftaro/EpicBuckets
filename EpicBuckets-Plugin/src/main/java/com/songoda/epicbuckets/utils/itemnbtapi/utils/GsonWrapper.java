@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.util.itemnbtapi.utils;
+package com.songoda.epicbuckets.utils.itemnbtapi.utils;
 
 import com.google.gson.Gson;
 

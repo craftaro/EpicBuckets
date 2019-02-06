@@ -1,8 +1,8 @@
-package com.songoda.epicbuckets.util.gui;
+package com.songoda.epicbuckets.utils.gui;
 
 import com.songoda.epicbuckets.EpicBuckets;
-import com.songoda.epicbuckets.util.ServerVersion;
-import com.songoda.epicbuckets.util.version.NMSUtil;
+import com.songoda.epicbuckets.utils.ServerVersion;
+import com.songoda.epicbuckets.utils.version.NMSUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -53,7 +53,7 @@ public class AbstractAnvilGUI {
                         closeSound = Sound.ENTITY_PLAYER_LEVELUP;
                     else
                         closeSound = Sound.valueOf("LEVEL_UP");
-                        
+
                 }
                 if (!(event.getWhoClicked() instanceof Player) || !event.getInventory().equals(inv)) return;
 
@@ -94,7 +94,8 @@ public class AbstractAnvilGUI {
                 if (!inv.equals(AbstractAnvilGUI.this.inv)) return;
                 inv.clear();
                 OnClose onClose = getOnClose();
-                if (EpicBuckets.getInstance().isServerVersionAtLeast(ServerVersion.V1_9)) player.playSound(player.getLocation(), closeSound, 1F, 1F);
+                if (EpicBuckets.getInstance().isServerVersionAtLeast(ServerVersion.V1_9))
+                    player.playSound(player.getLocation(), closeSound, 1F, 1F);
                 Bukkit.getScheduler().scheduleSyncDelayedTask(EpicBuckets.getInstance(), () -> {
                     if (onClose != null) onClose.OnClose(player, inv);
                     destroy();

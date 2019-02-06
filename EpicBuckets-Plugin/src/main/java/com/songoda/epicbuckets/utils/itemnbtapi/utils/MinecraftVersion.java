@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.util.itemnbtapi.utils;
+package com.songoda.epicbuckets.utils.itemnbtapi.utils;
 
 import org.bukkit.Bukkit;
 
@@ -21,10 +21,6 @@ public enum MinecraftVersion {
 
     MinecraftVersion(int versionId) {
         this.versionId = versionId;
-    }
-
-    public int getVersionId() {
-        return versionId;
     }
 
     public static MinecraftVersion getVersion() {
@@ -57,6 +53,10 @@ public enum MinecraftVersion {
             hasGsonSupport = false;
         }
         return hasGsonSupport;
+    }
+
+    public int getVersionId() {
+        return versionId;
     }
 
 }

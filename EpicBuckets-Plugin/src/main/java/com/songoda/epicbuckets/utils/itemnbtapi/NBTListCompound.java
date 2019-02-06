@@ -1,4 +1,4 @@
-package com.songoda.epicbuckets.util.itemnbtapi;
+package com.songoda.epicbuckets.utils.itemnbtapi;
 
 import java.util.HashSet;
 import java.util.Set;

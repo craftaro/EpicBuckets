@@ -1,4 +1,9 @@
-package com.songoda.epicbuckets.util.itemnbtapi;
+package com.songoda.epicbuckets.utils.itemnbtapi;
+
+import com.songoda.epicbuckets.utils.itemnbtapi.utils.GsonWrapper;
+import com.songoda.epicbuckets.utils.itemnbtapi.utils.MinecraftVersion;
+import org.bukkit.block.BlockState;
+import org.bukkit.entity.Entity;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,12 +12,7 @@ import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.Stack;
 
-import com.songoda.epicbuckets.util.itemnbtapi.utils.GsonWrapper;
-import com.songoda.epicbuckets.util.itemnbtapi.utils.MinecraftVersion;
-import org.bukkit.block.BlockState;
-import org.bukkit.entity.Entity;
-
-public class NBTReflectionUtil {  
+public class NBTReflectionUtil {
 
     public static Object getNMSEntity(Entity entity) {
         try {
@@ -61,11 +61,11 @@ public class NBTReflectionUtil {
         @SuppressWarnings("rawtypes")
         Class clazz = ClassWrapper.NMS_ITEMSTACK.getClazz();
         try {
-            if(MinecraftVersion.getVersion().getVersionId() >= MinecraftVersion.MC1_12_R1.getVersionId()){
+            if (MinecraftVersion.getVersion().getVersionId() >= MinecraftVersion.MC1_12_R1.getVersionId()) {
                 Constructor<?> constructor = clazz.getConstructor(ClassWrapper.NMS_NBTTAGCOMPOUND.getClazz());
                 constructor.setAccessible(true);
                 return constructor.newInstance(nbtcompound.getCompound());
-            }else{
+            } else {
                 Method method = clazz.getMethod("createStack", ClassWrapper.NMS_NBTTAGCOMPOUND.getClazz());
                 method.setAccessible(true);
                 return method.invoke(null, nbtcompound.getCompound());
