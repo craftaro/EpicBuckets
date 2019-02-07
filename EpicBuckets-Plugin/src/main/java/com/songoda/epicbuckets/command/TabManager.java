@@ -1,7 +1,6 @@
 package com.songoda.epicbuckets.command;
 
 import com.songoda.epicbuckets.EpicBuckets;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -27,6 +26,7 @@ public class TabManager implements TabCompleter {
                         if (ac.getSubCommand() == null) continue;
                         subs.addAll(ac.getSubCommand());
                     }
+                    subs.removeIf(s -> !s.toLowerCase().startsWith(strings[0].toLowerCase()));
                     return subs;
                 }
             } else if (strings.length != 0 && abstractCommand.getParent() != null && abstractCommand.getParent().getCommand().equalsIgnoreCase(command.getName().toLowerCase())) {
@@ -34,7 +34,9 @@ public class TabManager implements TabCompleter {
                 String cmd2 = strings.length >= 2 ? String.join(" ", strings[0], strings[1]) : null;
                 for (String cmds : abstractCommand.getSubCommand()) {
                     if (cmd.equalsIgnoreCase(cmds) || (cmd2 != null && cmd2.equalsIgnoreCase(cmds))) {
-                       return abstractCommand.onTab(EpicBuckets.getInstance(), sender, strings);
+                        List<String> list = abstractCommand.onTab(EpicBuckets.getInstance(), sender, strings);
+                        if (list != null) list.removeIf(s -> !s.toLowerCase().startsWith(strings[strings.length - 1].toLowerCase()));
+                        return list;
                     }
                 }
             }
