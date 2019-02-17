@@ -88,7 +88,7 @@ public class GenbucketPlaceListener implements Listener {
         instance.getConfigManager().updateCooldown(e.getPlayer());
 
         if (!genbucket.calculateBlockFace()) {
-            e.getPlayer().sendMessage(instance.getLocale().getMessage("event.genbucket.placedwrong").replace("%genbucket%", genbucket.getGenbucketType().name.toUpperCase() + " genbucket"));
+            e.getPlayer().sendMessage(instance.getLocale().getMessage("event.genbucket.placedwrong").replace("%genbucket%", genbucket.getGenbucketType().formatName() + " Genbucket"));
             return;
         }
         if (genbucket.getGenbucketType() == GenbucketType.PSUEDO && !instance.getConfigManager().getPsuedoMaterials().contains(XMaterial.requestXMaterial(e.getClickedBlock().getType().name(), e.getClickedBlock().getData()))) {

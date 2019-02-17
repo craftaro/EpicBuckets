@@ -3,7 +3,7 @@ version: maven-version-number
 description: Generate walls fast and efficient with beautiful guis!
 author: Songoda
 main: com.songoda.epicbuckets.EpicBuckets
-softdepend: [WorldGuard, WorldEdit, Factions, MassiveCore, GriefPrevention]
+softdepend: [WorldGuard, WorldEdit, Factions, MassiveCore, GriefPrevention, FactionsFramework]
 depend: [Vault]
 commands:
   EpicBuckets:

@@ -22,6 +22,10 @@ public class PsuedoVertical extends Genbucket {
         BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
+                if (!epicBuckets.getGenbucketManager().isGenbucketActive(getGenUUID())) {
+                    cancel();
+                    return;
+                }
                 if (isBelowVoid(blocksUp) || blocksUp >= epicBuckets.getConfigManager().getMaxVerticalHeight()) {
                     epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
                     cancel();

@@ -15,7 +15,15 @@ interface.admin.panel.title = "Active Genbuckets"
 interface.admin.panel.player = "&a%player%"
 interface.admin.panel.type = "&7Type: &f%genbucket%"
 interface.admin.panel.location = "&7Location: &f%location%"
-interface.admin.panel.teleport = "&f&oClick to teleport"
+interface.admin.panel.teleport = "&f&oLeft Click to teleport"
+interface.admin.panel.delete = "&f&oRight Click to delete"
+interface.admin.panel.teleported = "&7Teleported to bucket at &e%location%"
+interface.admin.panel.deleted = "&cDeleted &7bucket at &e%location%"
+interface.admin.panel.previous = "&cPrevious"
+interface.admin.panel.next = "&aNext"
+interface.admin.panel.deactivateall = "&cDeactive All"
+interface.admin.panel.page = "&bPage &8#&e%page%"
+interface.admin.panel.deactivedall = "&cDeactivated &7all active genbuckets."
 
 #Event Messages
 

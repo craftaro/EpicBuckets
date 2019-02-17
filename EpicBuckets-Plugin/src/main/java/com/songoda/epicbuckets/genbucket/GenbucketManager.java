@@ -41,6 +41,17 @@ public class GenbucketManager {
         admins.add(player);
     }
 
+    public boolean isGenbucketActive(UUID genbucketUUID) {
+        for (UUID uuid : activeGens.keySet())
+            for (Genbucket bucket : activeGens.get(uuid)) if (bucket.getGenUUID().equals(genbucketUUID)) return true;
+        return false;
+    }
+
+    public void deactiveAll() {
+        for (UUID uuid : activeGens.keySet())
+            for (Genbucket genbucket : activeGens.get(uuid)) unregisterGenbucketForPlayer(genbucket.getOwner(), genbucket.getGenUUID());
+    }
+
     public List<Genbucket> activeGensInOneList() {
         List<Genbucket> gens = new ArrayList<>();
         activeGens.forEach((uuid, genbuckets) -> gens.addAll(genbuckets));

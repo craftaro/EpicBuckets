@@ -137,21 +137,31 @@ public abstract class Genbucket {
     }
 
     protected boolean spongeInRange(Block block) {
+
         if (!epicBuckets.getConfigManager().isSpongeCheck()) return false;
+
         int radius = (epicBuckets.getConfigManager().getSpongeRadius() - 1) / 2;
+
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 if (block.getRelative(x, 0, z).getType() == XMaterial.SPONGE.parseMaterial()) return true;
             }
         }
+
         return false;
     }
 
     protected boolean placeGen(Block block) {
+
         if (!epicBuckets.getConfigManager().getIgnoredMaterials().contains(XMaterial.requestXMaterial(block.getType().name(), block.getData())))
             return false;
+
+        if (!epicBuckets.canBuild(owner, block.getLocation())) return false;
+
         if (spongeInRange(block)) return false;
+
         block.setType(getGenItem().getType());
+
         return true;
     }
 

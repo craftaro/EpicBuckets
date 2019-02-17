@@ -177,10 +177,15 @@ public class ConfigManager {
 
         epicBuckets.getConfig().getConfigurationSection("COST-FOR-INFINITE-USE").getKeys(false)
                 .forEach(bucket -> {
+
                     HashMap<ItemStack, Double> chargingCostsPerItem = new HashMap<>();
+
                     epicBuckets.getConfig().getConfigurationSection("COST-FOR-INFINITE-USE." + bucket).getKeys(false)
-                            .forEach(item -> chargingCostsPerItem.put(XMaterial.valueOf(item).parseItem(), epicBuckets.getConfig().getDouble("COST-FOR-INFINITE-USE." + bucket + "." + item)));
+                            .forEach(item -> chargingCostsPerItem.put(XMaterial.valueOf(item).parseItem(),
+                                    epicBuckets.getConfig().getDouble("COST-FOR-INFINITE-USE." + bucket + "." + item)));
+
                     infiniteUseCost.put(GenbucketType.valueOf(bucket), chargingCostsPerItem);
+
                 });
 
         setCooldown(epicBuckets.getConfig().getInt("GENBUCKET-DELAY"));
@@ -447,7 +452,7 @@ public class ConfigManager {
 
     public double getInfiniteUseCostForGenbucketType(GenbucketType genbucketType, ItemStack item) {
         for (ItemStack itemStack : infiniteUseCost.get(genbucketType).keySet()) {
-            if (itemStack.getType() == item.getType() && itemStack.getData() == item.getData()) {
+            if (itemStack.getType().equals(item.getType()) && itemStack.getData().equals(item.getData())) {
                 return infiniteUseCost.get(genbucketType).get(itemStack);
             }
         }

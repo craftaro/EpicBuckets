@@ -13,6 +13,10 @@ public enum GenbucketType {
         this.name = name;
     }
 
+    public String formatName() {
+        return name.toUpperCase().charAt(0) + name.toLowerCase().substring(1);
+    }
+
     @Override
     public String toString() {
         return name;

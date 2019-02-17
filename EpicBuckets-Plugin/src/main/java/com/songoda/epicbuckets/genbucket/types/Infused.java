@@ -24,6 +24,10 @@ public class Infused extends Genbucket {
         BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
+                if (!epicBuckets.getGenbucketManager().isGenbucketActive(getGenUUID())) {
+                    cancel();
+                    return;
+                }
 //                if (isGravityGen()) {
 //                        if (!side1 && !side2) {
 //                            epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());

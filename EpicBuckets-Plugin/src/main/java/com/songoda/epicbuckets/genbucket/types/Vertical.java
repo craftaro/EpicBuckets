@@ -22,6 +22,10 @@ public class Vertical extends Genbucket {
         BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
+                if (!epicBuckets.getGenbucketManager().isGenbucketActive(getGenUUID())) {
+                    cancel();
+                    return;
+                }
                 if (isGravityGen()) {
                     if (!gravityGen(blocksPlaced)) {
                         epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());

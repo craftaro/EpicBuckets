@@ -22,6 +22,10 @@ public class Horizontal extends Genbucket {
         BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
+                if (!epicBuckets.getGenbucketManager().isGenbucketActive(getGenUUID())) {
+                    cancel();
+                    return;
+                }
                 if (blocksPlaced >= epicBuckets.getConfigManager().getMaxHorizontalLength() || !placeGen(getNextBlock())) {
                     epicBuckets.getGenbucketManager().unregisterGenbucketForPlayer(getOwner(), getGenUUID());
                     cancel();
