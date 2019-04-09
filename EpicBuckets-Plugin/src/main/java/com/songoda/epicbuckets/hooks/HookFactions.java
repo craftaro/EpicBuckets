@@ -29,7 +29,7 @@ public class HookFactions implements ClaimableProtectionPluginHook {
         FPlayer fPlayer = FPlayers.getBySender(player);
         Faction faction = Factions.getFactionAt(location);
 
-        if (faction.isNone()) return EpicBuckets.getInstance().getConfigManager().isGensInWilderness();
+        if (faction.isNone()) return false;
 
         return fPlayer.getFaction().equals(faction);
     }
