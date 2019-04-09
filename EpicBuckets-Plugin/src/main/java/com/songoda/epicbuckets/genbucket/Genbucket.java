@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.List;
 import java.util.UUID;
 
 public abstract class Genbucket {
@@ -153,7 +154,12 @@ public abstract class Genbucket {
 
     protected boolean placeGen(Block block) {
 
-        if (!epicBuckets.getConfigManager().getIgnoredMaterials().contains(XMaterial.requestXMaterial(block.getType().name(), block.getData())))
+        List<XMaterial> materials = epicBuckets.getConfigManager().getIgnoredMaterials();
+
+        if (!materials.contains(XMaterial.requestXMaterial(block.getType().name(), block.getData())))
+            return false;
+
+        if ((materials.contains(XMaterial.WATER) || materials.contains(XMaterial.LAVA)) && block.isLiquid())
             return false;
 
         if (!epicBuckets.canBuild(owner, block.getLocation())) return false;
