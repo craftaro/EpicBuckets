@@ -3,7 +3,7 @@ package com.songoda.epicbuckets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import org.apache.commons.io.IOUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class Locale {
 
     private static final List<Locale> LOCALES = Lists.newArrayList();
-    private static final Pattern NODE_PATTERN = Pattern.compile("(\\w+(?:\\.{1}\\w+)*)\\s*=\\s*\"(.*)\"");
+    private static final Pattern NODE_PATTERN = Pattern.compile("(\\w+(?:\\.\\w+)*)\\s*=\\s*\"(.*)\"");
     private static final String FILE_EXTENSION = ".lang";
     private static JavaPlugin plugin;
     private static File localeFolder;
@@ -48,7 +48,7 @@ public class Locale {
 
         if (this.reloadMessages()) return;
 
-        plugin.getLogger().info("Loaded locale " + fileName);
+        Bukkit.getConsoleSender().sendMessage("Loaded locale " + fileName);
     }
 
     /**
@@ -74,7 +74,9 @@ public class Locale {
      * Find all .lang file locales under the "locales" folder
      */
     public static void searchForLocales() {
-        if (!localeFolder.exists()) localeFolder.mkdirs();
+        if (!localeFolder.exists()) {
+            localeFolder.mkdirs();
+        }
 
         for (File file : localeFolder.listFiles()) {
             String name = file.getName();
@@ -87,7 +89,7 @@ public class Locale {
             if (localeExists(localeValues[0] + "_" + localeValues[1])) continue;
 
             LOCALES.add(new Locale(localeValues[0], localeValues[1]));
-            plugin.getLogger().info("Found and loaded locale \"" + fileName + "\"");
+            Bukkit.getConsoleSender().sendMessage("Found and loaded locale \"" + fileName + "\"");
         }
     }
 
@@ -151,11 +153,11 @@ public class Locale {
     /**
      * Save a default locale file from the project source directory, to the locale folder
      *
-     * @param path     the path to the file to save
+     * @param in       file to save
      * @param fileName the name of the file to save
      * @return true if the operation was successful, false otherwise
      */
-    public static boolean saveDefaultLocale(String path, String fileName) {
+    public static boolean saveDefaultLocale(InputStream in, String fileName) {
         if (!localeFolder.exists()) localeFolder.mkdirs();
 
         if (!fileName.endsWith(FILE_EXTENSION))
@@ -167,7 +169,7 @@ public class Locale {
         }
 
         try (OutputStream outputStream = new FileOutputStream(destinationFile)) {
-            IOUtils.copy(plugin.getResource(fileName), outputStream);
+            copy(in == null ? plugin.getResource(fileName) : in, outputStream);
 
             fileName = fileName.substring(0, fileName.lastIndexOf('.'));
             String[] localeValues = fileName.split("_");
@@ -190,7 +192,7 @@ public class Locale {
      * @return true if the operation was successful, false otherwise
      */
     public static boolean saveDefaultLocale(String fileName) {
-        return saveDefaultLocale("", fileName);
+        return saveDefaultLocale(null, fileName);
     }
 
     /**
@@ -242,6 +244,19 @@ public class Locale {
         }
 
         return changed;
+    }
+
+    private static void copy(InputStream input, OutputStream output) {
+        int n;
+        byte[] buffer = new byte[1024 * 4];
+
+        try {
+            while ((n = input.read(buffer)) != -1) {
+                output.write(buffer, 0, n);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -302,7 +317,7 @@ public class Locale {
     public String getMessage(String node, Object... args) {
         String message = getMessage(node);
         for (Object arg : args) {
-            message = message.replaceFirst("\\%.*?\\%", arg.toString());
+            message = message.replaceFirst("%.*?%", arg.toString());
         }
         return message;
     }
@@ -360,4 +375,7 @@ public class Locale {
         return true;
     }
 
+    public String getPrefix() {
+        return getMessage("general.nametag.prefix") + " ";
+    }
 }

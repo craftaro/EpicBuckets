@@ -2,8 +2,8 @@ package com.songoda.epicbuckets.shop;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.utils.InventoryHelper;
+import com.songoda.epicbuckets.utils.Materials;
 import com.songoda.epicbuckets.utils.Validator;
-import com.songoda.epicbuckets.utils.XMaterial;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -20,7 +20,7 @@ public class SubShop {
     private ItemStack shopItem;
     private ItemStack genItem;
     private ItemStack genShopItem;
-    private XMaterial type;
+    private Materials type;
 
     private Shop parent;
     private String item;
@@ -60,7 +60,7 @@ public class SubShop {
             setEnabled(false);
         }
 
-        this.type = XMaterial.valueOf(shops.getString(subShopPath + ".type"));
+        this.type = Materials.valueOf(shops.getString(subShopPath + ".type"));
         this.shopName = shops.getString(subShopPath + ".name");
         this.description = shops.getStringList(subShopPath + ".description");
         this.genItemLore = shops.getStringList(subShopPath + ".item-lore");
@@ -76,12 +76,12 @@ public class SubShop {
             setEnabled(false);
         }
 
-        shopItem = ((!m) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".icon")).parseItem());
+        shopItem = ((!m) ? Materials.WATER_BUCKET.parseItem() : Materials.valueOf(shops.getString(subShopPath + ".icon")).parseItem());
         shopItem = InventoryHelper.setDisplayName(InventoryHelper.setSubShopLore(shopItem, getDescription(), this), getShopName());
 
-        genItem = ((!t) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".type")).parseItem());
+        genItem = ((!t) ? Materials.WATER_BUCKET.parseItem() : Materials.valueOf(shops.getString(subShopPath + ".type")).parseItem());
 
-        genShopItem = ((!m) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(shops.getString(subShopPath + ".icon")).parseItem());
+        genShopItem = ((!m) ? Materials.WATER_BUCKET.parseItem() : Materials.valueOf(shops.getString(subShopPath + ".icon")).parseItem());
         genShopItem = InventoryHelper.setDisplayName(InventoryHelper.setLore(genShopItem, getGenItemLore()), getShopName());
     }
 
@@ -133,7 +133,7 @@ public class SubShop {
         return item;
     }
 
-    public XMaterial getType() {
+    public Materials getType() {
         return type;
     }
 }

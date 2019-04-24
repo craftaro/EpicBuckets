@@ -65,9 +65,9 @@ public class ShopManager {
             purchaseSlot = 40;
         }
 
-        increaseItem = ((!i) ? XMaterial.GREEN_STAINED_GLASS_PANE.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopIncreasePath() + ".material")).parseItem());
-        decreaseItem = ((!d) ? XMaterial.RED_STAINED_GLASS_PANE.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopDecreasePath() + ".material")).parseItem());
-        purchaseItem = ((!p) ? XMaterial.YELLOW_STAINED_GLASS.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopPurchasePath() + ".material")).parseItem());
+        increaseItem = ((!i) ? Materials.GREEN_STAINED_GLASS_PANE.parseItem() : Materials.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopIncreasePath() + ".material")).parseItem());
+        decreaseItem = ((!d) ? Materials.RED_STAINED_GLASS_PANE.parseItem() : Materials.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopDecreasePath() + ".material")).parseItem());
+        purchaseItem = ((!p) ? Materials.YELLOW_STAINED_GLASS.parseItem() : Materials.valueOf(epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopPurchasePath() + ".material")).parseItem());
         purchaseItem = InventoryHelper.setDisplayName(purchaseItem, epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopPurchasePath() + ".name"));
 
         for (String s : epicBuckets.getConfig().getString(epicBuckets.getConfigManager().getBulkShopIncreasePath() + ".slots").split(",")) {

@@ -1,5 +1,7 @@
 package com.songoda.epicbuckets.utils.itemnbtapi;
 
+import com.songoda.epicbuckets.utils.itemnbtapi.utils.MinecraftVersion;
+
 public class NBTList {
 
     private String listName;
@@ -28,7 +30,11 @@ public class NBTList {
         }
         try {
             Object compound = ClassWrapper.NMS_NBTTAGCOMPOUND.getClazz().newInstance();
-            ReflectionMethod.LIST_ADD.run(listObject, compound);
+            if (MinecraftVersion.getVersion().getVersionId() >= MinecraftVersion.MC1_14_R1.getVersionId()) {
+                ReflectionMethod.LIST_ADD.run(listObject, 0, compound);
+            } else {
+                ReflectionMethod.LEGACY_LIST_ADD.run(listObject, compound);
+            }
             return new NBTListCompound(this, compound);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -69,7 +75,13 @@ public class NBTList {
             return;
         }
         try {
-            ReflectionMethod.LIST_ADD.run(listObject, ClassWrapper.NMS_NBTTAGSTRING.getClazz().getConstructor(String.class).newInstance(s));
+            if (MinecraftVersion.getVersion().getVersionId() >= MinecraftVersion.MC1_14_R1.getVersionId()) {
+                ReflectionMethod.LIST_ADD.run(listObject, 0,
+                        ClassWrapper.NMS_NBTTAGSTRING.getClazz().getConstructor(String.class).newInstance(s));
+            } else {
+                ReflectionMethod.LEGACY_LIST_ADD.run(listObject,
+                        ClassWrapper.NMS_NBTTAGSTRING.getClazz().getConstructor(String.class).newInstance(s));
+            }
             save();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -82,7 +94,8 @@ public class NBTList {
             return;
         }
         try {
-            ReflectionMethod.LIST_SET.run(listObject, i, ClassWrapper.NMS_NBTTAGSTRING.getClazz().getConstructor(String.class).newInstance(s));
+            ReflectionMethod.LIST_SET.run(listObject, i,
+                    ClassWrapper.NMS_NBTTAGSTRING.getClazz().getConstructor(String.class).newInstance(s));
             save();
         } catch (Exception ex) {
             ex.printStackTrace();

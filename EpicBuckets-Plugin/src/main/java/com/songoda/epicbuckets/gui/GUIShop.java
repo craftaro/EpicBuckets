@@ -32,7 +32,7 @@ public class GUIShop extends AbstractGUI {
     }
 
     @Override
-    protected void constructGUI() {
+    public void constructGUI() {
         if (shop.isFillInventory()) {
             int num = 0;
             while (num != size) {

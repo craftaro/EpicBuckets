@@ -3,8 +3,8 @@ package com.songoda.epicbuckets.file;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.GenbucketType;
 import com.songoda.epicbuckets.utils.InventoryHelper;
+import com.songoda.epicbuckets.utils.Materials;
 import com.songoda.epicbuckets.utils.Validator;
-import com.songoda.epicbuckets.utils.XMaterial;
 import org.bukkit.block.BlockFace;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -34,8 +34,8 @@ public class ConfigManager {
     private String bulkShopPurchasePath = "BULK-SHOP-INVENTORY.purchase-item";
     private String menuItemsPath = "MENU-ITEMS";
 
-    private List<XMaterial> ignoredMaterials;
-    private List<XMaterial> psuedoMaterials;
+    private List<Materials> ignoredMaterials;
+    private List<Materials> psuedoMaterials;
 
     private LinkedHashMap<String, Integer> genbucketGroups;
 
@@ -181,7 +181,7 @@ public class ConfigManager {
                     HashMap<ItemStack, Double> chargingCostsPerItem = new HashMap<>();
 
                     epicBuckets.getConfig().getConfigurationSection("COST-FOR-INFINITE-USE." + bucket).getKeys(false)
-                            .forEach(item -> chargingCostsPerItem.put(XMaterial.valueOf(item).parseItem(),
+                            .forEach(item -> chargingCostsPerItem.put(Materials.valueOf(item).parseItem(),
                                     epicBuckets.getConfig().getDouble("COST-FOR-INFINITE-USE." + bucket + "." + item)));
 
                     infiniteUseCost.put(GenbucketType.valueOf(bucket), chargingCostsPerItem);
@@ -219,14 +219,14 @@ public class ConfigManager {
     private void setupFillItem() {
         boolean m = Validator.isMaterial(epicBuckets.getConfig().getString(getFillItemPath() + ".material"));
 
-        fillItem = ((!m) ? XMaterial.BLACK_STAINED_GLASS_PANE.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(getFillItemPath() + ".material")).parseItem());
+        fillItem = ((!m) ? Materials.BLACK_STAINED_GLASS_PANE.parseItem() : Materials.valueOf(epicBuckets.getConfig().getString(getFillItemPath() + ".material")).parseItem());
         fillItem = InventoryHelper.setDisplayName(fillItem, epicBuckets.getConfig().getString(getFillItemPath() + ".name"));
     }
 
     private void setupBackButton() {
         boolean m = Validator.isMaterial(epicBuckets.getConfig().getString(getBackButtonPath() + ".material"));
 
-        backButton = ((!m) ? XMaterial.BARRIER.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(getBackButtonPath() + ".material")).parseItem());
+        backButton = ((!m) ? Materials.BARRIER.parseItem() : Materials.valueOf(epicBuckets.getConfig().getString(getBackButtonPath() + ".material")).parseItem());
         backButton = InventoryHelper.setDisplayName(backButton, epicBuckets.getConfig().getString(getBackButtonPath() + ".name"));
     }
 
@@ -282,11 +282,11 @@ public class ConfigManager {
         return bulkShopPurchasePath;
     }
 
-    public List<XMaterial> getIgnoredMaterials() {
+    public List<Materials> getIgnoredMaterials() {
         return ignoredMaterials;
     }
 
-    public List<XMaterial> getPsuedoMaterials() {
+    public List<Materials> getPsuedoMaterials() {
         return psuedoMaterials;
     }
 

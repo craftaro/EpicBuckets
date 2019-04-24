@@ -3,7 +3,7 @@ package com.songoda.epicbuckets.gui;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.Genbucket;
 import com.songoda.epicbuckets.utils.ChatUtil;
-import com.songoda.epicbuckets.utils.XMaterial;
+import com.songoda.epicbuckets.utils.Materials;
 import com.songoda.epicbuckets.utils.gui.AbstractGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -32,7 +32,7 @@ public class GUIPanel extends AbstractGUI {
     }
 
     @Override
-    protected void constructGUI() {
+    public void constructGUI() {
 
         inventory.clear();
         resetClickables();
@@ -88,7 +88,7 @@ public class GUIPanel extends AbstractGUI {
     private void registerExtraButtons() {
 
         if (page > 0) {
-            inventory.setItem(27, createItem(XMaterial.ARROW.parseItem(), epicBuckets.getLocale().getMessage("interface.admin.panel.previous")));
+            inventory.setItem(27, createItem(Materials.ARROW.parseItem(), epicBuckets.getLocale().getMessage("interface.admin.panel.previous")));
             registerClickable(27, (player, inventory, cursor, slot, type) -> {
                 page--;
                 constructGUI();
@@ -96,9 +96,9 @@ public class GUIPanel extends AbstractGUI {
             });
         }
 
-        ItemStack deactiveButton = createItem(XMaterial.RED_WOOL.parseItem(), epicBuckets.getLocale().getMessage("interface.admin.panel.deactivateall"));
-        ItemStack pageButton = createItem(XMaterial.SIGN.parseItem(), epicBuckets.getLocale().getMessage("interface.admin.panel.page").replace("%page%", String.valueOf(page + 1)));
-        ItemStack nextButton = createItem(XMaterial.ARROW.parseItem(), epicBuckets.getLocale().getMessage("interface.admin.panel.next"));
+        ItemStack deactiveButton = createItem(Materials.RED_WOOL.parseItem(), epicBuckets.getLocale().getMessage("interface.admin.panel.deactivateall"));
+        ItemStack pageButton = createItem(Materials.OAK_SIGN.parseItem(), epicBuckets.getLocale().getMessage("interface.admin.panel.page").replace("%page%", String.valueOf(page + 1)));
+        ItemStack nextButton = createItem(Materials.ARROW.parseItem(), epicBuckets.getLocale().getMessage("interface.admin.panel.next"));
 
         inventory.setItem(30, deactiveButton);
         inventory.setItem(32, pageButton);
@@ -134,7 +134,7 @@ public class GUIPanel extends AbstractGUI {
 
     private ItemStack createGenbucketItem(Genbucket genbucket) {
 
-        ItemStack skull = new ItemStack(XMaterial.PLAYER_HEAD.parseMaterial(), 1, (short) 3);
+        ItemStack skull = new ItemStack(Materials.PLAYER_HEAD.parseMaterial(), 1, (short) 3);
         SkullMeta meta = (SkullMeta) (skull.getItemMeta() != null ? skull.getItemMeta() : Bukkit.getItemFactory().getItemMeta(skull.getType()));
         meta.setOwner(genbucket.getOwner().getName());
         meta.setDisplayName(ChatUtil.colorString(epicBuckets.getLocale().getMessage("interface.admin.panel.player").replace("%player%", genbucket.getOwner().getName())));

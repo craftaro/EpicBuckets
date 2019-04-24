@@ -12,14 +12,14 @@ import java.util.stream.IntStream;
 
 public class InventoryHelper {
 
-    public static List<XMaterial> convertMaterialList(List<String> toConvert, String item) {
-        List<XMaterial> converted = new ArrayList<>();
+    public static List<Materials> convertMaterialList(List<String> toConvert, String item) {
+        List<Materials> converted = new ArrayList<>();
         for (String s : toConvert) {
             if (!Validator.isMaterial(s.toUpperCase())) {
                 EpicBuckets.getInstance().getDebugger().sendConsole("Invalid material " + s.toUpperCase() + " in " + item + ", skipping..");
                 continue;
             }
-            converted.add(XMaterial.valueOf(s.toUpperCase()));
+            converted.add(Materials.valueOf(s.toUpperCase()));
         }
         return converted;
     }
