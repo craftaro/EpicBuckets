@@ -27,7 +27,7 @@ public class GUIMain extends AbstractGUI {
     }
 
     @Override
-    protected void constructGUI() {
+    public void constructGUI() {
         if (configManager.isFillInventory()) {
             int num = 0;
             while (num != size) {

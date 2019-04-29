@@ -46,7 +46,7 @@ public class Validator {
 
     public static boolean isMaterial(String mat) {
         try {
-            XMaterial.valueOf(mat);
+            Materials.valueOf(mat);
             return true;
         } catch (IllegalArgumentException e) {
             return false;

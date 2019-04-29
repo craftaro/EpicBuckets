@@ -9,7 +9,7 @@ import com.songoda.epicbuckets.genbucket.types.Horizontal;
 import com.songoda.epicbuckets.genbucket.types.Infused;
 import com.songoda.epicbuckets.genbucket.types.PsuedoVertical;
 import com.songoda.epicbuckets.genbucket.types.Vertical;
-import com.songoda.epicbuckets.utils.XMaterial;
+import com.songoda.epicbuckets.utils.Materials;
 import com.songoda.epicbuckets.utils.itemnbtapi.NBTItem;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -91,7 +91,7 @@ public class GenbucketPlaceListener implements Listener {
             e.getPlayer().sendMessage(instance.getLocale().getMessage("event.genbucket.placedwrong").replace("%genbucket%", genbucket.getGenbucketType().formatName() + " Genbucket"));
             return;
         }
-        if (genbucket.getGenbucketType() == GenbucketType.PSUEDO && !instance.getConfigManager().getPsuedoMaterials().contains(XMaterial.requestXMaterial(e.getClickedBlock().getType().name(), e.getClickedBlock().getData()))) {
+        if (genbucket.getGenbucketType() == GenbucketType.PSUEDO && !instance.getConfigManager().getPsuedoMaterials().contains(Materials.requestMaterials(e.getClickedBlock().getType().name(), e.getClickedBlock().getData()))) {
             e.getPlayer().sendMessage(instance.getLocale().getMessage("event.genbucket.wrongmaterialpsuedo"));
             return;
         }

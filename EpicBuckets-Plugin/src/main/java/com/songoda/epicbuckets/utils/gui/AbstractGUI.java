@@ -28,6 +28,7 @@ public abstract class AbstractGUI implements Listener {
     private static boolean listenersInitialized = false;
     protected Player player;
     protected Inventory inventory = null;
+    protected String setTitle = null;
     protected boolean cancelBottom = false;
     private Map<Range, Clickable> clickables = new HashMap<>();
     private List<OnClose> onCloses = new ArrayList<>();
@@ -84,8 +85,7 @@ public abstract class AbstractGUI implements Listener {
                         continue;
                     if (event.getSlot() >= range.getMin() && event.getSlot() <= range.getMax()) {
                         entry.getValue().Clickable(player, inventory, event.getCursor(), event.getSlot(), event.getClick());
-                        if (EpicBuckets.getInstance().isServerVersionAtLeast(ServerVersion.V1_12))
-                            player.playSound(player.getLocation(), entry.getKey().getOnClickSound(), 1F, 1F);
+                        player.playSound(player.getLocation(), entry.getKey().getOnClickSound(), 1F, 1F);
                     }
                 }
             }
@@ -116,8 +116,9 @@ public abstract class AbstractGUI implements Listener {
     public void init(String title, int slots) {
         if (inventory == null
                 || inventory.getSize() != slots
-                || ChatColor.translateAlternateColorCodes('&', title) != inventory.getTitle()) {
-            this.inventory = Bukkit.getServer().createInventory(new GUIHolder(), slots, title);
+                || ChatColor.translateAlternateColorCodes('&', title) != player.getOpenInventory().getTitle()) {
+            this.inventory = Bukkit.getServer().createInventory(new GUIHolder(), slots, ChatColor.translateAlternateColorCodes('&', title));
+            this.setTitle = ChatColor.translateAlternateColorCodes('&', title);
             if (this.clickables.size() == 0)
                 registerClickables();
             if (this.onCloses.size() == 0)
@@ -128,7 +129,7 @@ public abstract class AbstractGUI implements Listener {
         player.openInventory(inventory);
     }
 
-    protected abstract void constructGUI();
+    public abstract void constructGUI();
 
     protected void addDraggable(Range range, boolean option) {
         this.draggableRanges.put(range, option);
@@ -169,10 +170,6 @@ public abstract class AbstractGUI implements Listener {
 
     protected ItemStack createButton(int slot, Material material, String name, ArrayList<String> lore) {
         return createButton(slot, material, name, lore.toArray(new String[0]));
-    }
-
-    protected ItemStack createButton(int slot, ItemStack item, String name, ArrayList<String> lore) {
-        return createButton(slot, item, name, lore.toArray(new String[0]));
     }
 
     protected void registerClickable(int min, int max, ClickType clickType, boolean bottom, Clickable clickable) {
@@ -221,5 +218,9 @@ public abstract class AbstractGUI implements Listener {
         public AbstractGUI getGUI() {
             return AbstractGUI.this;
         }
+    }
+
+    public String getSetTitle() {
+        return setTitle;
     }
 }

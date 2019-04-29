@@ -3,8 +3,8 @@ package com.songoda.epicbuckets.shop;
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.genbucket.GenbucketType;
 import com.songoda.epicbuckets.utils.InventoryHelper;
+import com.songoda.epicbuckets.utils.Materials;
 import com.songoda.epicbuckets.utils.Validator;
-import com.songoda.epicbuckets.utils.XMaterial;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -94,7 +94,7 @@ public class Shop {
             setEnabled(false);
         }
 
-        shopItem = ((!m) ? XMaterial.WATER_BUCKET.parseItem() : XMaterial.valueOf(epicBuckets.getConfig().getString(itemPath + ".material")).parseItem());
+        shopItem = ((!m) ? Materials.WATER_BUCKET.parseItem() : Materials.valueOf(epicBuckets.getConfig().getString(itemPath + ".material")).parseItem());
         shopItem = InventoryHelper.setLore(InventoryHelper.setDisplayName(shopItem, epicBuckets.getConfig().getString(itemPath + ".name")), epicBuckets.getConfig().getStringList(itemPath + ".lore"));
     }
 
@@ -106,7 +106,7 @@ public class Shop {
         return subShops.get(shop);
     }
 
-    public SubShop getSubShop(XMaterial mat) {
+    public SubShop getSubShop(Materials mat) {
         for (SubShop subShop : subShops.values()) {
             if (subShop.getGenItem().getType() == mat.parseMaterial() &&
                     subShop.getGenItem().getDurability() == mat.parseItem().getDurability()) {

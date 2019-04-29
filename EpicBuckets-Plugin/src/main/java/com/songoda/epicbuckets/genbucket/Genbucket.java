@@ -2,7 +2,7 @@ package com.songoda.epicbuckets.genbucket;
 
 import com.songoda.epicbuckets.EpicBuckets;
 import com.songoda.epicbuckets.shop.SubShop;
-import com.songoda.epicbuckets.utils.XMaterial;
+import com.songoda.epicbuckets.utils.Materials;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -100,12 +100,12 @@ public abstract class Genbucket {
         Block b = getNextBlock();
         if (isBelowVoid(moved + 1)) return false;
         if (b.getRelative(getBlockFace()).getType() != Material.AIR) {
-            if (b.getRelative(getBlockFace()).getType() != XMaterial.COBBLESTONE.parseMaterial()) {
+            if (b.getRelative(getBlockFace()).getType() != Materials.COBBLESTONE.parseMaterial()) {
                 b.setType(getGenItem().getType());
                 return false;
             }
         }
-        b.getRelative(getBlockFace()).setType(XMaterial.COBBLESTONE.parseMaterial());
+        b.getRelative(getBlockFace()).setType(Materials.COBBLESTONE.parseMaterial());
         b.setType(getGenItem().getType());
         return true;
     }
@@ -114,12 +114,12 @@ public abstract class Genbucket {
         Block b = getNextBlock(moved, blockFace);
         if (isBelowVoid(moved + 1)) return false;
         if (b.getRelative(BlockFace.DOWN).getType() != Material.AIR) {
-            if (b.getRelative(BlockFace.DOWN).getType() != XMaterial.COBBLESTONE.parseMaterial()) {
+            if (b.getRelative(BlockFace.DOWN).getType() != Materials.COBBLESTONE.parseMaterial()) {
                 b.setType(getGenItem().getType());
                 return false;
             }
         }
-        b.getRelative(BlockFace.DOWN).setType(XMaterial.COBBLESTONE.parseMaterial());
+        b.getRelative(BlockFace.DOWN).setType(Materials.COBBLESTONE.parseMaterial());
         b.setType(getGenItem().getType());
         return true;
     }
@@ -134,7 +134,7 @@ public abstract class Genbucket {
     }
 
     protected void fixHole(Block block) {
-        if (block.getType() == XMaterial.AIR.parseMaterial()) block.setType(getGenItem().getType());
+        if (block.getType() == Materials.AIR.parseMaterial()) block.setType(getGenItem().getType());
     }
 
     protected boolean spongeInRange(Block block) {
@@ -145,7 +145,7 @@ public abstract class Genbucket {
 
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
-                if (block.getRelative(x, 0, z).getType() == XMaterial.SPONGE.parseMaterial()) return true;
+                if (block.getRelative(x, 0, z).getType() == Materials.SPONGE.parseMaterial()) return true;
             }
         }
 
@@ -154,12 +154,12 @@ public abstract class Genbucket {
 
     protected boolean placeGen(Block block) {
 
-        List<XMaterial> materials = epicBuckets.getConfigManager().getIgnoredMaterials();
+        List<Materials> materials = epicBuckets.getConfigManager().getIgnoredMaterials();
 
-        if (!materials.contains(XMaterial.requestXMaterial(block.getType().name(), block.getData())))
+        if (!materials.contains(Materials.requestMaterials(block.getType().name(), block.getData())))
             return false;
 
-        if ((materials.contains(XMaterial.WATER) || materials.contains(XMaterial.LAVA)) && block.isLiquid())
+        if ((materials.contains(Materials.WATER) || materials.contains(Materials.LAVA)) && block.isLiquid())
             return false;
 
         if (!epicBuckets.canBuild(owner, block.getLocation())) return false;

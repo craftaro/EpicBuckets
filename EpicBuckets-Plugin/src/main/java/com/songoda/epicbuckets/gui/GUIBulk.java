@@ -33,7 +33,7 @@ public class GUIBulk extends AbstractGUI {
     }
 
     @Override
-    protected void constructGUI() {
+    public void constructGUI() {
         if (shopManager.isBulkFillInventory()) {
             int num = 0;
             while (num != size) {

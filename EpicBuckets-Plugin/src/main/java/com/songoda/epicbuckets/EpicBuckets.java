@@ -15,6 +15,9 @@ import com.songoda.epicbuckets.utils.Debugger;
 import com.songoda.epicbuckets.utils.ServerVersion;
 import com.songoda.epicbuckets.utils.hooks.ClaimableProtectionPluginHook;
 import com.songoda.epicbuckets.utils.hooks.ProtectionPluginHook;
+import com.songoda.epicbuckets.utils.updateModules.LocaleModule;
+import com.songoda.update.Plugin;
+import com.songoda.update.SongodaUpdate;
 import net.milkbowl.vault.economy.Economy;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
@@ -24,7 +27,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -67,6 +77,11 @@ public class EpicBuckets extends JavaPlugin {
         Locale.init(this);
         Locale.saveDefaultLocale("en_US");
         this.locale = Locale.getLocale(getConfig().getString("Locale", "en_US"));
+
+        //Running Songoda Updater
+        Plugin plugin = new Plugin(this, 27);
+        plugin.addModule(new LocaleModule());
+        SongodaUpdate.load(plugin);
 
         this.references = new References();
 
