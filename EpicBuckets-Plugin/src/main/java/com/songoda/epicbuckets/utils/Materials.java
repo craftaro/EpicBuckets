@@ -1,6 +1,6 @@
 package com.songoda.epicbuckets.utils;
 
-import com.songoda.epicbuckets.utils.version.NMSUtil;
+import com.songoda.epicbuckets.EpicBuckets;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -1205,7 +1205,7 @@ public enum Materials {
     }
 
     public static Materials getMaterials(Material material, byte data) {
-        if (NMSUtil.getVersionNumber() > 12) {
+        if (EpicBuckets.getInstance().isServerVersionAtLeast(ServerVersion.V1_12)) {
             return fromString(material.name());
         } else {
             return requestMaterials(material.name(), data);
